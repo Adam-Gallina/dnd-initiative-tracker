@@ -1,5 +1,5 @@
 {
-  "name": "dnd-inspiration-tracker",
+  "name": "dnd-initiative-tracker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Adam-Gallina/dnd-inspiration-tracker.git"
+    "url": "git+https://github.com/Adam-Gallina/dnd-initiative-tracker.git"
   },
   "author": "Adam Gallina",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Adam-Gallina/dnd-inspiration-tracker/issues"
+    "url": "https://github.com/Adam-Gallina/dnd-initiative-tracker/issues"
   },
-  "homepage": "https://github.com/Adam-Gallina/dnd-inspiration-tracker#readme",
+  "homepage": "https://github.com/Adam-Gallina/dnd-initiative-tracker#readme",
   "dependencies": {
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2"
