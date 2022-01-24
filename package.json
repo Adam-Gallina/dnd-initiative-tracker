@@ -7,7 +7,7 @@
     "prestart": "npm run build",
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "handlebars views/storynode.handlebars -f public/storynodeTemplate.js"
+    "build": ""
   },
   "repository": {
     "type": "git",
