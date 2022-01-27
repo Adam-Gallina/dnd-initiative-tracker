@@ -1,3 +1,5 @@
+const TableReloadDelay = 1000
+
 var initiativeTable = document.getElementById("initTable")
 
 function ReloadTable() {
@@ -73,3 +75,5 @@ document.getElementById('submit').addEventListener('click', function(event) {
 })
 
 ReloadTable()
+
+setInterval(ReloadTable, TableReloadDelay)
