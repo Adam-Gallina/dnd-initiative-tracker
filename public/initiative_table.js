@@ -1,4 +1,4 @@
-const TableReloadDelay = 1000
+const TableReloadDelay = 3000
 var refreshingTable = true;
 
 var initiativeTable = document.getElementById("initTable")
@@ -22,19 +22,49 @@ function ReloadTable() {
 
 document.getElementById('edit').addEventListener('click', function(event) {
     var valueBtns = document.querySelectorAll('.initiativeEntry')
+    var editBtn = event.target
+
+    var data = { 'initiativeOrder' : [] }
+
     for (var i = 0; i < valueBtns.length; i++) {
+        val = valueBtns[i].querySelector('#value')
+        mod = valueBtns[i].querySelector('#mod')
         if (refreshingTable) {
-            valueBtns[i].querySelector('#value').removeAttribute('readonly')
-            valueBtns[i].querySelector('#mod').removeAttribute('readonly')
+            val.removeAttribute('readonly')
+            mod.removeAttribute('readonly')
         }
         else {
-            valueBtns[i].querySelector('#value').setAttribute('readonly', 'readonly')
-            valueBtns[i].querySelector('#mod').setAttribute('readonly', 'readonly')
+            val.setAttribute('readonly', 'readonly')
+            mod.setAttribute('readonly', 'readonly')
+
+            data.initiativeOrder.push({
+                'charName': valueBtns[i].getAttribute('name'),
+                'initVal': val.value,
+                'dexMod': mod.value
+            })
         }
     }
 
-    refreshingTable = !refreshingTable
-    event.target.value = refreshingTable ? "Edit" : "Refresh"
+    if (!refreshingTable) {
+        var req = new XMLHttpRequest()
+        req.open('POST', '/initiative/update')
+        req.setRequestHeader('Content-Type', 'application/json')
+
+        req.addEventListener('load', function(event) {    
+            if (event.target.status == 200) {
+                refreshingTable = !refreshingTable
+                editBtn.value = refreshingTable ? "Edit" : "Save"
+            } else {
+                alert("Error " + event.target.status + " when saving changes")
+            }
+        })
+
+        req.send(JSON.stringify(data))
+    }
+    else {
+        refreshingTable = !refreshingTable
+        editBtn.value = refreshingTable ? "Edit" : "Save"
+    }
 })
 
 document.getElementById('reset').addEventListener('click', function() {

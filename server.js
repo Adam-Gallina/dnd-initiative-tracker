@@ -35,11 +35,12 @@ app.post('/initiative/add', function(req, res, next) {
 })
 
 app.post('/initiative/update', function(req, res, next) {
-    data = req.body
-    initiative.Update(data)
+    data = req.body.initiativeOrder
 
-    initiative.Sort()
-    console.log(initiative.Get())
+    for (var i = 0; i < data.length; i++) {
+        if (!initiative.Update(data[i].charName, parseInt(data[i].initVal), parseInt(data[i].dexMod)))
+            console.log("Failed to update initiative data for " + data[i].charName)
+    }
     
     res.status(200).send()
 })

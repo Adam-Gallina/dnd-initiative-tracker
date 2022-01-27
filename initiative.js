@@ -42,8 +42,17 @@ function OrderInitiative() {
     })
 }
 
-function UpdateInitiativeValues(newValues) {
+function UpdateInitiativeValue(name, iValue, iMod) {
+    for (var i = 0; i < Initiative.length; i++) {
+        if (Initiative[i].name == name) {
+            Initiative[i].total = iValue + iMod
+            Initiative[i].value = iValue
+            Initiative[i].mod = iMod
+            return true
+        }
+    }
 
+    return false
 }
 
 ResetInitiative()
@@ -53,5 +62,5 @@ module.exports = {
     'Reset':ResetInitiative,
     'Add':AddCreature,
     'Sort':OrderInitiative,
-    'Update':UpdateInitiativeValues
+    'Update':UpdateInitiativeValue
 }
