@@ -1,4 +1,5 @@
 const TableReloadDelay = 1000
+var refreshingTable = true;
 
 var initiativeTable = document.getElementById("initTable")
 
@@ -13,13 +14,28 @@ function ReloadTable() {
         }
 
         var data = JSON.parse(event.target.responseText)
-        console.log(data)
-        console.log(Handlebars.templates.initiativeTable(data))
         initiativeTable.innerHTML = Handlebars.templates.initiativeTable(data)
     })
 
     req.send()
 }
+
+document.getElementById('edit').addEventListener('click', function(event) {
+    var valueBtns = document.querySelectorAll('.initiativeEntry')
+    for (var i = 0; i < valueBtns.length; i++) {
+        if (refreshingTable) {
+            valueBtns[i].querySelector('#value').removeAttribute('readonly')
+            valueBtns[i].querySelector('#mod').removeAttribute('readonly')
+        }
+        else {
+            valueBtns[i].querySelector('#value').setAttribute('readonly', 'readonly')
+            valueBtns[i].querySelector('#mod').setAttribute('readonly', 'readonly')
+        }
+    }
+
+    refreshingTable = !refreshingTable
+    event.target.value = refreshingTable ? "Edit" : "Refresh"
+})
 
 document.getElementById('reset').addEventListener('click', function() {
     var req = new XMLHttpRequest()
@@ -34,7 +50,6 @@ document.getElementById('reset').addEventListener('click', function() {
     })
 
     req.send()
-
 })
 
 document.getElementById('submit').addEventListener('click', function(event) {
@@ -76,4 +91,7 @@ document.getElementById('submit').addEventListener('click', function(event) {
 
 ReloadTable()
 
-setInterval(ReloadTable, TableReloadDelay)
+setInterval(function() {
+    if (refreshingTable)
+        ReloadTable()
+}, TableReloadDelay)

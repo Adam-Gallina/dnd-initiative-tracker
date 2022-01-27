@@ -42,11 +42,16 @@ function OrderInitiative() {
     })
 }
 
+function UpdateInitiativeValues(newValues) {
+
+}
+
 ResetInitiative()
 
 module.exports = {
+    'Get':GetInitiative,
     'Reset':ResetInitiative,
-    'AddCreature':AddCreature,
-    'OrderInitiative':OrderInitiative,
-    'GetOrder':GetInitiative
+    'Add':AddCreature,
+    'Sort':OrderInitiative,
+    'Update':UpdateInitiativeValues
 }
