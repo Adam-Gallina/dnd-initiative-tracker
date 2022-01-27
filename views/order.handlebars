@@ -1,10 +1,13 @@
 <script src="initiative_table.js" defer></script>
+<script src="initiativeTableTemplate.js"></script>
 
 <h1>Initiative Order</h1>
 
-{{# each initiativeOrder }}
-    <p>{{ name }}: {{ total }} ({{ value }} + {{ mod }})</p>
-{{/ each }}
+<div id="initTable">
+    
+</div>
+
+
 
 <input type="Submit" id="reset" value="Reset Table">
 

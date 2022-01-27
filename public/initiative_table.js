@@ -1,7 +1,38 @@
+var initiativeTable = document.getElementById("initTable")
+
+function ReloadTable() {
+    var req = new XMLHttpRequest()
+    req.open('GET', '/initiative/order')
+
+    req.addEventListener('load', function(event) {
+        if (event.target.status == 404) {
+            console.log("404: Couldn't retrieve initiative data")
+            return
+        }
+
+        var data = JSON.parse(event.target.responseText)
+        console.log(data)
+        console.log(Handlebars.templates.initiativeTable(data))
+        initiativeTable.innerHTML = Handlebars.templates.initiativeTable(data)
+    })
+
+    req.send()
+}
+
 document.getElementById('reset').addEventListener('click', function() {
     var req = new XMLHttpRequest()
     req.open('POST', '/initiative/reset')
+
+    req.addEventListener('load', function(event) {
+        if (event.target.status == 200) {
+            ReloadTable()
+        } else {
+            alert("Error " + event.target.status + " when trying to reset table")
+        }
+    })
+
     req.send()
+
 })
 
 document.getElementById('submit').addEventListener('click', function(event) {
@@ -21,7 +52,11 @@ document.getElementById('submit').addEventListener('click', function(event) {
             req.setRequestHeader('Content-Type', 'application/json')
             
             req.addEventListener('load', function(event) {
-                console.log(event)
+                if (event.target.status == 200) {
+                    ReloadTable()
+                } else {
+                    alert("Error " + event.target.status + " when trying to add new NPCs")
+                }
             })
 
             req.send(JSON.stringify({
@@ -36,3 +71,5 @@ document.getElementById('submit').addEventListener('click', function(event) {
         dexMod.value = ''
     }
 })
+
+ReloadTable()

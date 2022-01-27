@@ -18,9 +18,13 @@ app.get('/', function(req, res, next) {
 })
 
 app.get('/order', function(req, res, next) {
+    res.status(200).render('order')
+})
+
+app.get('/initiative/order', function(req, res, next) {
     initiative.OrderInitiative()
 
-    res.status(200).render('initiativeTable', { 'initiativeOrder' : initiative.GetOrder() })
+    res.status(200).send({ 'initiativeOrder': initiative.GetOrder() })
 })
 
 app.post('/initiative/add', function(req, res, next) {

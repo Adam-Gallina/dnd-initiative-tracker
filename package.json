@@ -7,7 +7,7 @@
     "prestart": "npm run build",
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": ""
+    "build": "handlebars views/partials/initiativeTable.handlebars -f public/initiativeTableTemplate.js"
   },
   "repository": {
     "type": "git",
