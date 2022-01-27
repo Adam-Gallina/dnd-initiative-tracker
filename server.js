@@ -11,6 +11,7 @@ app.engine('handlebars', exphbs.engine({defaultLayout : 'main'}))
 app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
+app.use(express.json())
 
 app.get('/', function(req, res, next) {
     res.status(200).render('home')
