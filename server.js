@@ -21,8 +21,14 @@ app.get('/order', function(req, res, next) {
     next()
 })
 
-app.post('/creature/*', function(req, res, next) {
-    next()
+app.post('/creature/upload', function(req, res, next) {
+    data = req.body
+    initiative.AddCreature(data.charName, parseInt(data.initVal), parseInt(data.dexMod))
+    initiative.OrderInitiative()
+    
+    console.log(initiative.Order)
+
+    res.status(200).send()
 })
 
 app.get('*', function(req, res) {
