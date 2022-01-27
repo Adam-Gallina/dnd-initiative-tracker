@@ -18,21 +18,24 @@ app.get('/', function(req, res, next) {
 })
 
 app.get('/order', function(req, res, next) {
-    res.status(200).render('initiativeTable', { 'initiativeOrder' : initiative.Order })
+    initiative.OrderInitiative()
+
+    res.status(200).render('initiativeTable', { 'initiativeOrder' : initiative.GetOrder() })
 })
 
 app.post('/initiative/add', function(req, res, next) {
     data = req.body
     initiative.AddCreature(data.charName, parseInt(data.initVal), parseInt(data.dexMod))
-    initiative.OrderInitiative()
 
-    console.log(initiative.Order)
+    console.log(initiative.GetOrder())
 
     res.status(200).send()
 })
 
 app.post('/initiative/reset', function(req, res, next) {
     initiative.Reset()
+
+    console.log(initiative.GetOrder())
 
     res.status(200).send()
 })

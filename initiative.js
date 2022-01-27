@@ -1,5 +1,9 @@
 var Initiative;
 
+function GetInitiative() {
+    return Initiative
+}
+
 function InitEntry(name, value, mod) {
     return {
         'name':name,
@@ -44,5 +48,5 @@ module.exports = {
     'Reset':ResetInitiative,
     'AddCreature':AddCreature,
     'OrderInitiative':OrderInitiative,
-    'Order':Initiative
+    'GetOrder':GetInitiative
 }
