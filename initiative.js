@@ -23,27 +23,6 @@ function AddCreature(name, iValue, iMod) {
     return true;
 }
 
-/*
-        if init[i]['val'] == 20:
-            if init[j]['val'] == 20:
-                if init[i]['mod'] > init[j]['mod']:
-                    temp = init.pop(i)
-                    init.insert(j, temp)
-                    break
-            else:
-                temp = init.pop(i)
-                init.insert(j, temp)
-                break
-        elif init[i]['tot'] > init[j]['tot']:
-            temp = init.pop(i)
-            init.insert(j, temp)
-            break
-        elif init[i]['tot'] == init[j]['tot'] and init[i]['mod'] > init[j]['mod']:
-            temp = init.pop(i)
-            init.insert(j, temp)
-            break
-*/
-
 function OrderInitiative() {
     Initiative.sort(function(i, j) {
         if (j.value == 20 && i.value != 20)
@@ -62,6 +41,7 @@ function OrderInitiative() {
 ResetInitiative()
 
 module.exports = {
+    'Reset':ResetInitiative,
     'AddCreature':AddCreature,
     'OrderInitiative':OrderInitiative,
     'Order':Initiative
