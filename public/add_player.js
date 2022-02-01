@@ -11,7 +11,6 @@ document.getElementById("submit").addEventListener('click', function(event) {
         req.setRequestHeader('Content-Type', 'application/json')
         
         req.addEventListener('load', function(event) {
-            console.log(event.target)
             if (event.target.status != 200)
                 alert('ERROR '+ event.target.status +': ' + event.target.response)
             
@@ -23,8 +22,8 @@ document.getElementById("submit").addEventListener('click', function(event) {
             'dexMod': dexMod.value
         }))
 
-        charName.value = ''
+        //charName.value = ''
         initVal.value = ''
-        dexMod.value = ''
+        //dexMod.value = ''
     }
 })

@@ -3,7 +3,34 @@ var refreshingTable = true;
 
 var initiativeTable = document.getElementById("initTable")
 
-function ReloadTable() {
+var currData = []
+
+function ReloadTable(data) {
+    console.log('Reloading data...')
+    initiativeTable.innerHTML = Handlebars.templates.initiativeTable(data)
+    currData = data.initiativeOrder
+
+    document.querySelectorAll('#delete').forEach(
+        (x, i) => x.addEventListener('click', function(event) {
+            var req = new XMLHttpRequest()
+            req.open('POST', '/initiative/remove')
+            req.setRequestHeader('Content-Type', 'application/json')
+
+            req.addEventListener('load', function(event) {
+                if (event.target.status == 200) {
+                    CheckForTableUpdate()
+                }
+                else {
+                    alert(event.target.status + ': ' + event.target.response)
+                }
+            })
+
+            req.send(JSON.stringify({ 'charName': event.target.parentNode.getAttribute('name')}))
+        }
+    ))
+}
+
+function CheckForTableUpdate() {
     var req = new XMLHttpRequest()
     req.open('GET', '/initiative/order')
 
@@ -13,8 +40,18 @@ function ReloadTable() {
             return
         }
 
-        var data = JSON.parse(event.target.responseText)
-        initiativeTable.innerHTML = Handlebars.templates.initiativeTable(data)
+        data = JSON.parse(event.target.responseText)
+        order = data.initiativeOrder
+        if (order.length != currData.length)
+            ReloadTable(data)
+        else {
+            for (var i = 0; i < order.length; i++) {
+                if (JSON.stringify(order[i]) != JSON.stringify(currData[i])) {
+                    ReloadTable(data)
+                    break
+                }
+            }
+        }
     })
 
     req.send()
@@ -73,7 +110,7 @@ document.getElementById('reset').addEventListener('click', function() {
 
     req.addEventListener('load', function(event) {
         if (event.target.status == 200) {
-            ReloadTable()
+            CheckForTableUpdate()
         } else {
             alert("Error " + event.target.status + " when trying to reset table")
         }
@@ -100,7 +137,7 @@ document.getElementById('submit').addEventListener('click', function(event) {
             
             req.addEventListener('load', function(event) {
                 if (event.target.status == 200) {
-                    ReloadTable()
+                    CheckForTableUpdate()
                 } else {
                     alert("Error " + event.target.status + " when trying to add new NPCs")
                 }
@@ -119,9 +156,9 @@ document.getElementById('submit').addEventListener('click', function(event) {
     }
 })
 
-ReloadTable()
+CheckForTableUpdate()
 
 setInterval(function() {
     if (refreshingTable)
-        ReloadTable()
+        CheckForTableUpdate()
 }, TableReloadDelay)

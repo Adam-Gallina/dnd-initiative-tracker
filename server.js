@@ -1,5 +1,3 @@
-// Todo: Delete entries in initiative
-
 var initiative = require('./initiative')
 
 var express = require('express')
@@ -46,6 +44,15 @@ app.post('/initiative/update', function(req, res, next) {
     }
     
     res.status(200).send()
+})
+
+app.post('/initiative/remove', function(req, res, next) {
+    data = req.body
+
+    if (initiative.Remove(data.charName))
+        res.status(200).send()
+    else
+        res.status(500).send(data.charName + ' was not able to be removed')
 })
 
 app.post('/initiative/reset', function(req, res, next) {

@@ -13,12 +13,16 @@ function InitEntry(name, value, mod) {
     }
 }
 
+function GetInitEntry(name) {
+    return Initiative.find(i => i.name.toLowerCase() == name.toLowerCase())
+}
+
 function ResetInitiative() {
     Initiative = []
 }
 
 function AddCreature(name, iValue, iMod) {
-    if (Initiative.find(i => i.name.toLowerCase() == name.toLowerCase())) {
+    if (GetInitEntry(name)) {
         return false;
     }
 
@@ -43,13 +47,21 @@ function OrderInitiative() {
 }
 
 function UpdateInitiativeValue(name, iValue, iMod) {
-    for (var i = 0; i < Initiative.length; i++) {
-        if (Initiative[i].name == name) {
-            Initiative[i].total = iValue + iMod
-            Initiative[i].value = iValue
-            Initiative[i].mod = iMod
-            return true
-        }
+    entry = GetInitEntry(name)
+    if (entry) {
+        entry.total = iValue + iMod
+        entry.value = iValue
+        entry.mod = iMod
+        return true
+    }
+
+    return false
+}
+
+function RemoveInitiativeValue(name) {
+    if (GetInitEntry(name)) {
+        Initiative = Initiative.filter(i => i.name.toLowerCase() != name.toLowerCase())
+        return true
     }
 
     return false
@@ -62,5 +74,6 @@ module.exports = {
     'Reset':ResetInitiative,
     'Add':AddCreature,
     'Sort':OrderInitiative,
-    'Update':UpdateInitiativeValue
+    'Update':UpdateInitiativeValue,
+    'Remove':RemoveInitiativeValue
 }
