@@ -6,7 +6,6 @@ var initiativeTable = document.getElementById("initTable")
 var currData = []
 
 function ReloadTable(data) {
-    console.log('Reloading data...')
     initiativeTable.innerHTML = Handlebars.templates.initiativeTable(data)
     currData = data.initiativeOrder
 
