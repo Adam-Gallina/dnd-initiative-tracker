@@ -1,3 +1,5 @@
+// Todo: Delete entries in initiative
+
 var initiative = require('./initiative')
 
 var express = require('express')
@@ -29,9 +31,10 @@ app.get('/initiative/order', function(req, res, next) {
 
 app.post('/initiative/add', function(req, res, next) {
     data = req.body
-    initiative.Add(data.charName, parseInt(data.initVal), parseInt(data.dexMod))
-
-    res.status(200).send()
+    if (initiative.Add(data.charName, parseInt(data.initVal), parseInt(data.dexMod)))
+        res.status(200).send()
+    else
+        res.status(500).send('Name already in initiative order')
 })
 
 app.post('/initiative/update', function(req, res, next) {

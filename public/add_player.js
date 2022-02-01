@@ -11,7 +11,10 @@ document.getElementById("submit").addEventListener('click', function(event) {
         req.setRequestHeader('Content-Type', 'application/json')
         
         req.addEventListener('load', function(event) {
-            console.log(event)
+            console.log(event.target)
+            if (event.target.status != 200)
+                alert('ERROR '+ event.target.status +': ' + event.target.response)
+            
         })
 
         req.send(JSON.stringify({

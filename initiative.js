@@ -18,7 +18,7 @@ function ResetInitiative() {
 }
 
 function AddCreature(name, iValue, iMod) {
-    if (name in Initiative) {
+    if (Initiative.find(i => i.name.toLowerCase() == name.toLowerCase())) {
         return false;
     }
 
