@@ -31,7 +31,7 @@ function ReloadTable(data) {
 
 function CheckForTableUpdate() {
     var req = new XMLHttpRequest()
-    req.open('GET', '/initiative/order')
+    req.open('GET', InitOrder.urls.GetTable)
 
     req.addEventListener('load', function(event) {
         if (event.target.status == 404) {

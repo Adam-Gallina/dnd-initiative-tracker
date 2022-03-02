@@ -1,3 +1,5 @@
+//var initiative = require('./initiative_xml')
+
 document.getElementById("submit").addEventListener('click', function(event) {
     charName = document.getElementById("charName")
     initVal = document.getElementById("initVal")
@@ -7,7 +9,7 @@ document.getElementById("submit").addEventListener('click', function(event) {
         alert("Please fill in all fields")
     else {
         var req = new XMLHttpRequest()
-        req.open('POST', '/initiative/add')
+        req.open('POST', InitOrder.urls.AddChar)
         req.setRequestHeader('Content-Type', 'application/json')
         
         req.addEventListener('load', function(event) {
