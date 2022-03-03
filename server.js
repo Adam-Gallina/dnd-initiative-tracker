@@ -24,13 +24,25 @@ app.get('/order', function(req, res, next) {
 app.get('/initiative/table/order', function(req, res, next) {
     initiative.Sort()
 
-    res.status(200).send({ 'initiativeOrder': initiative.Get() })
+    res.status(200).send({ 
+        'initiativeOrder': initiative.Get(false),
+        'playersOnly': false
+    })
+})
+
+app.get('/initiative/table/playerOrder', function(req, res, next) {
+    initiative.Sort()
+    
+    res.status(200).send({ 
+        'initiativeOrder': initiative.Get(true),
+        'playersOnly': true
+    })
 })
 
 app.post('/initiative/char/add', function(req, res, next) {
     data = req.body
-
-    if (initiative.Add(data.charName, parseInt(data.initVal), parseInt(data.dexMod)))
+    
+    if (initiative.Add(data.charName, parseInt(data.initVal), parseInt(data.dexMod), data.isPlayer))
         res.status(200).send()
     else
         res.status(500).send('Name already in initiative order')

@@ -1,5 +1,6 @@
 <script src="initiative_xml.js"></script>
 <script src="add_player.js" defer></script>
+<script src="initiativeTableTemplate.js"></script>
 
 <h1>Initiative Tracker</h1>
 
@@ -7,7 +8,7 @@
 
 <h3>Add Character</h3>
 
-<label for="charName">Player Name:</label>
+<label for="charName">Character Name:</label>
 <input type="text" id="charName" name="charName"></p>
 
 <label for="initVal">Initiative Roll:</label>
@@ -17,3 +18,7 @@
 <input type="number" id="dexMod" name="dexMod"></p>
 
 <input type="Submit" id="submit" value="Submit">
+
+<h1>Initiative Order</h1>
+
+<div id="initTable"></div>

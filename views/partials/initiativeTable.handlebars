@@ -1,3 +1,6 @@
 {{# each initiativeOrder }}
-    <p class='initiativeEntry' name='{{ name }}'>{{ name }}: {{ total }} (<input type="number" readonly="readonly" id="value" value={{ value }}> +<input type="number" readonly="readonly" id="mod" value={{ mod }}>) <input type="Submit" id="delete" value="Delete"></p>
+    <p class='initiativeEntry' name='{{ name }}'>{{ name }}: {{ total }} (<input type="number" readonly="readonly" id="value" value={{ value }}> +<input type="number" readonly="readonly" id="mod" value={{ mod }}>)
+    {{# if playersOnly}}
+         <input type="Submit" id="delete" value="Delete"></p>
+    {{/ if}}
 {{/ each }}

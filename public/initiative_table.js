@@ -26,7 +26,7 @@ function ReloadTable(data) {
 }
 
 function CheckForTableUpdate() {
-    InitOrder.Table.Get(function(event) {
+    InitOrder.Table.Get(true, function(event) {
         if (event.target.status == 404) {
             console.log("404: Couldn't retrieve initiative data")
             return
@@ -109,7 +109,7 @@ document.getElementById('submit').addEventListener('click', function(event) {
         npcTotal = parseInt(count.value)
         
         for (var i = 0; i < npcTotal; i++) {
-            InitOrder.Chars.Add(charName.value + (npcTotal > 1 ? ' ' + i : ''), initVal, dexMod.value,
+            InitOrder.Chars.AddNpc(charName.value + (npcTotal > 1 ? ' ' + i : ''), initVal, dexMod.value,
                 function(event) {
                 if (event.target.status == 200) {
                     CheckForTableUpdate()

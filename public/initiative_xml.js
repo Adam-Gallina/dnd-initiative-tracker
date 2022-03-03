@@ -3,7 +3,8 @@ var urls = {
     'UpdateTable':'/initiative/table/update',
     'RemoveChar':'/initiative/char/remove',
     'GetTable':'/initiative/table/order',
-    'ResetTable':'/initiative/table/reset'
+    'ResetTable':'/initiative/table/reset',
+    'GetPlayerTable':'/initiative/table/playerOrder'
 }
 
 function GetServerData(url, onLoad) {
@@ -26,16 +27,21 @@ function PostServerData(url, data, onLoad) {
     req.send(JSON.stringify(data))
 }
 
-function GenChar(charName, initVal, dexMod) {
+function GenChar(charName, initVal, dexMod, isPlayer) {
     return {
         'charName': charName,
         'initVal': initVal,
-        'dexMod': dexMod
+        'dexMod': dexMod,
+        'isPlayer': isPlayer
     }
 }
 
-function AddChar(charName, initVal, dexMod, onLoad) {
-    PostServerData(urls.AddChar, GenChar(charName, initVal, dexMod), onLoad)
+function AddPlayerChar(charName, initVal, dexMod, onLoad) {
+    PostServerData(urls.AddChar, GenChar(charName, initVal, dexMod, true), onLoad)
+}
+
+function AddNpcChar(charName, initVal, dexMod, onLoad) {
+    PostServerData(urls.AddChar, GenChar(charName, initVal, dexMod, false), onLoad)
 }
 
 function RemoveChar(charName, onLoad) {
@@ -45,8 +51,8 @@ function RemoveChar(charName, onLoad) {
     PostServerData(urls.RemoveChar, data, onLoad)
 }
 
-function GetTable(onLoad) {
-    GetServerData(urls.GetTable, onLoad)
+function GetTable(fullTable, onLoad) {
+    GetServerData(fullTable ? urls.GetTable : urls.GetPlayerTable, onLoad)
 }
 
 function UpdateTable(updatedChars, onLoad) {
@@ -59,7 +65,8 @@ function ClearTable(onLoad) {
 
 const InitOrder = {
     'Chars':{
-        'Add':AddChar,
+        'AddPlayer':AddPlayerChar,
+        'AddNpc':AddNpcChar,
         'Remove':RemoveChar
     },
     'Table':{

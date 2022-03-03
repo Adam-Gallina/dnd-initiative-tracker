@@ -1,15 +1,18 @@
 var Initiative;
 
-function GetInitiative() {
+function GetInitiative(playersOnly) {
+    if (playersOnly)
+        return Initiative.filter(i => i.isPlayer)
     return Initiative
 }
 
-function InitEntry(name, value, mod) {
+function InitEntry(name, value, mod, isPlayer) {
     return {
         'name':name,
         'total': value + mod,
         'value': value,
-        'mod': mod
+        'mod': mod,
+        'isPlayer': isPlayer
     }
 }
 
@@ -21,12 +24,12 @@ function ResetInitiative() {
     Initiative = []
 }
 
-function AddCreature(name, iValue, iMod) {
+function AddCreature(name, iValue, iMod, isPlayer) {
     if (GetInitEntry(name)) {
         return false;
     }
 
-    Initiative.push(InitEntry(name, iValue, iMod))
+    Initiative.push(InitEntry(name, iValue, iMod, isPlayer))
 
     return true;
 }
