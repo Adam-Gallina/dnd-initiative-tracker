@@ -51,7 +51,7 @@ document.getElementById('edit').addEventListener('click', function(event) {
     var valueBtns = document.querySelectorAll('.initiativeEntry')
     var editBtn = event.target
 
-    var data = { 'initiativeOrder' : [] }
+    var data = { }
 
     for (var i = 0; i < valueBtns.length; i++) {
         val = valueBtns[i].querySelector('#value')
@@ -64,16 +64,14 @@ document.getElementById('edit').addEventListener('click', function(event) {
             val.setAttribute('readonly', 'readonly')
             mod.setAttribute('readonly', 'readonly')
 
-            data.initiativeOrder.push({
-                'charName': valueBtns[i].getAttribute('name'),
-                'initVal': val.value,
-                'dexMod': mod.value
-            })
+            data.push(InitOrder.GenChar(
+                valueBtns[i].getAttribute('name'),
+                val.value,
+                mod.value))
         }
     }
 
     if (!refreshingTable) {
-        var req = new XMLHttpRequest()
         InitOrder.Table.Update(data, function(event) {    
             if (event.target.status == 200) {
                 refreshingTable = !refreshingTable

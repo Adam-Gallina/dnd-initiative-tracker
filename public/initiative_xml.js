@@ -26,13 +26,16 @@ function PostServerData(url, data, onLoad) {
     req.send(JSON.stringify(data))
 }
 
-function AddChar(charName, initVal, dexMod, onLoad) {
-    var data = {
+function GenChar(charName, initVal, dexMod) {
+    return {
         'charName': charName,
         'initVal': initVal,
         'dexMod': dexMod
     }
-    PostServerData(urls.AddChar, data, onLoad)
+}
+
+function AddChar(charName, initVal, dexMod, onLoad) {
+    PostServerData(urls.AddChar, GenChar(charName, initVal, dexMod), onLoad)
 }
 
 function RemoveChar(charName, onLoad) {
@@ -46,8 +49,8 @@ function GetTable(onLoad) {
     GetServerData(urls.GetTable, onLoad)
 }
 
-function UpdateTable(data, onLoad) {
-    PostServerData(urls.UpdateTable, data, onLoad)
+function UpdateTable(updatedChars, onLoad) {
+    PostServerData(urls.UpdateTable, { 'initiativeOrder':updatedChars }, onLoad)
 }
 
 function ClearTable(onLoad) {
@@ -63,5 +66,6 @@ const InitOrder = {
         'Get':GetTable,
         'Update':UpdateTable,
         'Clear':ClearTable
-    }
+    },
+    'GenChar':GenChar
 }
