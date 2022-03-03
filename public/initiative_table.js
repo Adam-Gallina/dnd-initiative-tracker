@@ -102,6 +102,9 @@ document.getElementById('submit').addEventListener('click', function(event) {
     count = document.getElementById("totalNpc")
     initVal = Math.floor(Math.random() * 20) + 1
     dexMod = document.getElementById("dexMod")
+    isPlayer = document.getElementById("isPlayer")
+
+    var Add = isPlayer.checked ? InitOrder.Chars.AddPlayer : InitOrder.Chars.AddNpc
 
     if (!charName.value || !count.value || !dexMod.value)
         alert("Please fill in all fields")
@@ -109,7 +112,7 @@ document.getElementById('submit').addEventListener('click', function(event) {
         npcTotal = parseInt(count.value)
         
         for (var i = 0; i < npcTotal; i++) {
-            InitOrder.Chars.AddNpc(charName.value + (npcTotal > 1 ? ' ' + i : ''), initVal, dexMod.value,
+            Add(charName.value + (npcTotal > 1 ? ' ' + i : ''), initVal, dexMod.value,
                 function(event) {
                 if (event.target.status == 200) {
                     CheckForTableUpdate()
@@ -122,6 +125,7 @@ document.getElementById('submit').addEventListener('click', function(event) {
         charName.value = ''
         count.value = '1'
         dexMod.value = ''
+        isPlayer.checked = false
     }
 })
 
