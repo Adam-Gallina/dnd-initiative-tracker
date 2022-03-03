@@ -11,29 +11,22 @@ function ReloadTable(data) {
 
     document.querySelectorAll('#delete').forEach(
         (x, i) => x.addEventListener('click', function(event) {
-            var req = new XMLHttpRequest()
-            req.open('POST', '/initiative/remove')
-            req.setRequestHeader('Content-Type', 'application/json')
-
-            req.addEventListener('load', function(event) {
-                if (event.target.status == 200) {
-                    CheckForTableUpdate()
+            InitOrder.Chars.Remove(event.target.parentNode.getAttribute('name'), 
+                function(event) {
+                    if (event.target.status == 200) {
+                        CheckForTableUpdate()
+                    }
+                    else {
+                        alert(event.target.status + ': ' + event.target.response)
+                    }
                 }
-                else {
-                    alert(event.target.status + ': ' + event.target.response)
-                }
-            })
-
-            req.send(JSON.stringify({ 'charName': event.target.parentNode.getAttribute('name')}))
+            )
         }
     ))
 }
 
 function CheckForTableUpdate() {
-    var req = new XMLHttpRequest()
-    req.open('GET', InitOrder.urls.GetTable)
-
-    req.addEventListener('load', function(event) {
+    InitOrder.Table.Get(function(event) {
         if (event.target.status == 404) {
             console.log("404: Couldn't retrieve initiative data")
             return
@@ -52,8 +45,6 @@ function CheckForTableUpdate() {
             }
         }
     })
-
-    req.send()
 }
 
 document.getElementById('edit').addEventListener('click', function(event) {
@@ -83,10 +74,7 @@ document.getElementById('edit').addEventListener('click', function(event) {
 
     if (!refreshingTable) {
         var req = new XMLHttpRequest()
-        req.open('POST', '/initiative/update')
-        req.setRequestHeader('Content-Type', 'application/json')
-
-        req.addEventListener('load', function(event) {    
+        InitOrder.Table.Update(data, function(event) {    
             if (event.target.status == 200) {
                 refreshingTable = !refreshingTable
                 editBtn.value = refreshingTable ? "Edit" : "Save"
@@ -94,8 +82,6 @@ document.getElementById('edit').addEventListener('click', function(event) {
                 alert("Error " + event.target.status + " when saving changes")
             }
         })
-
-        req.send(JSON.stringify(data))
     }
     else {
         refreshingTable = !refreshingTable
@@ -104,18 +90,13 @@ document.getElementById('edit').addEventListener('click', function(event) {
 })
 
 document.getElementById('reset').addEventListener('click', function() {
-    var req = new XMLHttpRequest()
-    req.open('POST', '/initiative/reset')
-
-    req.addEventListener('load', function(event) {
+    InitOrder.Table.Clear(function(event) {
         if (event.target.status == 200) {
             CheckForTableUpdate()
         } else {
             alert("Error " + event.target.status + " when trying to reset table")
         }
     })
-
-    req.send()
 })
 
 document.getElementById('submit').addEventListener('click', function(event) {
@@ -127,26 +108,17 @@ document.getElementById('submit').addEventListener('click', function(event) {
     if (!charName.value || !count.value || !dexMod.value)
         alert("Please fill in all fields")
     else {
-        
         npcTotal = parseInt(count.value)
+        
         for (var i = 0; i < npcTotal; i++) {
-            var req = new XMLHttpRequest()
-            req.open('POST', '/initiative/add')
-            req.setRequestHeader('Content-Type', 'application/json')
-            
-            req.addEventListener('load', function(event) {
+            InitOrder.Chars.Add(charName.value + (npcTotal > 1 ? ' ' + i : ''), initVal, dexMod.value,
+                function(event) {
                 if (event.target.status == 200) {
                     CheckForTableUpdate()
                 } else {
                     alert("Error " + event.target.status + " when trying to add new NPCs")
                 }
             })
-
-            req.send(JSON.stringify({
-                'charName': charName.value + (npcTotal > 1 ? ' ' + i : ''),
-                'initVal': initVal,
-                'dexMod': dexMod.value
-            }))
         }
 
         charName.value = ''

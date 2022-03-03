@@ -29,13 +29,14 @@ app.get('/initiative/table/order', function(req, res, next) {
 
 app.post('/initiative/char/add', function(req, res, next) {
     data = req.body
+
     if (initiative.Add(data.charName, parseInt(data.initVal), parseInt(data.dexMod)))
         res.status(200).send()
     else
         res.status(500).send('Name already in initiative order')
 })
 
-app.post('/initiative/char/update', function(req, res, next) {
+app.post('/initiative/table/update', function(req, res, next) {
     data = req.body.initiativeOrder
 
     for (var i = 0; i < data.length; i++) {
