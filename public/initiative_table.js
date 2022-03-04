@@ -52,7 +52,7 @@ document.getElementById('edit').addEventListener('click', function(event) {
     var valueBtns = document.querySelectorAll('.initiativeEntry')
     var editBtn = event.target
 
-    var data = { }
+    var data = []
 
     for (var i = 0; i < valueBtns.length; i++) {
         val = valueBtns[i].querySelector('#value')
