@@ -28,21 +28,6 @@ document.getElementById("submit").addEventListener('click', function(event) {
 function ReloadTable(data) {
     initiativeTable.innerHTML = Handlebars.templates.initiativeTable(data)
     currData = data.initiativeOrder
-
-    document.querySelectorAll('#delete').forEach(
-        (x, i) => x.addEventListener('click', function(event) {
-            InitOrder.Chars.Remove(event.target.parentNode.getAttribute('name'), 
-                function(event) {
-                    if (event.target.status == 200) {
-                        CheckForTableUpdate()
-                    }
-                    else {
-                        alert(event.target.status + ': ' + event.target.response)
-                    }
-                }
-            )
-        }
-    ))
 }
 
 function CheckForTableUpdate() {
