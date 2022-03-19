@@ -5,12 +5,17 @@ var initiativeTable = document.getElementById("initTable")
 
 var currData = []
 
+var currCharacter = -1
+var totalCharacters = 0
+
 function ReloadTable(data) {
     data.modPerms = true
     initiativeTable.innerHTML = Handlebars.templates.initiativeTable(data)
     currData = data.initiativeOrder
 
-    document.querySelectorAll('#delete').forEach(
+    deleteBtns = document.querySelectorAll('#delete')
+
+    deleteBtns.forEach(
         (x, i) => x.addEventListener('click', function(event) {
             InitOrder.Chars.Remove(event.target.parentNode.getAttribute('name'), 
                 function(event) {
@@ -24,6 +29,12 @@ function ReloadTable(data) {
             )
         }
     ))
+    
+    totalCharacters = deleteBtns.length
+    if (totalCharacters > 0 && currCharacter == -1)
+        currCharacter = 0
+    
+    deleteBtns[currCharacter].parentNode.classList.add("highlight")
 }
 
 function CheckForTableUpdate() {
@@ -46,6 +57,15 @@ function CheckForTableUpdate() {
             }
         }
     })
+}
+
+function SetOrderHighlight(curr, next) {
+    deleteBtns = document.querySelectorAll('#delete')
+    
+    if (deleteBtns[curr].parentNode.classList.contains('highlight'))
+        deleteBtns[curr].parentNode.classList.remove('highlight')
+
+    deleteBtns[next].parentNode.classList.add('highlight')
 }
 
 document.getElementById('edit').addEventListener('click', function(event) {
@@ -86,6 +106,12 @@ document.getElementById('edit').addEventListener('click', function(event) {
         refreshingTable = !refreshingTable
         editBtn.value = refreshingTable ? "Edit" : "Save"
     }
+})
+
+document.getElementById('next').addEventListener('click', function() {
+    next = currCharacter + 1 < totalCharacters ? currCharacter + 1 : 0
+    SetOrderHighlight(currCharacter, next)
+    currCharacter = next
 })
 
 document.getElementById('reset').addEventListener('click', function() {
