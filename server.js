@@ -17,6 +17,13 @@ app.get('/', function(req, res, next) {
     res.status(200).render('home')
 })
 
+app.get('/:charName', function(req, res, next) {
+    res.status(200).render('home', {
+        'charName': req.params.charName,
+        'charMod': 12
+    })
+})
+
 /*app.get('/chant', function(req, res, next) {
 	res.status(200).send('<h1>Ubi est Fidget. Afferte eum ad nos. Volumus animam suam. </h1>')
 })*/
