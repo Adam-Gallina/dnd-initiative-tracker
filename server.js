@@ -1,5 +1,5 @@
 var initiative = require('./initiative')
-var data = require('./database')
+var db = require('./database')
 
 var express = require('express')
 var exphbs = require('express-handlebars')
@@ -25,7 +25,7 @@ app.get('/order', function(req, res, next) {
 app.get('/:charName', function(req, res, next) {
     res.status(200).render('home', {
         'charName': req.params.charName.replace(/\w\S*/g, function(txt) {return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()}),
-        'charMod': data.GetDexMod(req.params.charName)
+        'charMod': db.GetDexMod(req.params.charName)[0]
     })
 })
 
@@ -83,7 +83,13 @@ app.post('/initiative/char/remove', function(req, res, next) {
 app.post('/initiative/table/reset', function(req, res, next) {
     initiative.Reset()
 
-    console.log(initiative.Get())
+    res.status(200).send()
+})
+
+app.post('/database/dexMod', function(req, res, next) {
+    data = req.body
+
+    db.SetDexMod(data.charName, data.dexMod)
 
     res.status(200).send()
 })

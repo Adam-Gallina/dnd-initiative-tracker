@@ -5,25 +5,31 @@ const dataTemplate = {
     'dexMod':0
 }
 
-// Generate data file if it doesnt exist
-data = require('./' + FNAME)
+function LoadData() {
+    // Generate data file if it doesnt exist
+    return require('./' + FNAME)
+}
 
-function SaveData() {
+function SaveData(data) {
     fs.writeFile(FNAME, JSON.stringify(data), function(err) {
         return err ? false : true
     })
 }
 
 function GetDexMod(char) {
+    data = LoadData()
+
     char = char.toLowerCase()
 
     if (data.hasOwnProperty(char))
-        return data[char].dexMod
+        return [data[char].dexMod, true]
 
-    return 0, false
+    return [0, false]
 }
 
 function SetDexMod(char, newVal) {
+    data = LoadData()
+
     char = char.toLowerCase()
     
     if (!data.hasOwnProperty(char))
@@ -31,7 +37,7 @@ function SetDexMod(char, newVal) {
 
     data[char].dexMod = newVal
 
-    SaveData()
+    SaveData(data)
 }
 
 module.exports = {
