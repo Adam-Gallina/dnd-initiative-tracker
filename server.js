@@ -18,6 +18,10 @@ app.get('/', function(req, res, next) {
     res.status(200).render('home')
 })
 
+app.get('/order', function(req, res, next) {
+    res.status(200).render('order')
+})
+
 app.get('/:charName', function(req, res, next) {
     res.status(200).render('home', {
         'charName': req.params.charName.replace(/\w\S*/g, function(txt) {return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()}),
@@ -28,10 +32,6 @@ app.get('/:charName', function(req, res, next) {
 /*app.get('/chant', function(req, res, next) {
 	res.status(200).send('<h1>Ubi est Fidget. Afferte eum ad nos. Volumus animam suam. </h1>')
 })*/
-
-app.get('/order', function(req, res, next) {
-    res.status(200).render('order')
-})
 
 app.get('/initiative/table/order', function(req, res, next) {
     initiative.Sort()
