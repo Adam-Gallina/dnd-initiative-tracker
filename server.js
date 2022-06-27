@@ -1,4 +1,5 @@
 var initiative = require('./initiative')
+var data = require('./database')
 
 var express = require('express')
 var exphbs = require('express-handlebars')
@@ -19,8 +20,8 @@ app.get('/', function(req, res, next) {
 
 app.get('/:charName', function(req, res, next) {
     res.status(200).render('home', {
-        'charName': req.params.charName,
-        'charMod': 12
+        'charName': req.params.charName.replace(/\w\S*/g, function(txt) {return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()}),
+        'charMod': data.GetDexMod(req.params.charName)
     })
 })
 
