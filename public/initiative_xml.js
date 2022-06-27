@@ -4,7 +4,8 @@ var urls = {
     'RemoveChar':'/initiative/char/remove',
     'GetTable':'/initiative/table/order',
     'ResetTable':'/initiative/table/reset',
-    'GetPlayerTable':'/initiative/table/playerOrder'
+    'GetPlayerTable':'/initiative/table/playerOrder',
+    'SetDex':'/database/dexMod'
 }
 
 function GetServerData(url, onLoad) {
@@ -63,6 +64,13 @@ function ClearTable(onLoad) {
     PostServerData(urls.ResetTable, {}, onLoad)
 }
 
+function SetDexMod(charName, value, onLoad) {
+    PostServerData(urls.SetDex, { 
+        'charName': charName,
+        'dexMod': value
+    }, onLoad)
+}
+
 const InitOrder = {
     'Chars':{
         'AddPlayer':AddPlayerChar,
@@ -73,6 +81,9 @@ const InitOrder = {
         'Get':GetTable,
         'Update':UpdateTable,
         'Clear':ClearTable
+    },
+    'Data':{
+        'SetDexMod':SetDexMod
     },
     'GenChar':GenChar
 }
