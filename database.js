@@ -6,7 +6,12 @@ const dataTemplate = {
 }
 
 function LoadData() {
-    // Generate data file if it doesnt exist
+    if (!fs.existsSync(FNAME))
+        fs.writeFile(FNAME, '{}', function(err) {
+            console.log('[ERROR] Could not load ' + FNAME)
+            return {}
+        })
+
     return require('./' + FNAME)
 }
 
