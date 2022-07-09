@@ -2,3 +2,20 @@
     background-color: lightgreen;
     padding: 5px;
 }
+
+.left {
+    background-color: aquamarine;
+    float: left;
+    width: 20%;
+}
+
+.center {
+    background-color: burlywood;
+    float: left;
+}
+
+.right {
+    background-color: coral;
+    float: right;
+    width: 40%;
+}
