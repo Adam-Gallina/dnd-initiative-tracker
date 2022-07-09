@@ -3,19 +3,39 @@
     padding: 5px;
 }
 
-.left {
-    background-color: aquamarine;
+#charLinks {
     float: left;
     width: 20%;
+    margin-right: 40px
 }
 
-.center {
-    background-color: burlywood;
+#addChar {
     float: left;
 }
 
-.right {
-    background-color: coral;
+#initTable {
     float: right;
     width: 40%;
+}
+
+@media(max-width: 1200px) {
+    body {
+        font-size: 250%;
+    }
+    input {
+        font-size: 100%;
+    }
+
+    #charLinks {
+        width: 100%;
+        margin-right: auto;
+    }
+
+    #addChar {
+        width: 100%;
+    }
+
+    #initTable {
+        width: 100%;
+    }
 }
