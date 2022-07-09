@@ -2,30 +2,38 @@
 <script src="add_player.js" defer></script>
 <script src="initiativeTableTemplate.js"></script>
 
-<h1>Initiative Tracker</h1>
+<header>
+    <h1>Initiative Tracker</h1>
+    <!--<img src="\images\party_banner_2-5-22.jpeg" width="100%">-->
+</header>
 
-<!--<img src="\images\party_banner_2-5-22.jpeg" width="100%">-->
+<body>
+    <div id="charLinks" class="left">
+        <a href="/eilhana">Eilhana</a>
+        <a href="/hedamir">Hedamir</a>
+        <a href="/clash">Clash</a>
+        <a href="/nessi">Nessi</a>
+        <a href="/rumor">Rumor</a>
+        <a href="/fidget">Fidget</a>
+    </div>
 
-<a href="/eilhana">Eilhana</a>
-<a href="/hedamir">Hedamir</a>
-<a href="/clash">Clash</a>
-<a href="/nessi">Nessi</a>
-<a href="/rumor">Rumor</a>
-<a href="/fidget">Fidget</a>
+    <div id="addChar" class="center">
+        <h3>Add Character</h3>
 
-<h3>Add Character</h3>
+        <label for="charName">Character Name:</label>
+        <input type="text" {{# if charName }} readonly="readonly" {{/ if}} id="charName" name="charName" value="{{ charName }}"></p>
 
-<label for="charName">Character Name:</label>
-<input type="text" {{# if charName }} readonly="readonly" {{/ if}} id="charName" name="charName" value="{{ charName }}"></p>
+        <label for="initVal">Initiative Roll:</label>
+        <input type="number" id="initVal" name="initVal"></p>
 
-<label for="initVal">Initiative Roll:</label>
-<input type="number" id="initVal" name="initVal"></p>
+        <label for="dexMod">DEX Modifier:</label>
+        <input type="number" id="dexMod" name="dexMod" value="{{ charMod }}"></p>
 
-<label for="dexMod">DEX Modifier:</label>
-<input type="number" id="dexMod" name="dexMod" value="{{ charMod }}"></p>
+        <input type="Submit" id="submit" value="Submit">
+    </div>
 
-<input type="Submit" id="submit" value="Submit">
-
-<h1>Initiative Order</h1>
-
-<div id="initTable"></div>
+    <div id="initTable">
+        <h1>Initiative Order</h1>
+        <div id="charInit"></div>
+    </div>
+</body>

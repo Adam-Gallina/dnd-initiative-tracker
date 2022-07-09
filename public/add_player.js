@@ -1,7 +1,7 @@
 const TableReloadDelay = 3000
 var refreshingTable = true;
 
-var initiativeTable = document.getElementById("initTable")
+var initiativeTable = document.getElementById("charInit")
 
 var currData = []
 
