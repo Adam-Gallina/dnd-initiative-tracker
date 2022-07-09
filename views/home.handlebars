@@ -8,33 +8,31 @@
     <!--<img src="\images\party_banner_2-5-22.jpeg" width="100%">-->
 </header>
 
-<body>
-    <div id="charLinks" class="flex-child left">
-        <a href="/eilhana"><img src="\images\eilhana_pfp_temp.png" alt="Eilhana"></a>
-        <a href="/hedamir"><img src="\images\hedamir_pfp_temp.png" alt="Hedamir"></a>
-        <a href="/clash"><img src="\images\clash_pfp_temp.png" alt="Clash"></a>
-        <a href="/nessi"><img src="\images\nessie_pfp_temp.png" alt="Nessie"></a>
-        <a href="/rumor"><img src="\images\rumor_pfp_temp.png" alt="Rumor"></a>
-        <a href="/fidget"><img src="\images\fidget_pfp_temp.png" alt="Fidget"></a>
-    </div>
+<div id="charLinks" class="flex-child left">
+    <a href="/eilhana"><img src="\images\eilhana_pfp_temp.png" alt="Eilhana"></a>
+    <a href="/hedamir"><img src="\images\hedamir_pfp_temp.png" alt="Hedamir"></a>
+    <a href="/clash"><img src="\images\clash_pfp_temp.png" alt="Clash"></a>
+    <a href="/nessi"><img src="\images\nessie_pfp_temp.png" alt="Nessie"></a>
+    <a href="/rumor"><img src="\images\rumor_pfp_temp.png" alt="Rumor"></a>
+    <a href="/fidget"><img src="\images\fidget_pfp_temp.png" alt="Fidget"></a>
+</div>
 
-    <div id="addChar" class="flex-child center">
-        <h3>Add Character</h3>
+<div id="addChar" class="flex-child center">
+    <h3>Add Character</h3>
 
-        <label for="charName">Character Name:</label>
-        <input type="text" {{# if charName }} readonly="readonly" {{/ if}} id="charName" name="charName" value="{{ charName }}"></p>
+    <label for="charName">Character Name:</label>
+    <input type="text" {{# if charName }} readonly="readonly" {{/ if}} id="charName" name="charName" value="{{ charName }}"></p>
 
-        <label for="initVal">Initiative Roll:</label>
-        <input type="number" id="initVal" name="initVal"></p>
+    <label for="initVal">Initiative Roll:</label>
+    <input type="number" id="initVal" name="initVal"></p>
 
-        <label for="dexMod">DEX Modifier:</label>
-        <input type="number" id="dexMod" name="dexMod" value="{{ charMod }}"></p>
+    <label for="dexMod">DEX Modifier:</label>
+    <input type="number" id="dexMod" name="dexMod" value="{{ charMod }}"></p>
 
-        <input type="Submit" id="submit" value="Submit">
-    </div>
+    <input type="Submit" id="submit" value="Submit">
+</div>
 
-    <div id="initTable" class="flex-child right">
-        <h1>Initiative Order</h1>
-        <div id="charInit"></div>
-    </div>
-</body>
+<div id="initTable" class="flex-child right">
+    <h1>Initiative Order</h1>
+    <div id="charInit"></div>
+</div>
