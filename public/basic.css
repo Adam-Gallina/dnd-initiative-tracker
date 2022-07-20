@@ -5,14 +5,12 @@
 
 body {
     background: url(images/scroll_tile.jpg);
-    /*background-repeat: no-repeat;*/
-    /*background-size: 100%;*/
 }
 
 #charLinks {
     float: left;
     width: 20%;
-    margin-right: 40px
+    margin-right: 40px;
 }
 
 #addChar {
