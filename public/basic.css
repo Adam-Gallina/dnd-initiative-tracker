@@ -7,20 +7,50 @@ body {
     background: url(images/scroll_tile.jpg);
 }
 
+.border {
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10px;
+    border-color: black;
+    padding: 0px 20px;
+    background-color: tan;
+    min-height: 500px;
+    margin: 20px;
+}
+
+#title {
+    text-align: center;
+}
+
 #charLinks {
     float: left;
     width: 20%;
     margin-right: 40px;
+    margin-left: 20px;
 }
 
 #addChar {
     float: left;
+    width: 25%;
 }
 
 #initTable {
-    float: right;
-    width: 40%;
+    float: left;
+    width: 35%;
+    margin-right: 20px;
 }
+
+#initTable input#value,
+#initTable input#mod {
+    width: 35px;
+    padding: auto 5px;
+}
+
+/*#initTable input#value:read-only,
+#initTable input#mod:read-only {
+    background-color: transparent;
+    border-color: transparent;
+}*/
 
 @media(max-width: 1200px) {
     body {

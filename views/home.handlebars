@@ -8,7 +8,7 @@
     <!--<img src="\images\party_banner_2-5-22.jpeg" width="100%">-->
 </header>
 
-<div id="charLinks">
+<div id="charLinks" class="border">
     <a href="/eilhana"><img src="\images\eilhana_pfp_temp.png" alt="Eilhana"></a>
     <a href="/hedamir"><img src="\images\hedamir_pfp_temp.png" alt="Hedamir"></a>
     <a href="/clash"><img src="\images\clash_pfp_temp.png" alt="Clash"></a>
@@ -17,8 +17,8 @@
     <a href="/fidget"><img src="\images\fidget_pfp_temp.png" alt="Fidget"></a>
 </div>
 
-<div id="addChar">
-    <h3>Add Character</h3>
+<div id="addChar" class="border">
+    <h1 id="title">Add Character</h1>
 
     <label for="charName">Character Name:</label>
     <input type="text" {{# if charName }} readonly="readonly" {{/ if}} id="charName" name="charName" value="{{ charName }}"></p>
@@ -32,7 +32,7 @@
     <input type="Submit" id="submit" value="Submit">
 </div>
 
-<div id="initTable">
-    <h1>Initiative Order</h1>
+<div id="initTable" class="border">
+    <h1 id="title">Initiative Order</h1>
     <div id="charInit"></div>
 </div>
