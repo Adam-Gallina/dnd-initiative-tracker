@@ -8,11 +8,10 @@ body {
 }
 
 .border {
-    border-style: solid;
-    border-width: 3px;
+    border-style: 3px solid black;
     border-radius: 10px;
-    border-color: black;
-    padding: 0px 20px;
+
+    padding: 20px;
     background-color: tan;
     min-height: 500px;
     margin: 20px;
@@ -20,13 +19,22 @@ body {
 
 #title {
     text-align: center;
+    margin-top: 0px;
 }
 
 #charLinks {
     float: left;
     width: 20%;
-    margin-right: 40px;
-    margin-left: 20px;
+}
+
+#initTable {
+    float: left;
+    width: 35%;
+}
+
+#initTable input#value,
+#initTable input#mod {
+    width: 35px;
 }
 
 #addChar {
@@ -34,16 +42,13 @@ body {
     width: 25%;
 }
 
-#initTable {
-    float: left;
-    width: 35%;
-    margin-right: 20px;
+#charInp label {
+    max-width: 50%;
 }
 
-#initTable input#value,
-#initTable input#mod {
-    width: 35px;
-    padding: auto 5px;
+#charInp .inp {
+    float: right;
+    width: 50%;
 }
 
 /*#initTable input#value:read-only,
@@ -60,16 +65,25 @@ body {
         font-size: 100%;
     }
 
+    .border {
+        min-height: auto;
+    }
+
     #charLinks {
-        width: 100%;
-        margin-right: auto;
+        width: 90%;
     }
 
     #addChar {
-        width: 100%;
+        width: 90%;
     }
 
     #initTable {
-        width: 100%;
+        width: 90%;
+    }
+
+    
+    #initTable input#value,
+    #initTable input#mod {
+        width: 60px;
     }
 }

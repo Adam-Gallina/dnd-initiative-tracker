@@ -17,22 +17,24 @@
     <a href="/fidget"><img src="\images\fidget_pfp_temp.png" alt="Fidget"></a>
 </div>
 
-<div id="addChar" class="border">
-    <h1 id="title">Add Character</h1>
-
-    <label for="charName">Character Name:</label>
-    <input type="text" {{# if charName }} readonly="readonly" {{/ if}} id="charName" name="charName" value="{{ charName }}"></p>
-
-    <label for="initVal">Initiative Roll:</label>
-    <input type="number" id="initVal" name="initVal"></p>
-
-    <label for="dexMod">DEX Modifier:</label>
-    <input type="number" id="dexMod" name="dexMod" value="{{ charMod }}"></p>
-
-    <input type="Submit" id="submit" value="Submit">
-</div>
-
 <div id="initTable" class="border">
     <h1 id="title">Initiative Order</h1>
     <div id="charInit"></div>
+</div>
+
+<div id="addChar" class="border">
+    <h1 id="title">Add Character</h1>
+
+    <div id="charInp">
+        <label for="charName">Character Name:</label>
+        <span><input type="text" {{# if charName }} readonly="readonly" {{/ if}} id="charName" class="inp" name="charName" value="{{ charName }}"></p></span>
+
+        <label for="initVal">Initiative Roll:</label>
+        <span><input type="number" id="initVal" class="inp" name="initVal"></p></span>
+
+        <label for="dexMod">DEX Modifier:</label>
+        <span><input type="number" id="dexMod" class="inp" name="dexMod" value="{{ charMod }}"></p></span>
+    </div>
+
+    <input type="Submit" id="submit" value="Submit">
 </div>
