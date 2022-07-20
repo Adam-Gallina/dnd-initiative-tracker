@@ -27,13 +27,13 @@
 
     <div id="charInp">
         <label for="charName">Character Name:</label>
-        <span><input type="text" {{# if charName }} readonly="readonly" {{/ if}} id="charName" class="inp" name="charName" value="{{ charName }}"></p></span>
+        <span><input type="text" {{# if charName }} readonly="readonly" {{/ if}} id="charName" name="charName" value="{{ charName }}"></p></span>
 
         <label for="initVal">Initiative Roll:</label>
-        <span><input type="number" id="initVal" class="inp" name="initVal"></p></span>
+        <span><input type="number" id="initVal"  name="initVal"></p></span>
 
         <label for="dexMod">DEX Modifier:</label>
-        <span><input type="number" id="dexMod" class="inp" name="dexMod" value="{{ charMod }}"></p></span>
+        <span><input type="number" id="dexMod" name="dexMod" value="{{ charMod }}"></p></span>
     </div>
 
     <input type="Submit" id="submit" value="Submit">

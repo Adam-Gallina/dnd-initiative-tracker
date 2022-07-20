@@ -46,18 +46,20 @@ body {
     max-width: 50%;
 }
 
-#charInp .inp {
+#charInp input {
     float: right;
     width: 50%;
 }
 
-/*#initTable input#value:read-only,
+/*
+#initTable input#value:read-only,
 #initTable input#mod:read-only {
     background-color: transparent;
     border-color: transparent;
-}*/
+}
+*/
 
-@media(max-width: 1200px) {
+@media (max-width: 1200px) {
     body {
         font-size: 250%;
     }
@@ -85,5 +87,15 @@ body {
     #initTable input#value,
     #initTable input#mod {
         width: 60px;
+    }
+}
+
+/* Hacky way to format order table nicely on my screen */
+@media (max-width: 550px) {
+    body {
+        font-size: 100%;
+    }
+    input {
+        font-size: 100%;
     }
 }
