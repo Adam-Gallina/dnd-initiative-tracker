@@ -18,7 +18,7 @@ body {
 }
 
 #main-title {
-    width: 30%;
+    width: auto;
     margin-top: 10px;
     margin-bottom: 0px;
     
@@ -97,6 +97,11 @@ hr {
 
     .border {
         min-height: auto;
+    }
+
+    #useful-btns {
+        font-size: 75%;
+        float: none;
     }
 
     #charLinks {
