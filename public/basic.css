@@ -54,6 +54,10 @@ hr {
     justify-content: space-between;
 }
 
+#charLinks img {
+    width: 140px;
+}
+
 
 #initTable {
     float: left;
@@ -77,6 +81,15 @@ hr {
 #charInp input {
     float: right;
     width: 50%;
+}
+
+#graveyard {
+    margin-top: 4000px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 /*
