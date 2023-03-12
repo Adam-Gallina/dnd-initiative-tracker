@@ -6,11 +6,13 @@
 <header>
     <h1 id="main-title">Initiative Tracker</h1>
 
+    {{# if mapImages }}
     <div id="useful-btns">
         {{# each mapImages }}
             {{> mapLink name=name file=image }}
         {{/ each }}
     </div>
+    {{/ if }}
 </header>
 
 <hr>
@@ -45,8 +47,10 @@
     <input type="Submit" id="submit" value="Submit">
 </div>
 
+{{# if graveImages }}
 <div id="graveyard">
     {{# each graveImages }}
         {{> charLink name=name file=image }}
     {{/ each}}
 </div>
+{{/ if }}

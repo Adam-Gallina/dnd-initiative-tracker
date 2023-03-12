@@ -1,6 +1,11 @@
 var initiative = require('./initiative')
 var db = require('./database')
-var charImages = require('./images.json')
+try {
+    var charImages = require('./images.json')
+} catch (error) {
+    console.log("Error loading images.json: " + error.message)
+    var charImages = {}
+}
 
 var express = require('express')
 var exphbs = require('express-handlebars')
