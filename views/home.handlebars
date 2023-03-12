@@ -8,7 +8,7 @@
 
     <div id="useful-btns">
         {{# each mapImages }}
-            {{> mapLink dir="maps" name=name file=file }}
+            {{> mapLink name=name file=image }}
         {{/ each }}
     </div>
 </header>
@@ -18,7 +18,7 @@
 {{# if charImages }}
 <div id="charLinks" class="border">
     {{# each charImages }}
-        {{> charLink dir="characters" name=name file=file }}
+        {{> charLink name=name file=image }}
     {{/ each}}
 </div>
 {{/ if }}
@@ -47,6 +47,6 @@
 
 <div id="graveyard">
     {{# each graveImages }}
-        {{> charLink dir="gravestones" name=name file=file }}
+        {{> charLink name=name file=image }}
     {{/ each}}
 </div>

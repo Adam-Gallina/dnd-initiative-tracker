@@ -1,0 +1,35 @@
+<script src="settings.js" defer></script>
+<link rel="stylesheet" href="basic.css"></link>
+
+<header>
+    <h1 id="main-title">Initiative Tracker Settings</h1>
+
+    <div id="useful-btns">
+        <a href="\order"><input type="button" value="Back to Initiative Order"></a>
+    </div>
+</header>
+
+<hr>
+
+<div id="charSettings" class="border">
+    <h2>Characters</h2>
+    <div id="savedChars">
+        <div id="rumor" class="char">
+            <input type="checkbox" id="rumorActive" checked>
+            <img src="\images\characters\rumor_pfp_2-10-2023.jpg">
+            <input type="text" id="rumorName" value="Rumor">
+        </div>
+        <div id="clash" class="char">
+            <input type="checkbox" id="clashActive" checked>
+            <img src="\images\characters\clash_pfp_2-10-2023.jpg">
+            <input type="text" id="clashName" value="Clash">
+        </div>
+    </div>
+
+    <h2>Add character</h2>
+    <input type="text" id="charName">
+    <input type="file" id="charImage" accept="image/png, image/jpeg">
+    <input type="Submit" id="charSubmit" value="submit">
+</div>
+
+<input type="Submit" id="save" value="Save changes">
