@@ -9,6 +9,9 @@ var exphbs = require('express-handlebars')
 
 
 function GetImages(files) {
+    if (!files)
+        return []
+        
     images = []
     for (i = 0; i < files.length; i++)
         if (files[i].charAt(0) != '.')

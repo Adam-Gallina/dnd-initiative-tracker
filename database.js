@@ -6,13 +6,16 @@ const dataTemplate = {
 }
 
 function LoadData() {
-    if (!fs.existsSync(FNAME))
-        fs.writeFile(FNAME, '{}', function(err) {
+    try {
+        return require('./' + FNAME)
+    } catch {
+        fs.writeFileSync(FNAME, '{}', function(err) {
             console.log('[ERROR] Could not load ' + FNAME)
             return {}
         })
+    }
 
-    return require('./' + FNAME)
+    return LoadData()
 }
 
 function SaveData(data) {
