@@ -17,7 +17,7 @@ function ReloadTable(data) {
 
     deleteBtns.forEach(
         (x, i) => x.addEventListener('click', function(event) {
-            InitOrder.Chars.Remove(event.target.parentNode.getAttribute('name'), 
+            InitOrder.Chars.Remove(event.target.parentNode.parentNode.getAttribute('name'), 
                 function(event) {
                     if (event.target.status == 200) {
                         CheckForTableUpdate()
@@ -34,7 +34,7 @@ function ReloadTable(data) {
     if (totalCharacters > 0 && currCharacter == -1)
         currCharacter = 0
     
-    deleteBtns[currCharacter].parentNode.classList.add("highlight")
+    deleteBtns[currCharacter].parentNode.parentNode.classList.add("highlight")
 }
 
 function CheckForTableUpdate() {
@@ -62,10 +62,10 @@ function CheckForTableUpdate() {
 function SetOrderHighlight(curr, next) {
     deleteBtns = document.querySelectorAll('#delete')
     
-    if (deleteBtns[curr].parentNode.classList.contains('highlight'))
-        deleteBtns[curr].parentNode.classList.remove('highlight')
+    if (deleteBtns[curr].parentNode.parentNode.classList.contains('highlight'))
+        deleteBtns[curr].parentNode.parentNode.classList.remove('highlight')
 
-    deleteBtns[next].parentNode.classList.add('highlight')
+    deleteBtns[next].parentNode.parentNode.classList.add('highlight')
 }
 
 document.getElementById('edit').addEventListener('click', function(event) {

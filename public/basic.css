@@ -1,6 +1,5 @@
 .highlight {
     background-color: lightgreen;
-    padding: 5px;
 }
 
 body {
@@ -32,11 +31,20 @@ body {
     margin-top: 5px;
 }
 
-hr {
+
+/*hr {
     height: 3px;
     width: 100%;
     background-color: black;
     border-width: 0;
+}*/
+
+hr {
+    height: 2px;
+    background-color: black;
+    border-width: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .title {
@@ -58,7 +66,6 @@ hr {
     width: 140px;
 }
 
-
 #initTable {
     float: left;
     width: 35%;
@@ -67,6 +74,29 @@ hr {
 #initTable input#value,
 #initTable input#mod {
     width: 35px;
+}
+
+.initiativeEntry {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.initiativeEntry img {
+    width: 50px;
+    border-radius: 20px;
+    margin: 0px 10px;
+}
+
+.initiativeEntry p {
+    font-size: 125%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.initiativeValue {
+    margin-left: auto;
+    margin-right: 10px;
 }
 
 #addChar {
@@ -90,11 +120,6 @@ hr {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-#savedChars img {
-    width: 140px;
-    border: 1px solid black;
 }
 
 /*
@@ -134,7 +159,11 @@ hr {
         width: 90%;
     }
 
-    
+    .initiativeEntry img {
+        width: 75px;
+        margin-right: 15px;
+    }
+
     #initTable input#value,
     #initTable input#mod {
         width: 60px;

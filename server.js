@@ -7,6 +7,15 @@ try {
     var charImages = {}
 }
 
+function GetThumbnails(initiative) {
+    for (i = 0; i < initiative.length; i++) {
+        char = charImages.characters.find(element => element.name == initiative[i].name)
+        if (char)
+            initiative[i].thumbnail = char.thumbnail
+    }
+    return initiative
+}
+
 var express = require('express')
 var exphbs = require('express-handlebars')
 
@@ -63,7 +72,7 @@ app.get('/initiative/table/playerOrder', function(req, res, next) {
     initiative.Sort()
     
     res.status(200).send({ 
-        'initiativeOrder': initiative.Get(true),
+        'initiativeOrder': GetThumbnails(initiative.Get(true)),
         'playersOnly': true
     })
 })

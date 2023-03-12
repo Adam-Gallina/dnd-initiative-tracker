@@ -17,6 +17,9 @@ function InitEntry(name, value, mod, isPlayer) {
 }
 
 function GetInitEntry(name) {
+    if (!name)
+        return null
+        
     return Initiative.find(i => i.name.toLowerCase() == name.toLowerCase())
 }
 
