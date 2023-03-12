@@ -1,9 +1,20 @@
 var initiative = require('./initiative')
 var db = require('./database')
 
+var path = require('path')
+var fs = require('fs')
+
 var express = require('express')
 var exphbs = require('express-handlebars')
 
+
+function GetImages(files) {
+    images = []
+    for (i = 0; i < files.length; i++)
+        if (files[i].charAt(0) != '.')
+            images.push({'name': path.parse(files[i]).name, 'file': files[i] })
+    return images
+}
 
 var app = express()
 var port = process.env.PORT || 2282
@@ -15,17 +26,40 @@ app.use(express.static('public'))
 app.use(express.json())
 
 app.get('/', function(req, res, next) {
-    res.status(200).render('home')
+    fs.readdir('./public/images/characters', function(err, charFiles) {
+    fs.readdir('./public/images/maps', function(err, mapFiles) {
+    fs.readdir('./public/images/gravestones', function(err, graveFiles) {
+        res.status(200).render('home', { 
+            'charImages': GetImages(charFiles),
+            'mapImages': GetImages(mapFiles),
+            'graveImages': GetImages(graveFiles)
+        })
+    })
+    })
+    })    
 })
 
 app.get('/order', function(req, res, next) {
     res.status(200).render('order')
 })
 
+app.get('/settings', function(req, res, next) {
+    res.status(200).render('settings')
+})
+
 app.get('/:charName', function(req, res, next) {
-    res.status(200).render('home', {
-        'charName': req.params.charName.replace(/\w\S*/g, function(txt) {return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()}),
-        'charMod': db.GetDexMod(req.params.charName)[0]
+    fs.readdir('./public/images/characters', function(err, charFiles) {
+    fs.readdir('./public/images/maps', function(err, mapFiles) {
+    fs.readdir('./public/images/gravestones', function(err, graveFiles) {
+        res.status(200).render('home', { 
+            'charImages': GetImages(charFiles),
+            'mapImages': GetImages(mapFiles),
+            'graveImages': GetImages(graveFiles),
+            'charName': req.params.charName.replace(/\w\S*/g, function(txt) {return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()}),
+            'charMod': db.GetDexMod(req.params.charName)[0]
+        })
+    })
+    })
     })
 })
 

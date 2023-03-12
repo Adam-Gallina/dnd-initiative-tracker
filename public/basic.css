@@ -92,6 +92,11 @@ hr {
     justify-content: center;
 }
 
+#savedChars img {
+    width: 140px;
+    border: 1px solid black;
+}
+
 /*
 #initTable input#value:read-only,
 #initTable input#mod:read-only {

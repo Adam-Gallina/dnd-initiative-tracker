@@ -1,3 +1,4 @@
 /node_modules
 /public/*Template.js
+/public/images
 character_data.json
