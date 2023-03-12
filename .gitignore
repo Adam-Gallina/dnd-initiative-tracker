@@ -1,4 +1,6 @@
 /node_modules
 /public/*Template.js
-/public/images
+/public/images/characters
+/public/images/gravestones
+/public/images/maps
 character_data.json
