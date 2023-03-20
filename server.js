@@ -10,8 +10,11 @@ try {
 function GetThumbnails(initiative) {
     for (i = 0; i < initiative.length; i++) {
         char = charImages.characters.find(element => element.name == initiative[i].name)
-        if (char)
+        if (char) {
             initiative[i].thumbnail = char.thumbnail
+            if (char.only_image)
+                initiative[i].only_image = true
+        }
     }
     return initiative
 }

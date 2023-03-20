@@ -20,7 +20,9 @@
 {{# if charImages }}
 <div id="charLinks" class="border">
     {{# each charImages }}
-        {{> charLink name=name file=image }}
+        {{# if playing }}
+            {{> charLink name=name file=image }}
+        {{/ if }}
     {{/ each}}
 </div>
 {{/ if }}
