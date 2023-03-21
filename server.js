@@ -66,7 +66,7 @@ app.get('/initiative/table/order', function(req, res, next) {
     initiative.Sort()
 
     res.status(200).send({ 
-        'initiativeOrder': initiative.Get(false),
+        'initiativeOrder': GetThumbnails(initiative.Get(false)),
         'playersOnly': false
     })
 })
