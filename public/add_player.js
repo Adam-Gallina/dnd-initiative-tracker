@@ -16,8 +16,8 @@ document.getElementById("submit").addEventListener('click', function(event) {
         InitOrder.Chars.Add(
             InitOrder.Chars.GenEntry(
                 charName.value, 
-                initVal.value, 
-                dexMod.value,
+                parseInt(initVal.value), 
+                parseInt(dexMod.value),
                 true
             ),
             function(event){
