@@ -1,5 +1,5 @@
 var initiative = require('./api/initiative')
-var db = require('./database')
+var db = require('./api/database')
 try {
     var charImages = require('./images.json')
 } catch (error) {
