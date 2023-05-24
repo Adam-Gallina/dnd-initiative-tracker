@@ -1,12 +1,10 @@
-const { Router } = require('express')
-const router = Router()
-
+const { GetCharacter } = require('./images')
 
 var Initiative = []
 
 // Helper Functions
 function IsValidEntry(entry) {
-    return entry && entry.name && entry.total && entry.value && entry.mod && entry.hasOwnProperty('isPlayer')
+    return entry && entry.name && entry.hasOwnProperty('total') && entry.hasOwnProperty('value') && entry.hasOwnProperty('mod') && entry.hasOwnProperty('isPlayer')
 }
 
 function GetInitEntry(name) {
@@ -32,9 +30,12 @@ function SortInitiative() {
     })
 }
 
+// Html requests
+const { Router } = require('express')
+const router = Router()
 
 // Get players from initiative
-// /initiative?enemies=true
+// Query: ?enemies=<bool>
 router.get('/', function(req, res) {
     const playersOnly = !(req.query.enemies.toLowerCase() == "true") || false
     
@@ -46,7 +47,6 @@ router.get('/', function(req, res) {
         playersOnly: playersOnly
     })
 })
-
 
 // Clear initiative table
 router.post('/reset', function(req, res) {
@@ -68,6 +68,10 @@ router.post('/', function(req, res) {
             error: entry.name + " already exists in initiative order"
         })
     } else {
+        image = GetCharacter(entry.name)
+        if (image)
+            entry.thumbnail = image.thumbnail
+
         Initiative.push(entry)
         res.status(200).send()
     }

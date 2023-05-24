@@ -1,23 +1,6 @@
 var initiative = require('./api/initiative')
 var db = require('./api/database')
-try {
-    var charImages = require('./images.json')
-} catch (error) {
-    console.log("Error loading images.json: " + error.message)
-    var charImages = {}
-}
-
-function GetThumbnails(initiative) {
-    for (i = 0; i < initiative.length; i++) {
-        char = charImages.characters.find(element => element.name == initiative[i].name)
-        if (char) {
-            initiative[i].thumbnail = char.thumbnail
-            if (char.only_image)
-                initiative[i].only_image = true
-        }
-    }
-    return initiative
-}
+var images = require('./api/images')
 
 var express = require('express')
 var exphbs = require('express-handlebars')
@@ -37,9 +20,9 @@ app.use('/database', db.router)
 
 app.get('/', function(req, res, next) {
     res.status(200).render('home', { 
-        'charImages': charImages.characters,
-        'mapImages': charImages.maps,
-        'graveImages': charImages.gravestones
+        'charImages': images.characters,
+        'mapImages': images.maps,
+        'graveImages': images.gravestones
     })
 })
 
@@ -49,9 +32,9 @@ app.get('/order', function(req, res, next) {
 
 app.get('/:charName', function(req, res, next) {
     res.status(200).render('home', { 
-        'charImages': charImages.characters,
-        'mapImages': charImages.maps,
-        'graveImages': charImages.gravestones,
+        'charImages': images.characters,
+        'mapImages': images.maps,
+        'graveImages': images.gravestones,
         'charName': req.params.charName.replace(/\w\S*/g, function(txt) {return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()}),
         'charMod': db.GetDexMod(req.params.charName)[0]
     })

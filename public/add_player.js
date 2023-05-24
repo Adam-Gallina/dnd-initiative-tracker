@@ -26,7 +26,7 @@ document.getElementById("submit").addEventListener('click', function(event) {
                 CheckForTableUpdate()
             }
             else
-                alert('ERROR '+ event.target.status +': ' + event.target.response.error)
+                alert('ERROR '+ event.target.status +': ' + event.target.response)
         })
     }
 })
