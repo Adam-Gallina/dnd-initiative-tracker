@@ -1,89 +1,84 @@
-var urls = {
-    'AddChar':'/initiative/char/add',
-    'UpdateTable':'/initiative/table/update',
-    'RemoveChar':'/initiative/char/remove',
-    'GetTable':'/initiative/table/order',
-    'ResetTable':'/initiative/table/reset',
-    'GetPlayerTable':'/initiative/table/playerOrder',
-    'SetDex':'/database/dexMod'
+const Requests = {
+    AddChar:        { method: 'POST',   url: '/initiative' },
+    UpdateTable:    { method: 'PATCH',  url: '/initiative' },
+    RemoveChar:     { method: 'DELETE', url: '/initiative' },
+    GetTable:       { method: 'GET',    url: '/initiative?enemies=true' },
+    ResetTable:     { method: 'POST',   url: '/initiative/reset' },
+    GetPlayerTable: { method: 'GET',    url: '/initiative?enemies=false' }
 }
 
-function GetServerData(url, onLoad) {
+function InitEntry(name, value, mod, isPlayer) {
+    return {
+        name: name,
+        total: value + mod,
+        value: value,
+        mod: mod,
+        isPlayer: isPlayer
+    }
+}
+
+
+function OpenXmlRequest(request, onLoad, urlParams = '') {
     var req = new XMLHttpRequest()
-    req.open('GET', url)
+    req.open(request.method, request.url + urlParams)
 
     req.addEventListener('load', onLoad)
+
+    return req
+}
+
+
+function AddEntry(entry, onLoad) {
+    var req = OpenXmlRequest(Requests.AddChar, onLoad)
+    req.setRequestHeader('Content-Type', 'application/json')
+    
+    req.send(JSON.stringify({ entry: entry }))
+}
+
+function RemoveChar(charName, onLoad) {
+    var req = OpenXmlRequest(Requests.RemoveChar, onLoad, '/' + charName)
+    
+    req.send()
+}
+
+function GetTable(fullTable, onLoad) {
+    var req = OpenXmlRequest(fullTable ? Requests.GetTable : Requests.GetPlayerTable, onLoad)
+    
+    req.send()
+}
+
+function UpdateTable(entries, onLoad) {
+    var req = OpenXmlRequest(Requests.UpdateTable, onLoad)
+    req.setRequestHeader('Content-Type', 'application/json')
+
+    req.send(JSON.stringify({ entries: entries }))
+}
+
+function ClearTable(onLoad) {
+    var req = OpenXmlRequest(Requests.ResetTable, onLoad)
 
     req.send()
 }
 
-function PostServerData(url, data, onLoad) {
-    var req = new XMLHttpRequest()
-    req.open('POST', url)
-    req.setRequestHeader('Content-Type', 'application/json')
-    
-    if (arguments.length == 3)
-        req.addEventListener('load', onLoad)
-
-    req.send(JSON.stringify(data))
-}
-
-function GenChar(charName, initVal, dexMod, isPlayer) {
-    return {
-        'charName': charName,
-        'initVal': initVal,
-        'dexMod': dexMod,
-        'isPlayer': isPlayer
-    }
-}
-
-function AddPlayerChar(charName, initVal, dexMod, onLoad) {
-    PostServerData(urls.AddChar, GenChar(charName, initVal, dexMod, true), onLoad)
-}
-
-function AddNpcChar(charName, initVal, dexMod, onLoad) {
-    PostServerData(urls.AddChar, GenChar(charName, initVal, dexMod, false), onLoad)
-}
-
-function RemoveChar(charName, onLoad) {
-    var data = {
-        'charName': charName
-    }
-    PostServerData(urls.RemoveChar, data, onLoad)
-}
-
-function GetTable(fullTable, onLoad) {
-    GetServerData(fullTable ? urls.GetTable : urls.GetPlayerTable, onLoad)
-}
-
-function UpdateTable(updatedChars, onLoad) {
-    PostServerData(urls.UpdateTable, { 'initiativeOrder':updatedChars }, onLoad)
-}
-
-function ClearTable(onLoad) {
-    PostServerData(urls.ResetTable, {}, onLoad)
-}
-
-function SetDexMod(charName, value, onLoad) {
+/*function SetDexMod(charName, value, onLoad) {
     PostServerData(urls.SetDex, { 
         'charName': charName,
         'dexMod': value
     }, onLoad)
-}
+}*/
 
 const InitOrder = {
-    'Chars':{
-        'AddPlayer':AddPlayerChar,
-        'AddNpc':AddNpcChar,
-        'Remove':RemoveChar
+    Chars: {
+        Add: AddEntry,
+        Remove: RemoveChar,
+        GenEntry: InitEntry
     },
-    'Table':{
-        'Get':GetTable,
-        'Update':UpdateTable,
-        'Clear':ClearTable
-    },
-    'Data':{
-        'SetDexMod':SetDexMod
-    },
-    'GenChar':GenChar
+    Table:{
+        Get: GetTable,
+        Update: UpdateTable,
+        Clear: ClearTable
+    }/*,
+    Data:{
+        SetDexMod: SetDexMod
+    }*/
 }

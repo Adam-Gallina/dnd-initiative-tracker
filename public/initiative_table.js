@@ -85,15 +85,17 @@ document.getElementById('edit').addEventListener('click', function(event) {
             val.setAttribute('readonly', 'readonly')
             mod.setAttribute('readonly', 'readonly')
 
-            data.push(InitOrder.GenChar(
+            data.push(InitOrder.Chars.GenEntry(
                 valueBtns[i].getAttribute('name'),
-                val.value,
-                mod.value))
+                parseInt(val.value),
+                parseInt(mod.value),
+                'unknown'
+            ))
         }
     }
 
     if (!refreshingTable) {
-        InitOrder.Table.Update(data, function(event) {    
+        InitOrder.Table.Update(data, function(event) {
             if (event.target.status == 200) {
                 refreshingTable = !refreshingTable
                 editBtn.value = refreshingTable ? "Edit" : "Save"
@@ -131,8 +133,6 @@ document.getElementById('submit').addEventListener('click', function(event) {
     dexMod = document.getElementById("dexMod")
     isPlayer = document.getElementById("isPlayer")
 
-    var Add = isPlayer.checked ? InitOrder.Chars.AddPlayer : InitOrder.Chars.AddNpc
-
     if (!initVal.value)
         initVal.value = Math.floor(Math.random() * 20) + 1
 
@@ -142,7 +142,13 @@ document.getElementById('submit').addEventListener('click', function(event) {
         npcTotal = parseInt(count.value)
         
         for (var i = 0; i < npcTotal; i++) {
-            Add(charName.value + (npcTotal > 1 ? ' ' + i : ''), parseInt(initVal.value), dexMod.value,
+            InitOrder.Chars.Add(
+                InitOrder.Chars.GenEntry(
+                    charName.value + (npcTotal > 1 ? ' ' + i : ''), 
+                    parseInt(initVal.value), 
+                    parseInt(dexMod.value),
+                    isPlayer.checked
+                ),
                 function(event) {
                 if (event.target.status == 200) {
                     CheckForTableUpdate()

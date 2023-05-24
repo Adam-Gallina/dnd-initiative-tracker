@@ -5,14 +5,8 @@ const router = Router()
 var Initiative = []
 
 // Helper Functions
-function InitEntry(name, value, mod, isPlayer) {
-    return {
-        name: name,
-        total: value + mod,
-        value: value,
-        mod: mod,
-        isPlayer: isPlayer
-    }
+function IsValidEntry(entry) {
+    return entry && entry.name && entry.total && entry.value && entry.mod && entry.hasOwnProperty('isPlayer')
 }
 
 function GetInitEntry(name) {
@@ -63,15 +57,13 @@ router.post('/reset', function(req, res) {
 
 // Add char to initiative
 router.post('/', function(req, res) {
-    const char = req.body
-    const entry = InitEntry(
-        char.charName,
-        char.initVal,
-        char.dexMod,
-        char.isPlayer
-    )
+    const entry = IsValidEntry(req.body.entry) ? req.body.entry : null
 
-    if (GetInitEntry(entry.name)) {
+    if (!entry) {
+        res.status(400).json({
+            error: "Request body is not a properly formatted Entry object"
+        })
+    } else if (GetInitEntry(entry.name)) {
         res.status(500).json({
             error: entry.name + " already exists in initiative order"
         })
@@ -83,22 +75,30 @@ router.post('/', function(req, res) {
 
 // Update characters in initiative
 router.patch('/', function(req, res) {
-    const chars = req.body
+    const chars = req.body.entries
     const failed = []
-    
+    const invalid = []
+    console.log(chars)
     for (var i = 0; i < chars.length; i++) {
-        entry = GetInitEntry(chars[i].charName)
+        if (!IsValidEntry(chars[i])) {
+            invalid.push(chars[i])
+            continue
+        }
+
+        entry = GetInitEntry(chars[i].name)
         if (entry) {
-            entry.value = chars[i].initVal
-            entry.mod = chars[i].dexMod
+            entry.value = chars[i].value
+            entry.mod = chars[i].mod
             entry.total = entry.value + entry.mod
+            console.log(entry)
         } else {
-            failed.push(chars[i].charName)
+            failed.push(chars[i])
         }
     }
 
     res.status(200).json({
-        failed: failed
+        failed: failed,
+        invalid: invalid
     })
 })
 
@@ -117,4 +117,6 @@ router.delete('/:charName', function(req, res) {
 })
 
 
-exports.router = router
+module.exports = {
+    router: router
+}

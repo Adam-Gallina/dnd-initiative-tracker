@@ -13,14 +13,20 @@ document.getElementById("submit").addEventListener('click', function(event) {
     if (!charName.value || !initVal.value || !dexMod.value)
         alert("Please fill in all fields")
     else {
-        InitOrder.Chars.AddPlayer(charName.value, initVal.value, dexMod.value,
+        InitOrder.Chars.Add(
+            InitOrder.Chars.GenEntry(
+                charName.value, 
+                initVal.value, 
+                dexMod.value,
+                true
+            ),
             function(event){
             if (event.target.status == 200) {
                 initVal.value = ''
                 CheckForTableUpdate()
             }
             else
-                alert('ERROR '+ event.target.status +': ' + event.target.response)
+                alert('ERROR '+ event.target.status +': ' + event.target.response.error)
         })
     }
 })
@@ -29,7 +35,7 @@ if (document.getElementById("charName").hasAttribute('readonly')) {
     document.getElementById("dexMod").addEventListener('change', function(event) {
         charName = document.getElementById("charName")
         dexMod = document.getElementById("dexMod")
-        InitOrder.Data.SetDexMod(charName.value, dexMod.value)
+        //InitOrder.Data.SetDexMod(charName.value, dexMod.value)
     })
 }
 
