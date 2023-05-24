@@ -33,6 +33,7 @@ app.use(express.static('public'))
 app.use(express.json())
 
 app.use('/initiative', initiative.router)
+app.use('/database', db.router)
 
 app.get('/', function(req, res, next) {
     res.status(200).render('home', { 
@@ -54,14 +55,6 @@ app.get('/:charName', function(req, res, next) {
         'charName': req.params.charName.replace(/\w\S*/g, function(txt) {return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()}),
         'charMod': db.GetDexMod(req.params.charName)[0]
     })
-})
-
-app.post('/database/dexMod', function(req, res, next) {
-    data = req.body
-
-    db.SetDexMod(data.charName, data.dexMod)
-
-    res.status(200).send()
 })
 
 app.get('*', function(req, res) {

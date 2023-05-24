@@ -4,7 +4,9 @@ const Requests = {
     RemoveChar:     { method: 'DELETE', url: '/initiative' },
     GetTable:       { method: 'GET',    url: '/initiative?enemies=true' },
     ResetTable:     { method: 'POST',   url: '/initiative/reset' },
-    GetPlayerTable: { method: 'GET',    url: '/initiative?enemies=false' }
+    GetPlayerTable: { method: 'GET',    url: '/initiative?enemies=false' },
+
+    SetDexMod:      { method: 'POST',   url: '/database'}
 }
 
 function InitEntry(name, value, mod, isPlayer) {
@@ -60,12 +62,12 @@ function ClearTable(onLoad) {
     req.send()
 }
 
-/*function SetDexMod(charName, value, onLoad) {
-    PostServerData(urls.SetDex, { 
-        'charName': charName,
-        'dexMod': value
-    }, onLoad)
-}*/
+function SetDexMod(charName, value, onLoad) {
+    var req = OpenXmlRequest(Requests.SetDexMod, onLoad, '/' + charName)
+    req.setRequestHeader('Content-Type', 'application/json')
+
+    req.send(JSON.stringify({ dexMod: value }))
+}
 
 const InitOrder = {
     Chars: {
@@ -77,8 +79,8 @@ const InitOrder = {
         Get: GetTable,
         Update: UpdateTable,
         Clear: ClearTable
-    }/*,
+    },
     Data:{
         SetDexMod: SetDexMod
-    }*/
+    }
 }
