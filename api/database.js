@@ -5,7 +5,7 @@ const FNAME = 'character_data.json'
 // Data IO
 function LoadData() {
     try {
-        return require('./' + FNAME)
+        return require('../' + FNAME)
     } catch {
         fs.writeFileSync(FNAME, '{}', function(err) {
             console.log('[ERROR] Could not load ' + FNAME)
