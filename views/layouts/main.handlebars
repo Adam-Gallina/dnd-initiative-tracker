@@ -6,21 +6,27 @@
 
         <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.runtime.js"></script>
         <style>
+            body {
+                background: url({{ backgroundImg }});
+                {{# if stretchImg }} 
+                    background-size: 100%;
+                    background-attachment: fixed;
+                {{/ if}}
+            }
             .border {
                 background-color: {{ blockCol }};
+            }
+            @media (max-width: 1200px) {
+                body {
+                    {{# if stretchImg }} 
+                        background-size: auto 100%;
+                    {{/ if}}
+                }
             }
         </style>
     </head>
 
-    <body 
-        style="
-            background: url({{ backgroundImg }});
-            {{# if stretchImg }} 
-                background-size: 100%;
-                background-attachment: fixed;
-            {{/ if}}
-        "
-    >
+    <body>
         {{{ body }}}
     </body>
 </html>
