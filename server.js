@@ -17,33 +17,28 @@ app.use(express.json())
 
 app.use('/initiative', initiative.router)
 app.use('/database', db.router)
+app.use('/images', images.router)
 
-app.get('/', function(req, res, next) {
-    res.status(200).render('home', { 
-        'charImages': images.characters,
-        'mapImages': images.maps,
-        'graveImages': images.gravestones
-    })
+app.get('/', images.GetImages, function(req, res, next) {
+    res.status(200).render('home', req.handlebarsArgs)
 })
 
-app.get('/order', function(req, res, next) {
-    res.status(200).render('order')
+app.get('/order', images.GetImages, function(req, res, next) {
+    res.status(200).render('order', req.handlebarsArgs)
 })
 
-app.get('/:charName', function(req, res, next) {
-    res.status(200).render('home', { 
-        'charImages': images.characters,
-        'mapImages': images.maps,
-        'graveImages': images.gravestones,
-        'charName': req.params.charName.replace(/\w\S*/g, function(txt) {return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()}),
-        'charMod': db.GetDexMod(req.params.charName)[0]
-    })
+app.get('/:charName', images.GetImages, function(req, res, next) {
+    var args = req.handlebarsArgs
+    args.charName = req.params.charName.replace(/\w\S*/g, function(txt) {return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()})
+    args.charMod = db.GetDexMod(req.params.charName)[0]
+
+    res.status(200).render('home', args)
 })
 
 app.get('*', function(req, res) {
     console.log("404 for " + req.url)
 
-    res.status(404).send('Could not find requested resource')
+    res.status(404).send('Error 404: Could not find requested resource')
 })
 
 app.listen(port, function() {

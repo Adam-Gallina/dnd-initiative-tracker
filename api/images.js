@@ -5,6 +5,20 @@ try {
     var charImages = {}
 }
 
+var currBackground = {
+    name: "Scroll",
+    image: "./images/scroll_tile.jpg",
+    color: "tan"
+}
+if (charImages.backgrounds) {
+    for (i = 0; i < charImages.backgrounds.length; i++) {
+        if (charImages.backgrounds[i].default) {
+            currBackground = charImages.backgrounds[i]
+            break
+        }
+    }
+}
+
 function GetThumbnails(initiative) {
     for (i = 0; i < initiative.length; i++) {
         char = charImages.characters.find(element => element.name == initiative[i].name)
@@ -21,9 +35,26 @@ function GetCharacter(charName) {
     return charImages.characters.find(e => e.name.toLowerCase() == charName.toLowerCase())
 }
 
+
+// HTML requests
+const { Router } = require('express')
+const router = Router()
+
+function GetImages(req, res, next) {
+    req.handlebarsArgs = {
+        charImages: charImages.characters,
+        mapImages: charImages.maps,
+        graveImages: charImages.gravestones,
+        backgroundImg: currBackground.image,
+        stretchImg: currBackground.stretchImg,
+        blockCol: currBackground.color
+    }
+    next()
+}
+
+
 module.exports = {
-    characters: charImages.characters,
-    maps: charImages.maps,
-    gravestones: charImages.gravestones,
-    GetCharacter: GetCharacter
+    router: router,
+    GetCharacter: GetCharacter,
+    GetImages: GetImages
 }

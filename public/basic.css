@@ -2,16 +2,12 @@
     background-color: lightgreen;
 }
 
-body {
-    background: url(images/scroll_tile.jpg);
-}
-
 .border {
     border: 3px solid black;
     border-radius: 10px;
 
     padding: 20px;
-    background-color: tan;
+    /* Background col set in main.handlebars */
     min-height: 500px;
     margin: 20px;
 }
@@ -30,14 +26,6 @@ body {
     padding: 10px 20px;
     margin-top: 5px;
 }
-
-
-/*hr {
-    height: 3px;
-    width: 100%;
-    background-color: black;
-    border-width: 0;
-}*/
 
 hr {
     height: 2px;

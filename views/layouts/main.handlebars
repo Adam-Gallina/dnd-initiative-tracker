@@ -5,9 +5,22 @@
         <title>Initiative Tracker</title>
 
         <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.runtime.js"></script>
+        <style>
+            .border {
+                background-color: {{ blockCol }};
+            }
+        </style>
     </head>
 
-    <body>
+    <body 
+        style="
+            background: url({{ backgroundImg }});
+            {{# if stretchImg }} 
+                background-size: 100%;
+                background-attachment: fixed;
+            {{/ if}}
+        "
+    >
         {{{ body }}}
     </body>
 </html>
