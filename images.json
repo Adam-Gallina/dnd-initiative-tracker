@@ -9,5 +9,13 @@
     ],
     "maps": [
 
+    ],
+    "backgrounds": [
+        {
+            "name": "Scroll",
+            "image": "./images/scroll_tile.jpg",
+            "color": "tan",
+            "default": true
+        }
     ]
 }
