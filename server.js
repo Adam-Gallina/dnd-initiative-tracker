@@ -27,6 +27,10 @@ app.get('/order', images.GetImages, function(req, res, next) {
     res.status(200).render('order', req.handlebarsArgs)
 })
 
+app.get('/settings', images.GetImages, function(req, res, next) {
+    res.status(200).render('settings', req.handlebarsArgs)
+})
+
 app.get('/:charName', images.GetImages, function(req, res, next) {
     var args = req.handlebarsArgs
     args.charName = req.params.charName.replace(/\w\S*/g, function(txt) {return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()})

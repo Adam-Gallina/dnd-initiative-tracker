@@ -31,13 +31,22 @@ const { Router } = require('express')
 const router = Router()
 
 function GetImages(req, res, next) {
+    const bkgds = JSON.parse(JSON.stringify(charImages.backgrounds))
+    for (i = 0; i < bkgds.length; i++)
+        if (bkgds[i].name.toLowerCase() == currBackground.name.toLowerCase()) {
+            bkgds[i].selected = true
+            break
+        }
+
     req.handlebarsArgs = {
         charImages: charImages.characters,
         mapImages: charImages.maps,
         graveImages: charImages.gravestones,
+        backgroundName: currBackground.name,
         backgroundImg: currBackground.image,
         stretchImg: currBackground.stretchImg,
-        blockCol: currBackground.color
+        blockCol: currBackground.color,
+        backgrounds: bkgds
     }
     next()
 }
@@ -46,16 +55,6 @@ router.get('/currBackground', function(req, res) {
     res.status(200).json({
         currBackground: currBackground.name
     })
-})
-
-router.get('/backgrounds', function(req, res) {
-    if (charImages.backgrounds) {
-        res.status(200).json({
-            backgrounds: charImages.backgrounds
-        })
-    } else {
-        res.status(404).json({ error: "No backgrounds available" })
-    }
 })
 
 router.post('/background/:bkgd', function (req, res) {

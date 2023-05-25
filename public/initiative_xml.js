@@ -8,7 +8,8 @@ const Requests = {
 
     SetDexMod:      { method: 'POST',   url: '/database' },
 
-    GetBkgdName:    { method: 'GET',    url:'/images/currBackground' }
+    GetBkgdName:    { method: 'GET',    url: '/images/currBackground' },
+    SetBkgd:        { method: 'POST',   url: '/images/background' }
 }
 
 function InitEntry(name, value, mod, isPlayer) {
@@ -74,7 +75,11 @@ function SetDexMod(charName, value, onLoad) {
 function GetCurrBackground(onLoad) {
     var req = OpenXmlRequest(Requests.GetBkgdName, onLoad)
 
-    req.addEventListener('load', onLoad)
+    req.send()
+}
+
+function ChangeBackground(background, onLoad) {
+    var req = OpenXmlRequest(Requests.SetBkgd, onLoad, '/' + background)
 
     req.send()
 }
@@ -94,6 +99,7 @@ const InitOrder = {
         SetDexMod: SetDexMod
     },
     Images:{
-        GetBkgdName: GetCurrBackground
+        GetBkgdName: GetCurrBackground,
+        ChangeBkgd: ChangeBackground
     }
 }

@@ -1,0 +1,22 @@
+<script src="initiative_xml.js"></script>
+<script src="settings.js" defer></script>
+<link rel="stylesheet" href="basic.css"></link>
+
+<header>
+    <h1 id="main-title">Settings</h1>
+
+    <div id="useful-btns">
+        <a href="/order"><input type="button" value="Initiative Order"></a>
+    </div>
+</header>
+
+<hr>
+
+<div class="border">
+    <label for="theme">Theme</label>
+    <select id="theme" name="theme">
+        {{# each backgrounds }}
+            <option value="{{ name }}" {{# if selected }}selected{{/ if }}>{{ name }}</option>
+        {{/ each}}
+    </select>
+</div>
