@@ -82,7 +82,7 @@ router.patch('/', function(req, res) {
     const chars = req.body.entries
     const failed = []
     const invalid = []
-    console.log(chars)
+
     for (var i = 0; i < chars.length; i++) {
         if (!IsValidEntry(chars[i])) {
             invalid.push(chars[i])
@@ -94,7 +94,6 @@ router.patch('/', function(req, res) {
             entry.value = chars[i].value
             entry.mod = chars[i].mod
             entry.total = entry.value + entry.mod
-            console.log(entry)
         } else {
             failed.push(chars[i])
         }

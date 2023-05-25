@@ -1,20 +1,9 @@
-const TableReloadDelay = 3000
-var refreshingTable = true;
-
-var initiativeTable = document.getElementById("charInit")
-
-var currData = []
-
 var currCharacter = -1
 var totalCharacters = 0
 
-function ReloadTable(data) {
-    data.modPerms = true
-    initiativeTable.innerHTML = Handlebars.templates.initiativeTable(data)
-    currData = data.initiativeOrder
-
+modPerms = true
+onTableReload = function(data) {
     deleteBtns = document.querySelectorAll('#delete')
-
     deleteBtns.forEach(
         (x, i) => x.addEventListener('click', function(event) {
             InitOrder.Chars.Remove(event.target.parentNode.parentNode.getAttribute('name'), 
@@ -31,32 +20,15 @@ function ReloadTable(data) {
     ))
     
     totalCharacters = deleteBtns.length
-    if (totalCharacters > 0 && currCharacter == -1)
-        currCharacter = 0
+    if (totalCharacters > 0) {
+        if (currCharacter < 0)
+            currCharacter = 0
+        else if (currCharacter >= totalCharacters)
+            currCharacter = totalCharacters - 1
+    }
     
-    deleteBtns[currCharacter].parentNode.parentNode.classList.add("highlight")
-}
-
-function CheckForTableUpdate() {
-    InitOrder.Table.Get(true, function(event) {
-        if (event.target.status == 404) {
-            console.log("404: Couldn't retrieve initiative data")
-            return
-        }
-
-        data = JSON.parse(event.target.responseText)
-        order = data.initiativeOrder
-        if (order.length != currData.length)
-            ReloadTable(data)
-        else {
-            for (var i = 0; i < order.length; i++) {
-                if (JSON.stringify(order[i]) != JSON.stringify(currData[i])) {
-                    ReloadTable(data)
-                    break
-                }
-            }
-        }
-    })
+    if (currCharacter != -1)
+        deleteBtns[currCharacter].parentNode.parentNode.classList.add("highlight")
 }
 
 function SetOrderHighlight(curr, next) {
@@ -118,6 +90,7 @@ document.getElementById('next').addEventListener('click', function() {
 
 document.getElementById('reset').addEventListener('click', function() {
     InitOrder.Table.Clear(function(event) {
+        currCharacter = -1
         if (event.target.status == 200) {
             CheckForTableUpdate()
         } else {
@@ -127,48 +100,27 @@ document.getElementById('reset').addEventListener('click', function() {
 })
 
 document.getElementById('submit').addEventListener('click', function(event) {
-    charName = document.getElementById("npcName")
-    count = document.getElementById("totalNpc")
-    initVal = document.getElementById("initVal")
-    dexMod = document.getElementById("dexMod")
-    isPlayer = document.getElementById("isPlayer")
+    var charNameVal = document.getElementById("charName").value
 
+    var count = document.getElementById("totalNpc")
+    var isPlayer = document.getElementById("isPlayer")
+
+    initVal = document.getElementById("initVal")
     if (!initVal.value)
         initVal.value = Math.floor(Math.random() * 20) + 1
 
-    if (!charName.value || !count.value || !dexMod.value)
-        alert("Please fill in all fields")
-    else {
+    var entry = ReadCharEntry(true, true, true, isPlayer.checked)
+    
+    if (entry) {
         npcTotal = parseInt(count.value)
         
         for (var i = 0; i < npcTotal; i++) {
-            InitOrder.Chars.Add(
-                InitOrder.Chars.GenEntry(
-                    charName.value + (npcTotal > 1 ? ' ' + i : ''), 
-                    parseInt(initVal.value), 
-                    parseInt(dexMod.value),
-                    isPlayer.checked
-                ),
-                function(event) {
-                if (event.target.status == 200) {
-                    CheckForTableUpdate()
-                } else {
-                    alert("Error " + event.target.status + " when trying to add new NPCs")
-                }
-            })
+            entry.name = charNameVal + (npcTotal > 1 ? ' ' + i : '')
+            
+            SubmitCharEntry(entry)
         }
 
-        charName.value = ''
         count.value = '1'
-        initVal.value = ''
-        dexMod.value = ''
         isPlayer.checked = false
     }
 })
-
-CheckForTableUpdate()
-
-setInterval(function() {
-    if (refreshingTable)
-        CheckForTableUpdate()
-}, TableReloadDelay)
