@@ -6,7 +6,9 @@ const Requests = {
     ResetTable:     { method: 'POST',   url: '/initiative/reset' },
     GetPlayerTable: { method: 'GET',    url: '/initiative?enemies=false' },
 
-    SetDexMod:      { method: 'POST',   url: '/database'}
+    SetDexMod:      { method: 'POST',   url: '/database' },
+
+    GetBkgdName:    { method: 'GET',    url:'/images/currBackground' }
 }
 
 function InitEntry(name, value, mod, isPlayer) {
@@ -69,6 +71,14 @@ function SetDexMod(charName, value, onLoad) {
     req.send(JSON.stringify({ dexMod: value }))
 }
 
+function GetCurrBackground(onLoad) {
+    var req = OpenXmlRequest(Requests.GetBkgdName, onLoad)
+
+    req.addEventListener('load', onLoad)
+
+    req.send()
+}
+
 const InitOrder = {
     Chars: {
         Add: AddEntry,
@@ -82,5 +92,8 @@ const InitOrder = {
     },
     Data:{
         SetDexMod: SetDexMod
+    },
+    Images:{
+        GetBkgdName: GetCurrBackground
     }
 }

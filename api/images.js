@@ -17,18 +17,8 @@ if (charImages.backgrounds) {
             break
         }
     }
-}
-
-function GetThumbnails(initiative) {
-    for (i = 0; i < initiative.length; i++) {
-        char = charImages.characters.find(element => element.name == initiative[i].name)
-        if (char) {
-            initiative[i].thumbnail = char.thumbnail
-            if (char.only_image)
-                initiative[i].only_image = true
-        }
-    }
-    return initiative
+} else {
+    console.log("[ERROR] No backgrounds found in images.json, using default")
 }
 
 function GetCharacter(charName) {
@@ -51,6 +41,39 @@ function GetImages(req, res, next) {
     }
     next()
 }
+
+router.get('/currBackground', function(req, res) {
+    res.status(200).json({
+        currBackground: currBackground.name
+    })
+})
+
+router.get('/backgrounds', function(req, res) {
+    if (charImages.backgrounds) {
+        res.status(200).json({
+            backgrounds: charImages.backgrounds
+        })
+    } else {
+        res.status(404).json({ error: "No backgrounds available" })
+    }
+})
+
+router.post('/background/:bkgd', function (req, res) {
+    bkgd = null
+    for (i = 0; i < charImages.backgrounds.length; i++) {
+        if (charImages.backgrounds[i].name.toLowerCase() == req.params.bkgd.toLowerCase()) {
+            bkgd = charImages.backgrounds[i]
+            break
+        }
+    }
+
+    if (!bkgd) {
+        res.status(404).json({ error: "No background loaded named "  + req.params.name })
+    } else {
+        currBackground = bkgd
+        res.status(200).send()
+    }
+})
 
 
 module.exports = {

@@ -3,6 +3,7 @@ var refreshingTable = true;
 
 var initiativeTable = document.getElementById("charInit")
 
+var currBackground = ""
 var currData = []
 var onTableReload = null
 var modPerms = false
@@ -85,4 +86,14 @@ CheckForTableUpdate()
 setInterval(function() {
     if (refreshingTable)
         CheckForTableUpdate()
+
+    InitOrder.Images.GetBkgdName(function(event) {
+        if (event.target.status == 200) {
+            var bkgd = JSON.parse(event.target.responseText).currBackground
+            if (currBackground === "")
+                currBackground = bkgd
+            else if (bkgd != currBackground)
+                location.reload()
+        }
+    })
 }, TableReloadDelay)
