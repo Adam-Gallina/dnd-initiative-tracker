@@ -1,6 +1,4 @@
 {
-    "imagesDir": "./images",
-    "background": "/scroll_tile.jpg",
     "characters": [
         
     ],
@@ -9,5 +7,13 @@
     ],
     "maps": [
 
+    ],
+    "backgrounds": [
+        {
+            "name": "Scroll",
+            "image": "./images/scroll_tile.jpg",
+            "color": "tan",
+            "default": true
+        }
     ]
 }
