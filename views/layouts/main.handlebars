@@ -14,7 +14,7 @@
                 {{/ if}}
             }
             .border {
-                background-color: {{ blockCol }};
+                background-color: {{# if blockCol }} {{ blockCol }} {{ else }} tan {{/ if }};
             }
             @media (max-width: 1200px) {
                 body {

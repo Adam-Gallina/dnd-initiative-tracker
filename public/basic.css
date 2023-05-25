@@ -18,6 +18,8 @@
     margin-bottom: 0px;
     
     display: inline-block;
+
+    text-shadow: white 0px 0px 10px;
 }
 
 #useful-btns {
