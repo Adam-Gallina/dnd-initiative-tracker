@@ -1,104 +1,13 @@
 {
-    "characters": [
-        {
-            "name": "Clash",
-            "image": "./images/characters/clash_pfp.jpg",
-            "playing": true
-        },
-        {
-            "name": "Eli",
-            "image": "./images/characters/eli_pfp.jpg",
-            "playing": true
-        },
-        {
-            "name": "Rumor",
-            "image": "./images/characters/rumor_pfp.jpg",
-            "playing": true
-        },
-        {
-            "name": "Hedamir",
-            "image": "./images/characters/hedamir_pfp.jpg",
-            "playing": true
-        },
-        {
-            "name": "Nessi",
-            "image": "./images/characters/nessi_pfp.jpg",
-            "playing": true
-        },
-        {
-            "name": "Kell",
-            "image": "./images/characters/kell_pfp_placeholder.png",
-            "playing": true
-        },
-        {
-            "name": "Zephyr",
-            "thumbnail": "./images/characters/zephyr_thumbnail.jpg",
-            "playing": false,
-            "only_image": true
-        }
-    ],
-    "gravestones": [
-        {
-            "name": "Fig",
-            "image": "./images/gravestones/fig_gravestone.jpg"
-        }
-    ],
-    "maps": [
-        {
-            "name": "Istral Empire",
-            "image": "./images/maps/istral_empire.png"
-        },
-        {
-            "name": "Tyr Faerth",
-            "image": "./images/maps/tyr_faerth.jpg"
-        }
-    ],
+    "characters": [],
+    "gravestones": [],
+    "maps": [],
     "backgrounds": [
         {
             "name": "Scroll",
             "image": "./images/scroll_tile.jpg",
             "color": "tan",
             "default": true
-        },
-        {
-            "name": "Castle",
-            "image": "./images/backgrounds/castle.jpg",
-            "stretchImg": true
-        },
-        {
-            "name": "Cave",
-            "image": "./images/backgrounds/cave.jpg",
-            "stretchImg": true
-        },
-        {
-            "name": "City",
-            "image": "./images/backgrounds/city.jpg",
-            "stretchImg": true
-        },
-        {
-            "name": "Desert",
-            "image": "./images/backgrounds/desert.jpg",
-            "stretchImg": true
-        },
-        {
-            "name": "Forest",
-            "image": "./images/backgrounds/forest.jpg",
-            "stretchImg": true
-        },
-        {
-            "name": "Ocean",
-            "image": "./images/backgrounds/ocean.jpg",
-            "stretchImg": true
-        },
-        {
-            "name": "Plains",
-            "image": "./images/backgrounds/plains.jpg",
-            "stretchImg": true
-        },
-        {
-            "name": "Lunehollow go boom",
-            "image": "./images/backgrounds/lunehollow_attack.jpg",
-            "stretchImg": true
         }
     ]
 }
