@@ -14,6 +14,11 @@
             "image": "./images/scroll_tile.jpg",
             "color": "tan",
             "default": true
+        },
+        {
+            "name": "Castle",
+            "image": "./images/castle.jpg",
+            "stretchImg": true
         }
     ]
 }

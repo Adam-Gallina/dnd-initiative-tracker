@@ -81,19 +81,18 @@ function CheckForTableUpdate() {
 }
 
 
-CheckForTableUpdate()
+const socket = io()
 
-setInterval(function() {
+socket.on(SocketCodes.bkgdUpdate, function(/*name*/) {
+    //if (currBackground === "")
+    //    currBackground = bkgd
+    //else if (bkgd != currBackground)
+        location.reload()
+})
+
+socket.on(SocketCodes.initUpdate, function() {
     if (refreshingTable)
         CheckForTableUpdate()
+})
 
-    InitOrder.Images.GetBkgdName(function(event) {
-        if (event.target.status == 200) {
-            var bkgd = JSON.parse(event.target.responseText).currBackground
-            if (currBackground === "")
-                currBackground = bkgd
-            else if (bkgd != currBackground)
-                location.reload()
-        }
-    })
-}, TableReloadDelay)
+CheckForTableUpdate()
