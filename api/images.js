@@ -1,3 +1,5 @@
+const { SendBackgroundUpdate } = require('./socket.js')
+
 try {
     var charImages = require('../images.json')
 } catch (error) {
@@ -51,12 +53,6 @@ function GetImages(req, res, next) {
     next()
 }
 
-router.get('/currBackground', function(req, res) {
-    res.status(200).json({
-        currBackground: currBackground.name
-    })
-})
-
 router.post('/background/:bkgd', function (req, res) {
     bkgd = null
     for (i = 0; i < charImages.backgrounds.length; i++) {
@@ -69,7 +65,10 @@ router.post('/background/:bkgd', function (req, res) {
     if (!bkgd) {
         res.status(404).json({ error: "No background loaded named "  + req.params.name })
     } else {
-        currBackground = bkgd
+        if (currBackground != bkgd) {
+            currBackground = bkgd
+            SendBackgroundUpdate(currBackground)
+        }
         res.status(200).send()
     }
 })

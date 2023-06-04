@@ -12,6 +12,11 @@ const Requests = {
     SetBkgd:        { method: 'POST',   url: '/images/background' }
 }
 
+const SocketCodes = {
+    bkgdUpdate: 'background update',
+    initUpdate: 'initiative update'
+}
+
 function InitEntry(name, value, mod, isPlayer) {
     return {
         name: name,

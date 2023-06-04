@@ -1,13 +1,14 @@
-var initiative = require('./api/initiative')
-var db = require('./api/database')
-var images = require('./api/images')
+const initiative = require('./api/initiative')
+const db = require('./api/database')
+const images = require('./api/images')
 
-var express = require('express')
-var exphbs = require('express-handlebars')
+const port = process.env.PORT || 2282
 
+const express = require('express')
+const exphbs = require('express-handlebars')
 
-var app = express()
-var port = process.env.PORT || 2282
+const { app, server } = require('./api/socket')
+
 
 app.engine('handlebars', exphbs.engine({defaultLayout : 'main'}))
 app.set('view engine', 'handlebars')
@@ -45,6 +46,6 @@ app.get('*', function(req, res) {
     res.status(404).send('Error 404: Could not find requested resource')
 })
 
-app.listen(port, function() {
+server.listen(port, function() {
     console.log('-- Server is listening on port ' + port + '!')
 })
