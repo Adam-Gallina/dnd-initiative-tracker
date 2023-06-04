@@ -67,7 +67,7 @@ images.json is used to customize the initiative tracker and allow the players to
 * **characters**: Contains images related to player characters
   * **name**: Name used in initiative table
   * **image**: Image displayed as a link on player view page
-  * **thumbnail**: Image displayed within initiative order
+  * **thumbnail**: Image displayed within initiative order. If not included, will use **image**
   * **playing**: Include element to add image to quick links on player view page
 * **gravestones**: Honors a fallen companion by creating a gravestone in the graveyard at the bottom of the player view page
 * **maps**: Adds a button to view a map to the header
