@@ -71,8 +71,10 @@ router.post('/', function(req, res) {
         })
     } else {
         image = GetCharacter(entry.name)
-        if (image)
-            entry.thumbnail = image.thumbnail
+        if (image) {
+            entry.thumbnail = image.thumbnail ? image.thumbnail : image.image
+            entry.only_image = image.only_image
+        }
 
         Initiative.push(entry)
         
