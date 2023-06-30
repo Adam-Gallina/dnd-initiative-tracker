@@ -17,6 +17,9 @@ app.engine('handlebars', exphbs.engine({defaultLayout : 'main'}))
 app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
+if (process.env.CUSTOM_IMG)
+    app.use(express.static(process.env.CUSTOM_IMG))
+
 app.use(express.json())
 
 app.use('/initiative', initiative.router)

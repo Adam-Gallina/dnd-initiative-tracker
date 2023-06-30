@@ -2,7 +2,6 @@ const { SendBackgroundUpdate } = require('./socket.js')
 
 try {
     var charImages = require(process.env.IMG_FILE || '../images.json')
-    console.log(charImages)
 } catch (error) {
     console.log("Error loading images.json: " + error.message)
     var charImages = {}
@@ -30,7 +29,7 @@ function GetCharacter(charName) {
 
 
 // HTML requests
-const { Router } = require('express')
+const { Router, static } = require('express')
 const { requireAuthentication } = require('../lib/auth')
 const router = Router()
 
