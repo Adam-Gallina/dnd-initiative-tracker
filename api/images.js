@@ -1,7 +1,8 @@
 const { SendBackgroundUpdate } = require('./socket.js')
 
 try {
-    var charImages = require('../images.json')
+    var charImages = require(process.env.IMG_FILE || '../images.json')
+    console.log(charImages)
 } catch (error) {
     console.log("Error loading images.json: " + error.message)
     var charImages = {}
