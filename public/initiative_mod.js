@@ -69,16 +69,17 @@ document.getElementById('edit').addEventListener('click', function(event) {
     if (!refreshingTable) {
         InitOrder.Table.Update(key, data, function(event) {
             if (event.target.status == 200) {
-                refreshingTable = !refreshingTable
-                editBtn.value = refreshingTable ? "Edit" : "Save"
+                refreshingTable = true
+                editBtn.value = "Edit"
+                CheckForTableUpdate()
             } else {
                 alert("Error " + event.target.status + " when saving changes")
             }
         })
     }
     else {
-        refreshingTable = !refreshingTable
-        editBtn.value = refreshingTable ? "Edit" : "Save"
+        refreshingTable = false
+        editBtn.value = "Save"
     }
 })
 
