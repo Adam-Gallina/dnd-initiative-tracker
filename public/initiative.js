@@ -81,35 +81,17 @@ function CheckForTableUpdate() {
 }
 
 
-// From https://www.w3schools.com/js/js_cookies.asp#:~:text=Create%20a%20Cookie%20with%20JavaScript,date%20(in%20UTC%20time).
-function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-}
-
 function onKeyReturned(event) {
-    console.log(`${event.target.status} for ${key}`)
     if (event.target.status == 200) {
-        document.cookie = `authkey=${key};`
+        localStorage.authKey = key
         document.getElementById('login').setAttribute('hidden', 'true')
         document.getElementById('content').removeAttribute('hidden')
     }
 }
 
-var key = getCookie('authkey')
-if (key != "")
-    CheckKey(getCookie('authkey'), onKeyReturned)
+var key = localStorage.authKey
+if (key)
+    CheckKey(key, onKeyReturned)
 
 const keyEntry = document.getElementById('secret-key')
 document.getElementById('submit-pw').addEventListener('click', function() {
