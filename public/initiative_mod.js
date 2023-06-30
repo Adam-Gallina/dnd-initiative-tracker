@@ -6,7 +6,7 @@ onTableReload = function(data) {
     deleteBtns = document.querySelectorAll('#delete')
     deleteBtns.forEach(
         (x, i) => x.addEventListener('click', function(event) {
-            InitOrder.Chars.Remove(event.target.parentNode.parentNode.getAttribute('name'), 
+            InitOrder.Chars.Remove(key, event.target.parentNode.parentNode.getAttribute('name'), 
                 function(event) {
                     if (event.target.status == 200) {
                         CheckForTableUpdate()
@@ -67,7 +67,7 @@ document.getElementById('edit').addEventListener('click', function(event) {
     }
 
     if (!refreshingTable) {
-        InitOrder.Table.Update(data, function(event) {
+        InitOrder.Table.Update(key, data, function(event) {
             if (event.target.status == 200) {
                 refreshingTable = !refreshingTable
                 editBtn.value = refreshingTable ? "Edit" : "Save"
@@ -89,7 +89,8 @@ document.getElementById('next').addEventListener('click', function() {
 })
 
 document.getElementById('reset').addEventListener('click', function() {
-    InitOrder.Table.Clear(function(event) {
+    console.log(key)
+    InitOrder.Table.Clear(key, function(event) {
         currCharacter = -1
         if (event.target.status == 200) {
             CheckForTableUpdate()

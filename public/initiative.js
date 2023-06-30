@@ -38,6 +38,7 @@ function ReadCharEntry(clearName, clearInit, clearDex, isPlayer) {
 
 function SubmitCharEntry(entry) {
     InitOrder.Chars.Add(
+        key,
         entry,
         function(event){
         if (event.target.status == 200) {

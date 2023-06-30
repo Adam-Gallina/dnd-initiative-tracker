@@ -1,5 +1,5 @@
 document.getElementById("theme").addEventListener('change', function() {
-    InitOrder.Images.ChangeBkgd(this.value, function(event) {
+    InitOrder.Images.ChangeBkgd(key, this.value, function(event) {
         if (event.target.status == 200)
             location.reload()
         else

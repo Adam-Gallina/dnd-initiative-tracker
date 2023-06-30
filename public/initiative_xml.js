@@ -40,17 +40,18 @@ function OpenXmlRequest(request, onLoad, urlParams = '') {
 }
 
 
-function AddEntry(entry, onLoad) {
+function AddEntry(key, entry, onLoad) {
     var req = OpenXmlRequest(Requests.AddChar, onLoad)
     req.setRequestHeader('Content-Type', 'application/json')
     
-    req.send(JSON.stringify({ entry: entry }))
+    req.send(JSON.stringify({ key: key, entry: entry }))
 }
 
-function RemoveChar(charName, onLoad) {
+function RemoveChar(key, charName, onLoad) {
     var req = OpenXmlRequest(Requests.RemoveChar, onLoad, '/' + charName)
+    req.setRequestHeader('Content-Type', 'application/json')
     
-    req.send()
+    req.send(JSON.stringify({ key: key }))
 }
 
 function GetTable(fullTable, onLoad) {
@@ -59,24 +60,25 @@ function GetTable(fullTable, onLoad) {
     req.send()
 }
 
-function UpdateTable(entries, onLoad) {
+function UpdateTable(key, entries, onLoad) {
     var req = OpenXmlRequest(Requests.UpdateTable, onLoad)
     req.setRequestHeader('Content-Type', 'application/json')
 
-    req.send(JSON.stringify({ entries: entries }))
+    req.send(JSON.stringify({ key: key, entries: entries }))
 }
 
-function ClearTable(onLoad) {
+function ClearTable(key, onLoad) {
     var req = OpenXmlRequest(Requests.ResetTable, onLoad)
+    req.setRequestHeader('Content-Type', 'application/json')
 
-    req.send()
+    req.send(JSON.stringify({ key: key }))
 }
 
-function SetDexMod(charName, value, onLoad) {
+function SetDexMod(key, charName, value, onLoad) {
     var req = OpenXmlRequest(Requests.SetDexMod, onLoad, '/' + charName)
     req.setRequestHeader('Content-Type', 'application/json')
 
-    req.send(JSON.stringify({ dexMod: value }))
+    req.send(JSON.stringify({ key: key, dexMod: value }))
 }
 
 function GetCurrBackground(onLoad) {
@@ -85,10 +87,11 @@ function GetCurrBackground(onLoad) {
     req.send()
 }
 
-function ChangeBackground(background, onLoad) {
+function ChangeBackground(key, background, onLoad) {
     var req = OpenXmlRequest(Requests.SetBkgd, onLoad, '/' + background)
+    req.setRequestHeader('Content-Type', 'application/json')
 
-    req.send()
+    req.send(JSON.stringify({ key: key }))
 }
 
 function CheckKey(key, onLoad) {
