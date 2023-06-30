@@ -36,30 +36,35 @@ function GetDexMod(char) {
 
 // HTML requests
 const { Router } = require('express')
+const { requireAuthentication } = require('../lib/auth')
 const router = Router()
 
 const dataTemplate = { 
     dexMod: 0
 }
 
-router.post('/:charName', function(req, res) {
-    if (!req.body.dexMod) {
-        res.status(400).json({
-            error: "Request body needs a dexMod field"
-        })
-    } else {
-        const data = LoadData()
+router.post('/:charName', requireAuthentication, function(req, res, next) {
+    if (!req.authorized)
+        next()
+    else {
+        if (!req.body.dexMod) {
+            res.status(400).json({
+                error: "Request body needs a dexMod field"
+            })
+        } else {
+            const data = LoadData()
 
-        var char = req.params.charName.toLowerCase()
-        
-        if (!data.hasOwnProperty(char))
-            data[char] = structuredClone(dataTemplate)
+            var char = req.params.charName.toLowerCase()
+            
+            if (!data.hasOwnProperty(char))
+                data[char] = structuredClone(dataTemplate)
 
-        data[char].dexMod = req.body.dexMod
+            data[char].dexMod = req.body.dexMod
 
-        SaveData(data)
+            SaveData(data)
 
-        res.status(200).send()
+            res.status(200).send()
+        }
     }
 })
 

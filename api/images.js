@@ -30,6 +30,7 @@ function GetCharacter(charName) {
 
 // HTML requests
 const { Router } = require('express')
+const { requireAuthentication } = require('../lib/auth')
 const router = Router()
 
 function GetImages(req, res, next) {
@@ -53,23 +54,27 @@ function GetImages(req, res, next) {
     next()
 }
 
-router.post('/background/:bkgd', function (req, res) {
-    bkgd = null
-    for (i = 0; i < charImages.backgrounds.length; i++) {
-        if (charImages.backgrounds[i].name.toLowerCase() == req.params.bkgd.toLowerCase()) {
-            bkgd = charImages.backgrounds[i]
-            break
+router.post('/background/:bkgd', requireAuthentication, function (req, res, next) {
+    if (!req.authorized)
+        next()
+    else {
+        bkgd = null
+        for (i = 0; i < charImages.backgrounds.length; i++) {
+            if (charImages.backgrounds[i].name.toLowerCase() == req.params.bkgd.toLowerCase()) {
+                bkgd = charImages.backgrounds[i]
+                break
+            }
         }
-    }
 
-    if (!bkgd) {
-        res.status(404).json({ error: "No background loaded named "  + req.params.name })
-    } else {
-        if (currBackground != bkgd) {
-            currBackground = bkgd
-            SendBackgroundUpdate(currBackground)
+        if (!bkgd) {
+            res.status(404).json({ error: "No background loaded named "  + req.params.name })
+        } else {
+            if (currBackground != bkgd) {
+                currBackground = bkgd
+                SendBackgroundUpdate(currBackground)
+            }
+            res.status(200).send()
         }
-        res.status(200).send()
     }
 })
 

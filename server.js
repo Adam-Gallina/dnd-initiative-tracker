@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const initiative = require('./api/initiative')
 const db = require('./api/database')
 const images = require('./api/images')
@@ -8,6 +10,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 
 const { app, server } = require('./api/socket')
+const { requireAuthentication } = require('./lib/auth')
 
 
 app.engine('handlebars', exphbs.engine({defaultLayout : 'main'}))
@@ -30,6 +33,13 @@ app.get('/order', images.GetImages, function(req, res, next) {
 
 app.get('/settings', images.GetImages, function(req, res, next) {
     res.status(200).render('settings', req.handlebarsArgs)
+})
+
+app.post('/auth', requireAuthentication, function(req, res, next) {
+    if (req.authorized)
+        res.status(200).send()
+    else
+        res.status(400).send()
 })
 
 app.get('/:charName', images.GetImages, function(req, res, next) {

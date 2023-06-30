@@ -9,7 +9,9 @@ const Requests = {
     SetDexMod:      { method: 'POST',   url: '/database' },
 
     GetBkgdName:    { method: 'GET',    url: '/images/currBackground' },
-    SetBkgd:        { method: 'POST',   url: '/images/background' }
+    SetBkgd:        { method: 'POST',   url: '/images/background' },
+
+    CheckKey:        { method: 'POST',   url: '/auth'}
 }
 
 const SocketCodes = {
@@ -87,6 +89,13 @@ function ChangeBackground(background, onLoad) {
     var req = OpenXmlRequest(Requests.SetBkgd, onLoad, '/' + background)
 
     req.send()
+}
+
+function CheckKey(key, onLoad) {
+    var req = OpenXmlRequest(Requests.CheckKey, onLoad)
+    req.setRequestHeader('Content-Type', 'application/json')
+
+    req.send(JSON.stringify({ key: key }))
 }
 
 const InitOrder = {

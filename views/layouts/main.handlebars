@@ -27,6 +27,13 @@
     </head>
 
     <body>
-        {{{ body }}}
+        <div id="login">
+            <label for="secret-key">Enter Password</label>
+            <input type="text" id="secret-key">
+            <input type="submit" id="submit-pw" value="Submit">
+        </div>
+        <div id="content" hidden>
+            {{{ body }}}
+        </div>
     </body>
 </html>

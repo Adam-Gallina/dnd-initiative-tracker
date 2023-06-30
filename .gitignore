@@ -3,3 +3,4 @@
 /public/images/**
 character_data.json
 images.json
+.env
