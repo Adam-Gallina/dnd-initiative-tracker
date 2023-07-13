@@ -13,6 +13,7 @@ const Requests = {
 
     GetMessages:    { method: 'GET',    url: '/messages' },
     SendMessage:    { method: 'POST',   url: '/messages' },
+    ClearMessages:  { method: 'POST',   url: '/messages/clear' },
 
     CheckKey:       { method: 'POST',   url: '/auth'}
 }
@@ -20,7 +21,8 @@ const Requests = {
 const SocketCodes = {
     bkgdUpdate: 'background update',
     initUpdate: 'initiative update',
-    newMessage: 'dm message'
+    newMessage: 'dm message',
+    msgUpdate: 'message update'
 }
 
 function InitEntry(name, value, mod, isPlayer) {
@@ -41,6 +43,14 @@ function OpenXmlRequest(request, onLoad, urlParams = '') {
     req.addEventListener('load', onLoad)
 
     return req
+}
+
+function SendAuthorizedJSON(xml, key, body) {
+    xml.setRequestHeader('Content-Type', 'application/json')
+    if (body == null)
+        body = {}
+    body.key = key
+    xml.send(JSON.stringify(body))
 }
 
 
@@ -105,10 +115,14 @@ function GetMessages(onLoad) {
 }
 
 function PostMessage(key, msg, onLoad) {
-    var req = OpenXmlRequest(Requests.PostMessage, onLoad)
+    var req = OpenXmlRequest(Requests.SendMessage, onLoad)
     req.setRequestHeader('Content-Type', 'application/json')
 
     req.send(JSON.stringify({ key: key, message: msg }))
+}
+
+function ClearMessages(key, onLoad) {
+    SendAuthorizedJSON(OpenXmlRequest(Requests.ClearMessages, onLoad), key)
 }
 
 

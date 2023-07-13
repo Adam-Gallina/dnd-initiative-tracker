@@ -12,20 +12,29 @@ if (document.getElementById("charName").hasAttribute('readonly')) {
     })
 }
 
-const msgLog = document.getElementById('messages')
 
-GetMessages(function(event) {    
-    if (event.target.status == 200)
-        JSON.parse(event.target.responseText).messages.forEach(
-            msg => {
-                var li = document.createElement('li')
-                li.append(msg)
-                messages.append(li)
-            })
-})
+const msgLog = document.getElementById('messages')
+function ReloadMessages() {
+    while (msgLog.firstChild)
+        msgLog.removeChild(msgLog.firstChild)
+
+    GetMessages(function(event) {    
+        if (event.target.status == 200)
+            JSON.parse(event.target.responseText).messages.forEach(
+                msg => {
+                    var li = document.createElement('li')
+                    li.append(msg)
+                    messages.append(li)
+                })
+    })
+}
 
 socket.on(SocketCodes.newMessage, function(msg) {
     var li = document.createElement('li')
     li.append(msg)
     messages.append(li)
 })
+
+socket.on(SocketCodes.msgUpdate, ReloadMessages)
+
+ReloadMessages()

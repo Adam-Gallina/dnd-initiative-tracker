@@ -1,4 +1,4 @@
-const { SendMessage } = require('./socket')
+const { SendMessage, SendMessageUpdate } = require('./socket')
 
 const MsgLog = { messages: [] }
 
@@ -31,6 +31,7 @@ router.post('/clear', requireAuthentication, function(req, res, next) {
         next()
     else {
         MsgLog.messages = []
+        SendMessageUpdate()
         res.status(200).send()
     }
 })

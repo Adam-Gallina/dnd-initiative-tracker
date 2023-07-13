@@ -99,6 +99,11 @@ hr {
     width: 25%;
 }
 
+#otherSettings {
+    float: left;
+    width: 50%;
+}
+
 #charInp label {
     max-width: 50%;
 }

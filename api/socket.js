@@ -13,7 +13,8 @@ exports.io = io
 const codes = {
     bkgdUpdate: 'background update',
     initUpdate: 'initiative update',
-    newMessage: 'dm message'
+    newMessage: 'dm message',
+    msgUpdate: 'message update'
 }
 exports.codes = codes
 
@@ -31,3 +32,7 @@ function SendMessage(msg) {
     io.emit(codes.newMessage, msg)
 }
 exports.SendMessage = SendMessage
+function SendMessageUpdate() {
+    io.emit(codes.msgUpdate)
+}
+exports.SendMessageUpdate = SendMessageUpdate
