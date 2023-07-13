@@ -94,6 +94,11 @@ hr {
     width: 25%;
 }
 
+#messageLog {
+    float: left;
+    width: 25%;
+}
+
 #charInp label {
     max-width: 50%;
 }
@@ -137,15 +142,10 @@ hr {
         float: none;
     }
 
-    #charLinks {
-        width: 90%;
-    }
-
-    #addChar {
-        width: 90%;
-    }
-
-    #initTable {
+    #charLinks,
+    #addChar,
+    #initTable,
+    #messageLog {
         width: 90%;
     }
 

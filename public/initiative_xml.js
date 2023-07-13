@@ -11,12 +11,16 @@ const Requests = {
     GetBkgdName:    { method: 'GET',    url: '/images/currBackground' },
     SetBkgd:        { method: 'POST',   url: '/images/background' },
 
-    CheckKey:        { method: 'POST',   url: '/auth'}
+    GetMessages:    { method: 'GET',    url: '/messages' },
+    SendMessage:    { method: 'POST',   url: '/messages' },
+
+    CheckKey:       { method: 'POST',   url: '/auth'}
 }
 
 const SocketCodes = {
     bkgdUpdate: 'background update',
-    initUpdate: 'initiative update'
+    initUpdate: 'initiative update',
+    newMessage: 'dm message'
 }
 
 function InitEntry(name, value, mod, isPlayer) {
@@ -93,6 +97,20 @@ function ChangeBackground(key, background, onLoad) {
 
     req.send(JSON.stringify({ key: key }))
 }
+
+
+function GetMessages(onLoad) {
+    var req = OpenXmlRequest(Requests.GetMessages, onLoad)
+    req.send()
+}
+
+function PostMessage(key, msg, onLoad) {
+    var req = OpenXmlRequest(Requests.PostMessage, onLoad)
+    req.setRequestHeader('Content-Type', 'application/json')
+
+    req.send(JSON.stringify({ key: key, message: msg }))
+}
+
 
 function CheckKey(key, onLoad) {
     var req = OpenXmlRequest(Requests.CheckKey, onLoad)
