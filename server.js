@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-const initiative = require('./api/initiative')
 const db = require('./api/database')
 const images = require('./api/images')
 
@@ -9,7 +8,7 @@ const port = process.env.PORT || 2282
 const express = require('express')
 const exphbs = require('express-handlebars')
 
-const { app, server } = require('./api/socket')
+const { app, server, io } = require('./api/socket')
 const { requireAuthentication } = require('./lib/auth')
 
 
@@ -22,9 +21,10 @@ if (process.env.CUSTOM_IMG)
 
 app.use(express.json())
 
-app.use('/initiative', initiative.router)
+app.use('/initiative', require('./api/initiative').router)
 app.use('/database', db.router)
 app.use('/images', images.router)
+app.use('/messages', require('./api/messages').router)
 
 app.get('/', images.GetImages, function(req, res, next) {
     res.status(200).render('home', req.handlebarsArgs)

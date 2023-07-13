@@ -11,12 +11,18 @@ const Requests = {
     GetBkgdName:    { method: 'GET',    url: '/images/currBackground' },
     SetBkgd:        { method: 'POST',   url: '/images/background' },
 
-    CheckKey:        { method: 'POST',   url: '/auth'}
+    GetMessages:    { method: 'GET',    url: '/messages' },
+    SendMessage:    { method: 'POST',   url: '/messages' },
+    ClearMessages:  { method: 'POST',   url: '/messages/clear' },
+
+    CheckKey:       { method: 'POST',   url: '/auth'}
 }
 
 const SocketCodes = {
     bkgdUpdate: 'background update',
-    initUpdate: 'initiative update'
+    initUpdate: 'initiative update',
+    newMessage: 'dm message',
+    msgUpdate: 'message update'
 }
 
 function InitEntry(name, value, mod, isPlayer) {
@@ -37,6 +43,14 @@ function OpenXmlRequest(request, onLoad, urlParams = '') {
     req.addEventListener('load', onLoad)
 
     return req
+}
+
+function SendAuthorizedJSON(xml, key, body) {
+    xml.setRequestHeader('Content-Type', 'application/json')
+    if (body == null)
+        body = {}
+    body.key = key
+    xml.send(JSON.stringify(body))
 }
 
 
@@ -93,6 +107,24 @@ function ChangeBackground(key, background, onLoad) {
 
     req.send(JSON.stringify({ key: key }))
 }
+
+
+function GetMessages(onLoad) {
+    var req = OpenXmlRequest(Requests.GetMessages, onLoad)
+    req.send()
+}
+
+function PostMessage(key, msg, onLoad) {
+    var req = OpenXmlRequest(Requests.SendMessage, onLoad)
+    req.setRequestHeader('Content-Type', 'application/json')
+
+    req.send(JSON.stringify({ key: key, message: msg }))
+}
+
+function ClearMessages(key, onLoad) {
+    SendAuthorizedJSON(OpenXmlRequest(Requests.ClearMessages, onLoad), key)
+}
+
 
 function CheckKey(key, onLoad) {
     var req = OpenXmlRequest(Requests.CheckKey, onLoad)

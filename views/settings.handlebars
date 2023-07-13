@@ -16,11 +16,24 @@
 
 <hr>
 
-<div class="border">
+<div id="otherSettings" class="border">
     <label for="theme">Theme</label>
     <select id="theme" name="theme">
         {{# each backgrounds }}
             <option value="{{ name }}" {{# if selected }}selected{{/ if }}>{{ name }}</option>
         {{/ each}}
     </select>
+</div>
+
+<div id="messageLog" class="border">
+    <h1 class="title">Messages</h1>
+
+    <input type="text" id="newMessage">
+    <input type="Submit" id="sendMessage" value="Send">
+
+    <h3>Message Log</h3>
+
+    <input type="Submit" id="clearMessages" value="Clear Messages">
+    <ul id="messages">
+    </ul>
 </div>
