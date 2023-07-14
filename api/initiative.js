@@ -153,8 +153,13 @@ module.exports = {
     router: router
 }
 
+var lastKnownInit = -1
 io.on('connection', function(socket) {
+    if (lastKnownInit != -1)
+        io.to(socket.id).emit(codes.currInit, lastKnownInit)
+
     socket.on(codes.currInit, function(val) {
+        lastKnownInit = val
         io.emit(codes.currInit, val)
     })
 })

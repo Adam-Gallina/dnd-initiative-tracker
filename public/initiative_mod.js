@@ -85,6 +85,7 @@ document.getElementById('reset').addEventListener('click', function() {
         currCharacter = -1
         if (event.target.status == 200) {
             CheckForTableUpdate()
+            socket.emit(SocketCodes.currInit, -1)
         } else {
             alert("Error " + event.target.status + " when trying to reset table")
         }

@@ -145,6 +145,7 @@ socket.on(SocketCodes.initUpdate, function() {
 })
 
 socket.on(SocketCodes.currInit, function(val) {
+    console.log(val)
     SetOrderHighlight(currCharacter, val)
     currCharacter = val
 })
