@@ -38,3 +38,4 @@ socket.on(SocketCodes.newMessage, function(msg) {
 socket.on(SocketCodes.msgUpdate, ReloadMessages)
 
 ReloadMessages()
+CheckForTableUpdate()

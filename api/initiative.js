@@ -29,6 +29,9 @@ function SortInitiative() {
             return j.total - i.total
         }
     })
+
+    for (var i = 0; i < Initiative.length; i++)
+        Initiative[i].position = i
 }
 
 // Html requests
@@ -40,7 +43,6 @@ const router = Router()
 // Query: ?enemies=<bool>
 router.get('/', function(req, res) {
     const playersOnly = !(req.query.enemies.toLowerCase() == "true") || false
-    
     SortInitiative()
     const initiative = playersOnly ? Initiative.filter(i => i.isPlayer) : Initiative
 

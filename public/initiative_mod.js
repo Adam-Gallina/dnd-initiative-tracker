@@ -1,7 +1,6 @@
-var currCharacter = -1
 var totalCharacters = 0
-
 modPerms = true
+
 onTableReload = function(data) {
     deleteBtns = document.querySelectorAll('#delete')
     deleteBtns.forEach(
@@ -31,14 +30,7 @@ onTableReload = function(data) {
         deleteBtns[currCharacter].parentNode.parentNode.classList.add("highlight")
 }
 
-function SetOrderHighlight(curr, next) {
-    deleteBtns = document.querySelectorAll('#delete')
-    
-    if (deleteBtns[curr].parentNode.parentNode.classList.contains('highlight'))
-        deleteBtns[curr].parentNode.parentNode.classList.remove('highlight')
 
-    deleteBtns[next].parentNode.parentNode.classList.add('highlight')
-}
 
 document.getElementById('edit').addEventListener('click', function(event) {
     var valueBtns = document.querySelectorAll('.initiativeEntry')
@@ -84,16 +76,9 @@ document.getElementById('edit').addEventListener('click', function(event) {
 })
 
 document.getElementById('next').addEventListener('click', function() {
-    //next = currCharacter + 1 < totalCharacters ? currCharacter + 1 : 0
-    //SetOrderHighlight(currCharacter, next)
-    //currCharacter = next
     socket.emit(SocketCodes.currInit, currCharacter + 1 < totalCharacters ? currCharacter + 1 : 0)
 })
 
-socket.on(SocketCodes.currInit, function(val) {
-    SetOrderHighlight(currCharacter, val)
-    currCharacter = val
-})
 
 document.getElementById('reset').addEventListener('click', function() {
     InitOrder.Table.Clear(key, function(event) {
@@ -131,3 +116,5 @@ document.getElementById('submit').addEventListener('click', function(event) {
         isPlayer.checked = false
     }
 })
+
+CheckForTableUpdate()

@@ -13,7 +13,7 @@ document.getElementById("debugPlayers").addEventListener('click', function() {
     AddEntry(key, InitEntry('Amity',  7, -2, true))
     AddEntry(key, InitEntry('Zephyr', 20, 5, true))
     AddEntry(key, InitEntry('Frances', 15, 3, false))
-    AddEntry(key, InitEntry('Self', 8, 2, false))
+    AddEntry(key, InitEntry('Self', 1, 2, false))
 })
 
 const socket = io()
