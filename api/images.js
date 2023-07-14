@@ -1,4 +1,4 @@
-const { SendBackgroundUpdate } = require('./socket.js')
+const { io, codes } = require('./socket.js')
 
 try {
     var charImages = require(process.env.IMG_FILE || '../images.json')
@@ -71,7 +71,7 @@ router.post('/background/:bkgd', requireAuthentication, function (req, res, next
         } else {
             if (currBackground != bkgd) {
                 currBackground = bkgd
-                SendBackgroundUpdate(currBackground)
+                io.emit(codes.bkgdUpdate, currBackground)
             }
             res.status(200).send()
         }

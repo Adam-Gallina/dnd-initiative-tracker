@@ -1,5 +1,5 @@
 const { GetCharacter } = require('./images')
-const { SendInitiativeUpdate } = require('./socket.js')
+const { io, codes } = require('./socket.js')
 
 var Initiative = []
 
@@ -57,7 +57,7 @@ router.post('/reset', requireAuthentication, function(req, res, next) {
     else {
         Initiative = []
 
-        SendInitiativeUpdate()
+        io.emit(codes.initUpdate)
         res.status(200).send()
     }
 })
@@ -86,7 +86,7 @@ router.post('/', requireAuthentication, function(req, res, next) {
 
             Initiative.push(entry)
             
-            SendInitiativeUpdate()
+            io.emit(codes.initUpdate)
             res.status(200).send()
         }
     }
@@ -118,7 +118,7 @@ router.patch('/', requireAuthentication, function(req, res, next) {
             }
         }
         
-        SendInitiativeUpdate()
+        io.emit(codes.initUpdate)
         res.status(200).json({
             failed: failed,
             invalid: invalid
@@ -140,7 +140,7 @@ router.delete('/:charName', requireAuthentication, function(req, res, next) {
         } else {
             Initiative.splice(Initiative.indexOf(entry), 1)
             
-            SendInitiativeUpdate()
+            io.emit(codes.initUpdate)
             res.status(200).send()
         }
     }
