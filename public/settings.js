@@ -7,6 +7,15 @@ document.getElementById("theme").addEventListener('change', function() {
     })
 })
 
+document.getElementById("debugPlayers").addEventListener('click', function() {
+    AddEntry(key, InitEntry('Gorblor', 5, 1, true))
+    AddEntry(key, InitEntry('Serenity', 10, 4, false))
+    AddEntry(key, InitEntry('Amity',  7, -2, true))
+    AddEntry(key, InitEntry('Zephyr', 20, 5, true))
+    AddEntry(key, InitEntry('Frances', 15, 3, false))
+    AddEntry(key, InitEntry('Self', 8, 2, false))
+})
+
 const socket = io()
 
 socket.on(SocketCodes.bkgdUpdate, function(/*name*/) {
