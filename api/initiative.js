@@ -150,3 +150,9 @@ router.delete('/:charName', requireAuthentication, function(req, res, next) {
 module.exports = {
     router: router
 }
+
+io.on('connection', function(socket) {
+    socket.on(codes.currInit, function(val) {
+        io.emit(codes.currInit, val)
+    })
+})

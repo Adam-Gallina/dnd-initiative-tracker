@@ -14,7 +14,6 @@ const keyEntry = document.getElementById('secret-key')
 document.getElementById('submit-pw').addEventListener('click', function() {
     if (keyEntry.value != '') {
         key = keyEntry.value
-        console.log(key)
         CheckKey(key, onKeyReturned)
     }
 })

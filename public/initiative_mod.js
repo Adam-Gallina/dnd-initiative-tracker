@@ -84,13 +84,18 @@ document.getElementById('edit').addEventListener('click', function(event) {
 })
 
 document.getElementById('next').addEventListener('click', function() {
-    next = currCharacter + 1 < totalCharacters ? currCharacter + 1 : 0
-    SetOrderHighlight(currCharacter, next)
-    currCharacter = next
+    //next = currCharacter + 1 < totalCharacters ? currCharacter + 1 : 0
+    //SetOrderHighlight(currCharacter, next)
+    //currCharacter = next
+    socket.emit(SocketCodes.currInit, currCharacter + 1 < totalCharacters ? currCharacter + 1 : 0)
+})
+
+socket.on(SocketCodes.currInit, function(val) {
+    SetOrderHighlight(currCharacter, val)
+    currCharacter = val
 })
 
 document.getElementById('reset').addEventListener('click', function() {
-    console.log(key)
     InitOrder.Table.Clear(key, function(event) {
         currCharacter = -1
         if (event.target.status == 200) {

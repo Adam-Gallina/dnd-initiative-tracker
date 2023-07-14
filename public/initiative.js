@@ -52,7 +52,6 @@ function SubmitCharEntry(entry) {
 
 function ReloadTable(data) {
     data.modPerms = modPerms
-    console.log(data)
     initiativeTable.innerHTML = Handlebars.templates.initiativeTable(data)
     currData = data.initiativeOrder
 
