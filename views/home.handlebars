@@ -10,35 +10,41 @@
 <link rel="stylesheet" href="basic.css"></link>
 
 <header>
-    <h1 id="main-title">Initiative Tracker</h1>
+    <h1 id="main-title" class="border bkgd-col">Initiative Tracker</h1>
+
+    {{# if charImages }}
+    <div id="charLinks">
+        {{# each charImages }}
+            {{# if playing }}
+                {{> charLink name=name file=image }}
+            {{/ if }}
+        {{/ each}}
+    </div>
+    {{/ if }}
 
     {{# if mapImages }}
-    <div id="useful-btns">
-        {{# each mapImages }}
-            {{> mapLink name=name file=image }}
-        {{/ each }}
+    <div id="useful-btns" class="border bkgd-col dropdown">
+        <h2 class="title">Maps</h2>
+            
+        </button>
+        <div class="dropdown-content bkgd-col">
+            {{# each mapImages }}
+                {{> mapLink name=name file=image }}
+            {{/ each }}
+        </div>
     </div>
     {{/ if }}
 </header>
 
 <hr>
 
-{{# if charImages }}
-<div id="charLinks" class="border">
-    {{# each charImages }}
-        {{# if playing }}
-            {{> charLink name=name file=image }}
-        {{/ if }}
-    {{/ each}}
-</div>
-{{/ if }}
 
-<div id="initTable" class="border">
+<div id="initTable" class="border bkgd-col">
     <h1 class="title">Initiative Order</h1>
     <div id="charInit"></div>
 </div>
 
-<div id="addChar" class="border">
+<div id="addChar" class="border bkgd-col">
     <h1 class="title">Add Character</h1>
 
     <div id="charInp">
@@ -55,7 +61,7 @@
     <input type="Submit" id="submit" value="Submit">
 </div>
 
-<div id="messageLog" class="border">
+<div id="messageLog" class="border bkgd-col">
     <h1 class="title">Messages</h1>
 
     <ul id="messages">

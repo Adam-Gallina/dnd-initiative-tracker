@@ -6,27 +6,61 @@
     border: 3px solid black;
     border-radius: 10px;
 
-    padding: 20px;
+    /*padding: 5px;*/
     /* Background col set in main.handlebars */
-    min-height: 500px;
-    margin: 20px;
+    /*min-height: 500px;*/
+    /*margin: 20px;*/
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 #main-title {
-    width: auto;
-    margin-top: 10px;
-    margin-bottom: 0px;
-    
-    display: inline-block;
+    /*width: auto;*/
+    /*margin-top: 10px;
+    margin-bottom: auto;*/
+    padding: 10px;
+    min-width: 260px;
+    margin-right: 20px;
 
+    /*display: inline-block;*/
+    /*float: left;*/
+
+    text-align: center;
     text-shadow: white 0px 0px 10px;
 }
 
 #useful-btns {
-    width: auto;
-    float: right;
-    padding: 10px 20px;
-    margin-top: 5px;
+    /*width: auto;
+    float: right;*/
+    /*padding: 10px 10px;
+    margin-top: 5px;*/
+}
+#useful-btns h2 {
+    margin: 10px;
+    text-shadow: white 0px 0px 10px;
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    color: #000000;
+    padding: 5px;
+    text-decoration: none;
+}
+.dropdown-content a:hover {
+    background-color: #e6e6e6;
 }
 
 hr {
@@ -43,17 +77,22 @@ hr {
 }
 
 #charLinks {
-    float: left;
-    width: 20%;
+    /*float: left;*/
+    /*width: 20%;*/
 
-    display: flex;
+    /*display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-wrap: wrap;*/
+    /*justify-content: space-between;*/
+}
+
+#charLinks a {
+    text-decoration: none;
 }
 
 #charLinks img {
-    width: 140px;
+    width: 100px;
+    margin-right: 10px;
 }
 
 #initTable {
@@ -147,7 +186,14 @@ hr {
         float: none;
     }
 
-    #charLinks,
+    header {
+        flex-wrap: wrap;
+    }
+
+    #charLinks {
+        order: 1;
+    }
+
     #addChar,
     #initTable,
     #messageLog {
