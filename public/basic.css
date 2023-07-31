@@ -5,6 +5,7 @@
 .border {
     border: 3px solid black;
     border-radius: 10px;
+    padding: 5px;
 }
 
 body {
@@ -21,28 +22,15 @@ header {
     border-bottom-right-radius: 10px;
 
     translate: 0px -3px;
-    padding: 3px 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin: 0px 20px 40px 20px;
 }
 
 #main-title {
-    /*padding: 10px;*/
     width: 140px;
-    /*margin-right: 20px;*/
-
-    /*display: inline-block;*/
-    /*float: left;*/
-
-    /*text-align: center;*/
-    /*text-shadow: white 0px 0px 10px;*/
 }
 
-#map-dropdown {
-    /*width: auto;
-    float: right;*/
-    /*padding: 10px 10px;
-    margin-top: 5px;*/
-}
 #map-dropdown h2 {
     margin: 10px;
 }
@@ -86,31 +74,27 @@ header {
 #initTable {
     float: left;
     width: 65%;
-    /*margin-left: 17.5%;*/
     margin-left: 20px;
 }
 #initTableHeader {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
-    /*margin-bottom: 20px;*/
 }
 
 #initTable input#value,
 #initTable input#mod {
-    width: 35px;
+    width: 20px;
+    text-align: center;
 }
 
 .initiativeEntry {
     display: flex;
     justify-content: left;
     align-items: center;
-    border-radius: 10px;
     margin-left: 25px;
     height: 40px;
-    margin-top: 20px;
-}
-.initiativeEntry div {
-    opacity: 0.5;
+    margin-top: 15px;
+    padding: 0px;
 }
 
 .initiativeEntry img {
@@ -125,10 +109,19 @@ header {
     margin-top: 0px;
     margin-bottom: 0px;
 }
+.initiativeEntry .entry-name {
+    translate: -15px;
+}
 
 .initiativeValue {
     margin-left: auto;
     margin-right: 10px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 #addChar {
@@ -136,25 +129,19 @@ header {
     width: 25%;
     margin-right: 20px;
     padding: 0px 10px 10px 10px;
+    margin-bottom: 30px;
 }
 
 #messageLog {
     float: right;
     width: 25%;
-    margin-top: 30px;
     margin-right: 20px;
     padding: 0px 10px 10px 10px;
-}
-
-#otherSettings {
-    float: left;
-    width: 50%;
 }
 
 #charInp label {
     max-width: 50%;
 }
-
 #charInp input {
     float: right;
     width: 50%;
@@ -184,19 +171,18 @@ header {
         width: auto;
         margin: 0px;
     }
-
+    #charLinks {
+        width: auto;
+    }
     #map-dropdown {
         font-size: 50%;
         margin: 5px;
     }
 
-    #charLinks {
-        width: auto;
-    }
-
     #addChar,
     #initTable,
-    #messageLog {
+    #messageLog,
+    #otherSettings {
         float: none;
         width: auto;
         margin: 20px;
@@ -205,26 +191,45 @@ header {
 
     .initiativeEntry {
         font-size: 70%;
+        height: 60px;
+        margin-top: 20px;
     }
-
     .initiativeEntry img {
-        /*width: 75px;*/
-        /*margin-right: 15px;*/
+        width: 75px;
     }
-
-    #initTable input#value,
-    #initTable input#mod {
-        width: 60px;
+    .initiativeEntry input#value,
+    .initiativeEntry input#mod {
+        width: 40px;
         font-size: 65%;
+    }
+    .initiativeEntry #delete {
+        /*width: 80px;*/
+        font-size: 65%;;
     }
 }
 
 /* Hacky way to format order table nicely on my screen */
 @media (max-width: 550px) {
     body {
-        font-size: 100%;
+        font-size: 125%;
     }
     input {
         font-size: 100%;
+    }
+    #delete {
+        font-size: 60%;
+    }
+    
+    .initiativeEntry {
+        height: 40px;
+        margin-top: 15px;
+    }
+    .initiativeEntry img {
+        width: 50px;
+    }
+    .initiativeEntry input#value,
+    .initiativeEntry input#mod {
+        width: 20px;
+        font-size: 65%;
     }
 }
