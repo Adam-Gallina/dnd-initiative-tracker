@@ -5,32 +5,36 @@
 .border {
     border: 3px solid black;
     border-radius: 10px;
+}
 
-    /*padding: 5px;*/
-    /* Background col set in main.handlebars */
-    /*min-height: 500px;*/
-    /*margin: 20px;*/
+body {
+    margin-top: 0px;
 }
 
 header {
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    border: 3px solid black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    translate: 0px -3px;
+    padding: 3px 0px;
+    margin: 0px 20px 40px 20px;
 }
 
 #main-title {
-    /*width: auto;*/
-    /*margin-top: 10px;
-    margin-bottom: auto;*/
-    padding: 10px;
-    min-width: 260px;
-    margin-right: 20px;
+    /*padding: 10px;*/
+    max-width: 140px;
+    /*margin-right: 20px;*/
 
     /*display: inline-block;*/
     /*float: left;*/
 
-    text-align: center;
-    text-shadow: white 0px 0px 10px;
+    /*text-align: center;*/
+    /*text-shadow: white 0px 0px 10px;*/
 }
 
 #useful-btns {
@@ -41,7 +45,6 @@ header {
 }
 #useful-btns h2 {
     margin: 10px;
-    text-shadow: white 0px 0px 10px;
 }
 
 .dropdown-content{
@@ -52,28 +55,21 @@ header {
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
 .dropdown-content a {
     display: block;
     color: #000000;
     padding: 5px;
     text-decoration: none;
+    border-radius: 10px;
 }
 .dropdown-content a:hover {
     background-color: #e6e6e6;
 }
 
-hr {
-    height: 2px;
-    background-color: black;
-    border-width: 0;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
 .title {
     text-align: center;
-    margin-top: 0px;
+    margin: 0px;
+    padding: 5px;
 }
 
 #charLinks {
@@ -85,11 +81,9 @@ hr {
     flex-wrap: wrap;*/
     /*justify-content: space-between;*/
 }
-
 #charLinks a {
     text-decoration: none;
 }
-
 #charLinks img {
     width: 100px;
     margin-right: 10px;
@@ -97,7 +91,14 @@ hr {
 
 #initTable {
     float: left;
-    width: 35%;
+    width: 65%;
+    /*margin-left: 17.5%;*/
+    margin-left: 20px;
+}
+#initTableHeader {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    /*margin-bottom: 20px;*/
 }
 
 #initTable input#value,
@@ -109,12 +110,20 @@ hr {
     display: flex;
     justify-content: left;
     align-items: center;
+    border-radius: 10px;
+    margin-left: 25px;
+    height: 40px;
+    margin-top: 20px;
+}
+.initiativeEntry div {
+    opacity: 0.5;
 }
 
 .initiativeEntry img {
     width: 50px;
     border-radius: 20px;
-    margin: 0px 10px;
+    border: 3px solid black;
+    translate: -25px;
 }
 
 .initiativeEntry p {
@@ -129,13 +138,18 @@ hr {
 }
 
 #addChar {
-    float: left;
+    float: right;
     width: 25%;
+    margin-right: 20px;
+    padding: 0px 10px 10px 10px;
 }
 
 #messageLog {
-    float: left;
+    float: right;
     width: 25%;
+    margin-top: 30px;
+    margin-right: 20px;
+    padding: 0px 10px 10px 10px;
 }
 
 #otherSettings {
@@ -160,14 +174,6 @@ hr {
     flex-wrap: wrap;
     justify-content: center;
 }
-
-/*
-#initTable input#value:read-only,
-#initTable input#mod:read-only {
-    background-color: transparent;
-    border-color: transparent;
-}
-*/
 
 @media (max-width: 1200px) {
     body {

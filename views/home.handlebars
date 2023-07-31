@@ -9,8 +9,8 @@
 
 <link rel="stylesheet" href="basic.css"></link>
 
-<header>
-    <h1 id="main-title" class="border bkgd-col">Initiative Tracker</h1>
+<header class="bkgd-col">
+    <h1 id="main-title">Initiative Tracker</h1>
 
     {{# if charImages }}
     <div id="charLinks">
@@ -27,7 +27,7 @@
         <h2 class="title">Maps</h2>
             
         </button>
-        <div class="dropdown-content bkgd-col">
+        <div class="dropdown-content border bkgd-col">
             {{# each mapImages }}
                 {{> mapLink name=name file=image }}
             {{/ each }}
@@ -36,11 +36,11 @@
     {{/ if }}
 </header>
 
-<hr>
 
-
-<div id="initTable" class="border bkgd-col">
-    <h1 class="title">Initiative Order</h1>
+<div id="initTable">
+    <div id="initTableHeader"class="border bkgd-col">
+        <h1 class="title">Initiative Order</h1>
+    </div>
     <div id="charInit"></div>
 </div>
 

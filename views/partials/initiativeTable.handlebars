@@ -1,7 +1,7 @@
 {{# each initiativeOrder }}
-    {{# if ../modPerms }}
-        <div class='initiativeEntry' name='{{ name }}'>
+        <div class='initiativeEntry border bkgd-col' name='{{ name }}'>
             <img src={{# if thumbnail }} '{{ thumbnail }}' {{ else }} './images/default_thumbnail.jpg' {{/ if }}>
+    {{# if ../modPerms }}
             <p>{{ name }}</p>
             <p class='initiativeValue'>
                 {{ total }} (<input type="number" readonly="readonly" id="value" value={{ value }}> +<input type="number" readonly="readonly" id="mod" value={{ mod }}>)
@@ -10,8 +10,6 @@
         </div>
         <hr>
     {{ else if isPlayer }}
-        <div class='initiativeEntry' name='{{ name }}'>
-            <img src={{# if thumbnail }} '{{ thumbnail }}' {{ else }} './images/default_thumbnail.jpg' {{/ if }}>
             {{# unless only_image }}
                 <p>{{ name }}</p>
                 <p class='initiativeValue'>
@@ -19,6 +17,5 @@
                 </p>
             {{/ unless }}
         </div>
-        <hr>
     {{/ if }}
 {{/ each }}
