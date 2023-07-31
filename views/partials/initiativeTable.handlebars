@@ -1,24 +1,19 @@
 {{# each initiativeOrder }}
+    <div class='initiativeEntry border bkgd-col' name='{{ name }}'>
+        <img src={{# if thumbnail }} '{{ thumbnail }}' {{ else }} './images/default_thumbnail.jpg' {{/ if }}>
     {{# if ../modPerms }}
-        <div class='initiativeEntry' name='{{ name }}'>
-            <img src={{# if thumbnail }} '{{ thumbnail }}' {{ else }} './images/default_thumbnail.jpg' {{/ if }}>
-            <p>{{ name }}</p>
-            <p class='initiativeValue'>
-                {{ total }} (<input type="number" readonly="readonly" id="value" value={{ value }}> +<input type="number" readonly="readonly" id="mod" value={{ mod }}>)
-                <input type="Submit" id="delete" value="Delete">
-            </p>
-        </div>
-        <hr>
+        <p class='entry-name'>{{ name }}</p>
+        <p class='initiativeValue'>
+            {{ total }} (<input type="number" readonly="readonly" id="value" value={{ value }}> +<input type="number" readonly="readonly" id="mod" value={{ mod }}>)
+            <input type="Submit" id="delete" value="Delete">
+        </p>
     {{ else if isPlayer }}
-        <div class='initiativeEntry' name='{{ name }}'>
-            <img src={{# if thumbnail }} '{{ thumbnail }}' {{ else }} './images/default_thumbnail.jpg' {{/ if }}>
-            {{# unless only_image }}
-                <p>{{ name }}</p>
-                <p class='initiativeValue'>
-                    {{ total }} (<input type="number" readonly="readonly" id="value" value={{ value }}> +<input type="number" readonly="readonly" id="mod" value={{ mod }}>)
-                </p>
-            {{/ unless }}
-        </div>
-        <hr>
+        {{# unless only_image }}
+        <p class='entry-name'></p>>{{ name }}</p>
+        <p class='initiativeValue'>
+            {{ total }} (<input type="number" readonly="readonly" id="value" value={{ value }}> +<input type="number" readonly="readonly" id="mod" value={{ mod }}>)
+        </p>
+        {{/ unless }}
     {{/ if }}
+    </div>
 {{/ each }}

@@ -5,77 +5,103 @@
 .border {
     border: 3px solid black;
     border-radius: 10px;
+    padding: 5px;
+}
 
-    padding: 20px;
-    /* Background col set in main.handlebars */
-    min-height: 500px;
-    margin: 20px;
+body {
+    margin-top: 0px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 3px solid black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    translate: 0px -3px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0px 20px 40px 20px;
 }
 
 #main-title {
-    width: auto;
-    margin-top: 10px;
-    margin-bottom: 0px;
-    
-    display: inline-block;
-
-    text-shadow: white 0px 0px 10px;
+    width: 140px;
 }
 
-#useful-btns {
-    width: auto;
-    float: right;
-    padding: 10px 20px;
-    margin-top: 5px;
+#map-dropdown h2 {
+    margin: 10px;
 }
 
-hr {
-    height: 2px;
-    background-color: black;
-    border-width: 0;
-    margin-top: 5px;
-    margin-bottom: 5px;
+.dropdown-content{
+    display: none;
+    position: absolute;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content a {
+    display: block;
+    color: #000000;
+    padding: 5px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+.dropdown-content a:hover {
+    background-color: #e6e6e6;
 }
 
 .title {
     text-align: center;
-    margin-top: 0px;
+    margin: 0px;
+    padding: 5px;
 }
 
 #charLinks {
-    float: left;
-    width: 20%;
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    width: 70%;
 }
-
+#charLinks a {
+    text-decoration: none;
+    margin-right: 10px;
+}
 #charLinks img {
-    width: 140px;
+    width: 100px;
 }
 
 #initTable {
     float: left;
-    width: 35%;
+    width: 65%;
+    margin-left: 20px;
+}
+#initTableHeader {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
 #initTable input#value,
 #initTable input#mod {
-    width: 35px;
+    width: 20px;
+    text-align: center;
 }
 
 .initiativeEntry {
     display: flex;
     justify-content: left;
     align-items: center;
+    margin-left: 25px;
+    height: 40px;
+    margin-top: 15px;
+    padding: 0px;
 }
 
 .initiativeEntry img {
     width: 50px;
     border-radius: 20px;
-    margin: 0px 10px;
+    border: 3px solid black;
+    translate: -25px;
 }
 
 .initiativeEntry p {
@@ -83,31 +109,39 @@ hr {
     margin-top: 0px;
     margin-bottom: 0px;
 }
+.initiativeEntry .entry-name {
+    translate: -15px;
+}
 
 .initiativeValue {
     margin-left: auto;
     margin-right: 10px;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 #addChar {
-    float: left;
+    float: right;
     width: 25%;
+    margin-right: 20px;
+    padding: 0px 10px 10px 10px;
+    margin-bottom: 30px;
 }
 
 #messageLog {
-    float: left;
+    float: right;
     width: 25%;
-}
-
-#otherSettings {
-    float: left;
-    width: 50%;
+    margin-right: 20px;
+    padding: 0px 10px 10px 10px;
 }
 
 #charInp label {
     max-width: 50%;
 }
-
 #charInp input {
     float: right;
     width: 50%;
@@ -122,14 +156,6 @@ hr {
     justify-content: center;
 }
 
-/*
-#initTable input#value:read-only,
-#initTable input#mod:read-only {
-    background-color: transparent;
-    border-color: transparent;
-}
-*/
-
 @media (max-width: 1200px) {
     body {
         font-size: 250%;
@@ -138,39 +164,72 @@ hr {
         font-size: 100%;
     }
 
-    .border {
-        min-height: auto;
+    header {
+        flex-direction: column;
+    }
+    #main-title {
+        width: auto;
+        margin: 0px;
+    }
+    #charLinks {
+        width: auto;
+    }
+    #map-dropdown {
+        font-size: 50%;
+        margin: 5px;
     }
 
-    #useful-btns {
-        font-size: 75%;
-        float: none;
-    }
-
-    #charLinks,
     #addChar,
     #initTable,
-    #messageLog {
-        width: 90%;
+    #messageLog,
+    #otherSettings {
+        float: none;
+        width: auto;
+        margin: 20px;
+        margin-bottom: 60px;
     }
 
+    .initiativeEntry {
+        font-size: 70%;
+        height: 60px;
+        margin-top: 20px;
+    }
     .initiativeEntry img {
         width: 75px;
-        margin-right: 15px;
     }
-
-    #initTable input#value,
-    #initTable input#mod {
-        width: 60px;
+    .initiativeEntry input#value,
+    .initiativeEntry input#mod {
+        width: 40px;
+        font-size: 65%;
+    }
+    .initiativeEntry #delete {
+        /*width: 80px;*/
+        font-size: 65%;;
     }
 }
 
 /* Hacky way to format order table nicely on my screen */
 @media (max-width: 550px) {
     body {
-        font-size: 100%;
+        font-size: 125%;
     }
     input {
         font-size: 100%;
+    }
+    #delete {
+        font-size: 60%;
+    }
+    
+    .initiativeEntry {
+        height: 40px;
+        margin-top: 15px;
+    }
+    .initiativeEntry img {
+        width: 50px;
+    }
+    .initiativeEntry input#value,
+    .initiativeEntry input#mod {
+        width: 20px;
+        font-size: 65%;
     }
 }

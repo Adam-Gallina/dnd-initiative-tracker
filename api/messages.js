@@ -1,4 +1,4 @@
-const { SendMessage, SendMessageUpdate } = require('./socket')
+const { io, codes } = require('./socket')
 
 const MsgLog = { messages: [] }
 
@@ -20,7 +20,7 @@ router.post('/', requireAuthentication, function(req, res, next) {
             res.status(500).json({ error: 'Improperly formatted body' })
         else {
             MsgLog.messages.push(req.body.message)
-            SendMessage(req.body.message)
+            io.emit(codes.newMessage, req.body.message)
             res.status(200).send()
         }
     }
@@ -31,7 +31,7 @@ router.post('/clear', requireAuthentication, function(req, res, next) {
         next()
     else {
         MsgLog.messages = []
-        SendMessageUpdate()
+        io.emit(codes.msgUpdate)
         res.status(200).send()
     }
 })

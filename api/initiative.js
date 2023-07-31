@@ -1,5 +1,5 @@
 const { GetCharacter } = require('./images')
-const { SendInitiativeUpdate } = require('./socket.js')
+const { io, codes } = require('./socket.js')
 
 var Initiative = []
 
@@ -29,6 +29,9 @@ function SortInitiative() {
             return j.total - i.total
         }
     })
+
+    for (var i = 0; i < Initiative.length; i++)
+        Initiative[i].position = i
 }
 
 // Html requests
@@ -40,7 +43,6 @@ const router = Router()
 // Query: ?enemies=<bool>
 router.get('/', function(req, res) {
     const playersOnly = !(req.query.enemies.toLowerCase() == "true") || false
-    
     SortInitiative()
     const initiative = playersOnly ? Initiative.filter(i => i.isPlayer) : Initiative
 
@@ -57,7 +59,7 @@ router.post('/reset', requireAuthentication, function(req, res, next) {
     else {
         Initiative = []
 
-        SendInitiativeUpdate()
+        io.emit(codes.initUpdate)
         res.status(200).send()
     }
 })
@@ -86,7 +88,7 @@ router.post('/', requireAuthentication, function(req, res, next) {
 
             Initiative.push(entry)
             
-            SendInitiativeUpdate()
+            io.emit(codes.initUpdate)
             res.status(200).send()
         }
     }
@@ -118,7 +120,7 @@ router.patch('/', requireAuthentication, function(req, res, next) {
             }
         }
         
-        SendInitiativeUpdate()
+        io.emit(codes.initUpdate)
         res.status(200).json({
             failed: failed,
             invalid: invalid
@@ -140,7 +142,7 @@ router.delete('/:charName', requireAuthentication, function(req, res, next) {
         } else {
             Initiative.splice(Initiative.indexOf(entry), 1)
             
-            SendInitiativeUpdate()
+            io.emit(codes.initUpdate)
             res.status(200).send()
         }
     }
@@ -150,3 +152,14 @@ router.delete('/:charName', requireAuthentication, function(req, res, next) {
 module.exports = {
     router: router
 }
+
+var lastKnownInit = -1
+io.on('connection', function(socket) {
+    if (lastKnownInit != -1)
+        io.to(socket.id).emit(codes.currInit, lastKnownInit)
+
+    socket.on(codes.currInit, function(val) {
+        lastKnownInit = val
+        io.emit(codes.currInit, val)
+    })
+})

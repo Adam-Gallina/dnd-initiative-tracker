@@ -6,26 +6,25 @@
 
 <link rel="stylesheet" href="basic.css"></link>
 
-<header>
+<header class="bkgd-col">
     <h1 id="main-title">Settings</h1>
 
-    <div id="useful-btns">
-        <a href="/order"><input type="button" value="Initiative Order"></a>
-    </div>
+    <a href="/order"><input type="button" value="Initiative Order"></a>
 </header>
 
-<hr>
 
-<div id="otherSettings" class="border">
+<div id="initTable" class="border bkgd-col">
     <label for="theme">Theme</label>
     <select id="theme" name="theme">
         {{# each backgrounds }}
             <option value="{{ name }}" {{# if selected }}selected{{/ if }}>{{ name }}</option>
         {{/ each}}
     </select>
+    </br></br>
+    <input type="Submit" id="debugPlayers" value="Insert Debug Initiative">
 </div>
 
-<div id="messageLog" class="border">
+<div id="messageLog" class="border bkgd-col">
     <h1 class="title">Messages</h1>
 
     <input type="text" id="newMessage">

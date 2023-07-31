@@ -21,6 +21,7 @@ const Requests = {
 const SocketCodes = {
     bkgdUpdate: 'background update',
     initUpdate: 'initiative update',
+    currInit: 'curr initiative',
     newMessage: 'dm message',
     msgUpdate: 'message update'
 }
