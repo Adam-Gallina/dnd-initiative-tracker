@@ -75,6 +75,8 @@ header {
     float: left;
     width: 65%;
     margin-left: 20px;
+    /* Correctly align Messages box */
+    min-height: 300px;
 }
 #initTableHeader {
     border-bottom-left-radius: 0px;
