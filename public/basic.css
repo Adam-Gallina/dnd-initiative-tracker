@@ -75,14 +75,16 @@ header {
     float: left;
     width: 65%;
     margin-left: 20px;
+    /* Correctly align Messages box */
+    min-height: 300px;
 }
 #initTableHeader {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
 
-#initTable input#value,
-#initTable input#mod {
+.initiativeEntry #value,
+.initiativeEntry #mod {
     width: 20px;
     text-align: center;
 }
@@ -197,9 +199,9 @@ input::-webkit-inner-spin-button {
     .initiativeEntry img {
         width: 75px;
     }
-    .initiativeEntry input#value,
-    .initiativeEntry input#mod {
-        width: 40px;
+    .initiativeEntry #value,
+    .initiativeEntry #mod {
+        width: 35px;
         font-size: 65%;
     }
     .initiativeEntry #delete {
@@ -227,9 +229,9 @@ input::-webkit-inner-spin-button {
     .initiativeEntry img {
         width: 50px;
     }
-    .initiativeEntry input#value,
-    .initiativeEntry input#mod {
-        width: 20px;
+    .initiativeEntry #value,
+    .initiativeEntry #mod {
+        width: 15px;
         font-size: 65%;
     }
 }

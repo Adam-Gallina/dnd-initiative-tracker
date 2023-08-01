@@ -9,7 +9,7 @@
         </p>
     {{ else if isPlayer }}
         {{# unless only_image }}
-        <p class='entry-name'></p>>{{ name }}</p>
+        <p class='entry-name'>{{ name }}</p>
         <p class='initiativeValue'>
             {{ total }} (<input type="number" readonly="readonly" id="value" value={{ value }}> +<input type="number" readonly="readonly" id="mod" value={{ mod }}>)
         </p>
