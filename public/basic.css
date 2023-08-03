@@ -8,6 +8,27 @@
     padding: 5px;
 }
 
+.span-btn,
+.span-btn-big {
+    text-align: center;
+    cursor: pointer;
+    border-radius: 100%;
+    color: black;
+    display: inline-block;
+    vertical-align: middle;
+}
+.span-btn {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+}
+.span-btn-big {
+    width: 50px;
+    height: 50px;
+    font-size: 35px;
+    line-height: 50px;
+}
+
 body {
     margin-top: 0px;
 }
@@ -29,10 +50,6 @@ header {
 
 #main-title {
     width: 140px;
-}
-
-#map-dropdown h2 {
-    margin: 10px;
 }
 
 .dropdown-content{
@@ -72,13 +89,13 @@ header {
 }
 
 #initTable {
-    float: left;
     width: 65%;
-    margin-left: 20px;
+    margin-left: 17.5%;
     /* Correctly align Messages box */
-    min-height: 300px;
+    /*min-height: 300px;*/
 }
 #initTableHeader {
+    position: relative;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
@@ -126,21 +143,28 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-#addChar {
-    float: right;
-    width: 25%;
-    margin-right: 20px;
-    padding: 0px 10px 10px 10px;
-    margin-bottom: 30px;
+#addCharBtn,
+#messageLog #msgBtn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
-#messageLog {
-    float: right;
-    width: 25%;
-    margin-right: 20px;
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 25%;
+    left: 30%;
+    width: 40%;
     padding: 0px 10px 10px 10px;
+    box-shadow: 0 0 10px black;
 }
 
+
+#charInp {
+    margin-top: 20px;
+}
 #charInp label {
     max-width: 50%;
 }

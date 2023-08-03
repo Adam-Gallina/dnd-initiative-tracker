@@ -1,13 +1,12 @@
 @keyframes slide-in {
-    from { margin-left: 25px; }
-    to { margin-left: 50px; }
+    from { margin-left: 50px; }
+    to { margin-left: 25px; }
 }
 .slide-in {
     animation-name: slide-in;
     animation-fill-mode: both;
     animation-duration: .25s;
     animation-timing-function: ease-in;
-    animation-direction: reverse;
 }
 
 @keyframes slide-out {

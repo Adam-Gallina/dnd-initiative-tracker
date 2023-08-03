@@ -10,6 +10,35 @@ var onTableReload = null
 var modPerms = false
 
 
+class Popup {
+    shown = false;
+    constructor(elemId) { this.elem = document.getElementById(elemId) }
+
+    toggle() {
+        this.shown = !this.shown
+        this.elem.style.display = this.shown ? 'block' : 'none'
+    }
+    hide() {
+        this.shown = false
+        this.elem.style.display = 'none'
+    }
+}
+const addChar = new Popup('addChar')
+const messages = new Popup('messageLog')
+
+document.querySelectorAll('#addCharBtn').forEach((elem) => {
+    elem.addEventListener('click', () => {
+        messages.hide()
+        addChar.toggle()
+    })
+})
+document.querySelectorAll('#msgBtn').forEach((elem) => {
+    elem.addEventListener('click', () => {
+        addChar.hide()
+        messages.toggle()
+    })
+})
+
 function ReadCharEntry(clearName, clearInit, clearDex, isPlayer) {
     var charName = document.getElementById("charName")
     var initVal = document.getElementById("initVal")
