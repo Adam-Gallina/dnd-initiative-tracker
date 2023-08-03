@@ -26,8 +26,10 @@ onTableReload = function(data) {
             currCharacter = totalCharacters - 1
     }
     
-    if (currCharacter != -1)
+    if (currCharacter != -1) {
         deleteBtns[currCharacter].parentNode.parentNode.classList.add("highlight")
+        deleteBtns[currCharacter].parentNode.parentNode.classList.add("slide-out")
+    }
 }
 
 

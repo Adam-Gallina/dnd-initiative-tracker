@@ -55,6 +55,8 @@ function ReloadTable(data) {
     data.modPerms = modPerms
     initiativeTable.innerHTML = Handlebars.templates.initiativeTable(data)
     currData = data
+    if (currData.initiativeOrder.length == 0)
+        fillerEntryIdx = -1
 
     if (onTableReload)
         onTableReload(data)
@@ -122,11 +124,17 @@ function SetOrderHighlight(curr, next) {
         ReloadTable(currData)
     
     var entries = document.querySelectorAll('.initiativeEntry')
-    if (c != null && entries.length > c && entries[c].classList.contains('highlight'))
+    if (c != null && entries.length > c && entries[c].classList.contains('highlight')) {
         entries[c].classList.remove('highlight')
+        entries[c].classList.remove('slide-out')
+        entries[c].classList.add('slide-in')
+    }
 
-    if (n != null && entries.length > n)
+    if (n != null && entries.length > n) {
         entries[n].classList.add('highlight')
+        entries[n].classList.add('slide-out')
+        entries[n].classList.remove('slide-in')
+    }
 }
 
 
@@ -145,7 +153,6 @@ socket.on(SocketCodes.initUpdate, function() {
 })
 
 socket.on(SocketCodes.currInit, function(val) {
-    console.log(val)
     SetOrderHighlight(currCharacter, val)
     currCharacter = val
 })

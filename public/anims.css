@@ -1,0 +1,22 @@
+@keyframes slide-in {
+    from { margin-left: 25px; }
+    to { margin-left: 50px; }
+}
+.slide-in {
+    animation-name: slide-in;
+    animation-fill-mode: both;
+    animation-duration: .25s;
+    animation-timing-function: ease-in;
+    animation-direction: reverse;
+}
+
+@keyframes slide-out {
+    from { margin-left: 25px; }
+    to { margin-left: 50px; }
+}
+.slide-out {
+    animation-name: slide-out;
+    animation-fill-mode: both;
+    animation-duration: .25s;
+    animation-timing-function: ease-out;
+}
