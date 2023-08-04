@@ -61,6 +61,7 @@ header {
 .dropdown-content{
     display: none;
     position: absolute;
+    z-index: 1000000;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 .dropdown:hover .dropdown-content {
@@ -100,6 +101,7 @@ header {
 }
 #initTableHeader {
     position: relative;
+    z-index: -1;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
@@ -204,19 +206,40 @@ input::-webkit-inner-spin-button {
     #charLinks {
         width: auto;
     }
-    #map-dropdown {
-        font-size: 50%;
-        margin: 5px;
+    #header-btns {
+        margin-bottom: 10px;
     }
 
-    #addChar,
+    .span-btn {
+        font-size: 50px;
+        width: 65px;
+        height: 65px;
+        line-height: 65px;
+    }
+    .span-btn-big {
+        font-size: 50px;
+        width: 65px;
+        height: 65px;
+        line-height: 65px;
+    }
+
+    #addCharBtn,
+    #messageLog #msgBtn {
+        right: 15px;
+        top: 15px;
+    }
+
+    .popup {
+        top: 25%;
+        left: 15%;
+        width: 70%;
+    }
+
     #initTable,
-    #messageLog,
     #otherSettings {
         float: none;
         width: auto;
         margin: 20px;
-        margin-bottom: 60px;
     }
 
     .initiativeEntry {
@@ -233,7 +256,6 @@ input::-webkit-inner-spin-button {
         font-size: 65%;
     }
     .initiativeEntry #delete {
-        /*width: 80px;*/
         font-size: 65%;;
     }
 }
@@ -249,7 +271,26 @@ input::-webkit-inner-spin-button {
     #delete {
         font-size: 60%;
     }
-    
+
+    .span-btn {
+        font-size: 25px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+    }
+    .span-btn-big {
+        font-size: 25px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    #addCharBtn,
+    #messageLog #msgBtn {
+        right: 10px;
+        top: 10px;
+    }
+
     .initiativeEntry {
         height: 40px;
         margin-top: 15px;
