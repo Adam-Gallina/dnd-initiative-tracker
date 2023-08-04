@@ -15,27 +15,31 @@ class Popup {
     constructor(elemId) { this.elem = document.getElementById(elemId) }
 
     toggle() {
+        if (!this.elem)
+            return;
         this.shown = !this.shown
         this.elem.style.display = this.shown ? 'block' : 'none'
     }
     hide() {
+        if (!this.elem)
+            return;
         this.shown = false
         this.elem.style.display = 'none'
     }
 }
 const addChar = new Popup('addChar')
-const messages = new Popup('messageLog')
+const messageBox = new Popup('messageLog')
 
 document.querySelectorAll('#addCharBtn').forEach((elem) => {
     elem.addEventListener('click', () => {
-        messages.hide()
+        messageBox.hide()
         addChar.toggle()
     })
 })
 document.querySelectorAll('#msgBtn').forEach((elem) => {
     elem.addEventListener('click', () => {
         addChar.hide()
-        messages.toggle()
+        messageBox.toggle()
     })
 })
 

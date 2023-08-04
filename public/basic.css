@@ -52,6 +52,12 @@ header {
     width: 140px;
 }
 
+#header-btns {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
 .dropdown-content{
     display: none;
     position: absolute;
@@ -91,8 +97,6 @@ header {
 #initTable {
     width: 65%;
     margin-left: 17.5%;
-    /* Correctly align Messages box */
-    /*min-height: 300px;*/
 }
 #initTableHeader {
     position: relative;

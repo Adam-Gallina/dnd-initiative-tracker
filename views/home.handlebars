@@ -24,20 +24,21 @@
     </div>
     {{/ if }}
 
-    {{# if mapImages }}
-    <div id="map-dropdown" class="dropdown">
-        <span class="material-symbols-sharp border bkgd-col span-btn-big">map</span>
-            
-        <div class="dropdown-content border bkgd-col">
-            {{# each mapImages }}
-                {{> mapLink name=name file=image }}
-            {{/ each }}
+    <div id="header-btns">
+        {{# if mapImages }}
+        <div id="map-dropdown" class="dropdown">
+            <span class="material-symbols-sharp border bkgd-col span-btn-big">map</span>
+                
+            <div class="dropdown-content border bkgd-col">
+                {{# each mapImages }}
+                    {{> mapLink name=name file=image }}
+                {{/ each }}
+            </div>
         </div>
-    </div>
-    {{/ if }}
+        {{/ if }}
 
-    <span id="msgBtn" class="material-symbols-sharp border bkgd-col span-btn-big">sticky_note_2</span>
-    
+        <span id="msgBtn" class="material-symbols-sharp border bkgd-col span-btn-big">sticky_note_2</span>
+    </div>
 </header>
 
 
