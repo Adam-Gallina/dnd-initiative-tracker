@@ -16,6 +16,9 @@
             .bkgd-col {
                 background-color: {{# if blockCol }} {{ blockCol }} {{ else }} tan {{/ if }};
             }
+            .dark-col {
+                background-color: {{# if darkCol }} {{ darkCol }} {{ else }} rgb(204, 164, 112) {{/ if }};
+            }
             @media (max-width: 1200px) {
                 body {
                     {{# if stretchImg }} 

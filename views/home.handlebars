@@ -27,9 +27,9 @@
     <div id="header-btns">
         {{# if mapImages }}
         <div id="map-dropdown" class="dropdown">
-            <span class="material-symbols-sharp border bkgd-col span-btn-big">map</span>
+            <span class="material-symbols-sharp border dark-col span-btn-big">map</span>
                 
-            <div class="dropdown-content border bkgd-col">
+            <div class="dropdown-content border dark-col">
                 {{# each mapImages }}
                     {{> mapLink name=name file=image }}
                 {{/ each }}
@@ -37,7 +37,7 @@
         </div>
         {{/ if }}
 
-        <span id="msgBtn" class="material-symbols-sharp border bkgd-col span-btn-big">sticky_note_2</span>
+        <span id="msgBtn" class="material-symbols-sharp border dark-col span-btn-big">sticky_note_2</span>
     </div>
 </header>
 
@@ -46,7 +46,7 @@
     <div id="initTableHeader"class="border bkgd-col">
         <h1 class="title">Initiative Order</h1>
 
-        <span id="addCharBtn" class="material-symbols-sharp bkgd-col span-btn border">person_add</span>
+        <span id="addCharBtn" class="material-symbols-sharp dark-col span-btn border">person_add</span>
     </div>
     <div id="charInit"></div>
 </div>
@@ -54,7 +54,7 @@
 <div id="addChar" class="border bkgd-col popup">
     <h1 class="title">Add Character</h1>
 
-    <span id="addCharBtn"class="material-symbols-sharp bkgd-col span-btn border">close</span>
+    <span id="addCharBtn"class="material-symbols-sharp dark-col span-btn border">close</span>
 
     <div id="charInp">
         <label for="charName">Character Name:</label>
@@ -73,7 +73,7 @@
 <div id="messageLog" class="border bkgd-col popup">
     <h1 class="title">Messages</h1>
 
-    <span id="msgBtn"class="material-symbols-sharp bkgd-col span-btn border">close</span>
+    <span id="msgBtn"class="material-symbols-sharp dark-col span-btn border">close</span>
 
     <ul id="messages">
     </ul>

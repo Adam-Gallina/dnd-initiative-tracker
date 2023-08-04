@@ -10,7 +10,8 @@ try {
 var currBackground = {
     name: "Scroll",
     image: "./images/scroll_tile.jpg",
-    color: "tan"
+    color: "tan",
+    darkColor: "rgb(204, 164, 112)"
 }
 if (charImages.backgrounds) {
     for (i = 0; i < charImages.backgrounds.length; i++) {
@@ -49,6 +50,7 @@ function GetImages(req, res, next) {
         backgroundImg: currBackground.image,
         stretchImg: currBackground.stretchImg,
         blockCol: currBackground.color,
+        darkCol: currBackground.darkColor,
         backgrounds: bkgds
     }
     next()
