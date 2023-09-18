@@ -21,9 +21,9 @@ onTableReload = function(data) {
     totalCharacters = deleteBtns.length
     if (totalCharacters > 0) {
         if (currCharacter < 0)
-            currCharacter = 0
+            socket.emit(SocketCodes.currInit, 0)
         else if (currCharacter >= totalCharacters)
-            currCharacter = totalCharacters - 1
+            socket.emit(SocketCodes.currInit, totalCharacters - 1)
     }
     
     if (currCharacter != -1) {
@@ -78,13 +78,14 @@ document.getElementById('edit').addEventListener('click', function(event) {
 })
 
 document.getElementById('next').addEventListener('click', function() {
+    if (totalCharacters == 0)
+        return
     socket.emit(SocketCodes.currInit, currCharacter + 1 < totalCharacters ? currCharacter + 1 : 0)
 })
 
 
 document.getElementById('reset').addEventListener('click', function() {
     InitOrder.Table.Clear(key, function(event) {
-        currCharacter = -1
         if (event.target.status == 200) {
             CheckForTableUpdate()
             socket.emit(SocketCodes.currInit, -1)
@@ -95,7 +96,6 @@ document.getElementById('reset').addEventListener('click', function() {
 })
 
 document.getElementById('submit').addEventListener('click', function(event) {
-    var charNameVal = document.getElementById("charName").value
     var isPlayer = document.getElementById("isPlayer")
 
     initVal = document.getElementById("initVal")

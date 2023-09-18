@@ -8,8 +8,8 @@ const Requests = {
 
     SetDexMod:      { method: 'POST',   url: '/database' },
 
-    GetBkgdName:    { method: 'GET',    url: '/images/currBackground' },
     SetBkgd:        { method: 'POST',   url: '/images/background' },
+    ReloadImgs:     { method: 'POST',    url: '/images/reloadImages' },
 
     GetMessages:    { method: 'GET',    url: '/messages' },
     SendMessage:    { method: 'POST',   url: '/messages' },
@@ -96,16 +96,18 @@ function SetDexMod(key, charName, value, onLoad) {
     req.send(JSON.stringify({ key: key, dexMod: value }))
 }
 
-function GetCurrBackground(onLoad) {
-    var req = OpenXmlRequest(Requests.GetBkgdName, onLoad)
-
-    req.send()
-}
 
 function ChangeBackground(key, background, onLoad) {
     var req = OpenXmlRequest(Requests.SetBkgd, onLoad, '/' + background)
     req.setRequestHeader('Content-Type', 'application/json')
 
+    req.send(JSON.stringify({ key: key }))
+}
+
+function ReloadImgs(key, onLoad) {
+    var req = OpenXmlRequest(Requests.ReloadImgs, onLoad)
+    req.setRequestHeader('Content-Type', 'application/json')
+    
     req.send(JSON.stringify({ key: key }))
 }
 
@@ -149,7 +151,7 @@ const InitOrder = {
         SetDexMod: SetDexMod
     },
     Images:{
-        GetBkgdName: GetCurrBackground,
-        ChangeBkgd: ChangeBackground
+        ChangeBkgd: ChangeBackground,
+        Reload: ReloadImgs
     }
 }
