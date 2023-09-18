@@ -26,8 +26,10 @@ onTableReload = function(data) {
             currCharacter = totalCharacters - 1
     }
     
-    if (currCharacter != -1)
+    if (currCharacter != -1) {
         deleteBtns[currCharacter].parentNode.parentNode.classList.add("highlight")
+        deleteBtns[currCharacter].parentNode.parentNode.classList.add("slide-out")
+    }
 }
 
 
@@ -94,8 +96,6 @@ document.getElementById('reset').addEventListener('click', function() {
 
 document.getElementById('submit').addEventListener('click', function(event) {
     var charNameVal = document.getElementById("charName").value
-
-    var count = document.getElementById("totalNpc")
     var isPlayer = document.getElementById("isPlayer")
 
     initVal = document.getElementById("initVal")
@@ -103,19 +103,46 @@ document.getElementById('submit').addEventListener('click', function(event) {
         initVal.value = Math.floor(Math.random() * 20) + 1
 
     var entry = ReadCharEntry(true, true, true, isPlayer.checked)
+    isPlayer.checked = false
     
-    if (entry) {
-        npcTotal = parseInt(count.value)
-        
-        for (var i = 0; i < npcTotal; i++) {
-            entry.name = charNameVal + (npcTotal > 1 ? ' ' + i : '')
-            
-            SubmitCharEntry(entry)
-        }
-
-        count.value = '1'
-        isPlayer.checked = false
-    }
+    if (entry)
+        SubmitCharEntry(entry)
 })
 
 CheckForTableUpdate()
+
+const msgLog = document.getElementById('messages')
+function ReloadMessages() {
+    while (msgLog.firstChild)
+        msgLog.removeChild(msgLog.firstChild)
+        
+    GetMessages(function(event) {    
+        if (event.target.status == 200)
+            JSON.parse(event.target.responseText).messages.forEach(
+                msg => {
+                    var li = document.createElement('li')
+                    li.append(msg)
+                    messages.append(li)
+                })
+    })
+}
+
+socket.on(SocketCodes.newMessage, function(msg) {
+    var li = document.createElement('li')
+    li.append(msg)
+    messages.append(li)
+})
+
+socket.on(SocketCodes.msgUpdate, ReloadMessages)
+
+const msgInp = document.getElementById('newMessage')
+document.getElementById('sendMessage').addEventListener('click', function() {
+    PostMessage(key, msgInp.value)
+    msgInp.value = ''
+})
+
+document.getElementById('clearMessages').addEventListener('click', function() {
+    ClearMessages(key)
+})
+
+ReloadMessages()

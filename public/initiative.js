@@ -10,6 +10,39 @@ var onTableReload = null
 var modPerms = false
 
 
+class Popup {
+    shown = false;
+    constructor(elemId) { this.elem = document.getElementById(elemId) }
+
+    toggle() {
+        if (!this.elem)
+            return;
+        this.shown = !this.shown
+        this.elem.style.display = this.shown ? 'block' : 'none'
+    }
+    hide() {
+        if (!this.elem)
+            return;
+        this.shown = false
+        this.elem.style.display = 'none'
+    }
+}
+const addChar = new Popup('addChar')
+const messageBox = new Popup('messageLog')
+
+document.querySelectorAll('#addCharBtn').forEach((elem) => {
+    elem.addEventListener('click', () => {
+        messageBox.hide()
+        addChar.toggle()
+    })
+})
+document.querySelectorAll('#msgBtn').forEach((elem) => {
+    elem.addEventListener('click', () => {
+        addChar.hide()
+        messageBox.toggle()
+    })
+})
+
 function ReadCharEntry(clearName, clearInit, clearDex, isPlayer) {
     var charName = document.getElementById("charName")
     var initVal = document.getElementById("initVal")
@@ -55,6 +88,8 @@ function ReloadTable(data) {
     data.modPerms = modPerms
     initiativeTable.innerHTML = Handlebars.templates.initiativeTable(data)
     currData = data
+    if (currData.initiativeOrder.length == 0)
+        fillerEntryIdx = -1
 
     if (onTableReload)
         onTableReload(data)
@@ -122,11 +157,17 @@ function SetOrderHighlight(curr, next) {
         ReloadTable(currData)
     
     var entries = document.querySelectorAll('.initiativeEntry')
-    if (c != null && entries.length > c && entries[c].classList.contains('highlight'))
+    if (c != null && entries.length > c && entries[c].classList.contains('highlight')) {
         entries[c].classList.remove('highlight')
+        entries[c].classList.remove('slide-out')
+        entries[c].classList.add('slide-in')
+    }
 
-    if (n != null && entries.length > n)
+    if (n != null && entries.length > n) {
         entries[n].classList.add('highlight')
+        entries[n].classList.add('slide-out')
+        entries[n].classList.remove('slide-in')
+    }
 }
 
 
@@ -145,7 +186,6 @@ socket.on(SocketCodes.initUpdate, function() {
 })
 
 socket.on(SocketCodes.currInit, function(val) {
-    console.log(val)
     SetOrderHighlight(currCharacter, val)
     currCharacter = val
 })
