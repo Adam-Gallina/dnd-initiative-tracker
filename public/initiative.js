@@ -84,12 +84,15 @@ function SubmitCharEntry(entry) {
 }
 
 
-function ReloadTable(data) {
+function ReloadTable(data, resetCurrChar=true) {
     data.modPerms = modPerms
     initiativeTable.innerHTML = Handlebars.templates.initiativeTable(data)
     currData = data
-    if (currData.initiativeOrder.length == 0)
+
+    if (resetCurrChar) {
         fillerEntryIdx = -1
+        SetOrderHighlight(-1, currCharacter)
+    }
 
     if (onTableReload)
         onTableReload(data)
@@ -129,6 +132,11 @@ function SetOrderHighlight(curr, next) {
         doReload = true
     }
 
+    if (next == -1) {
+        fillerEntryIdx = -1
+        return
+    }
+
     var c = n = null
     var fakeN = false
     for (var i = 0; i < currData.initiativeOrder.length; i++) {
@@ -154,7 +162,7 @@ function SetOrderHighlight(curr, next) {
     }
 
     if (doReload)
-        ReloadTable(currData)
+        ReloadTable(currData, false)
     
     var entries = document.querySelectorAll('.initiativeEntry')
     if (c != null && entries.length > c && entries[c].classList.contains('highlight')) {
@@ -173,11 +181,8 @@ function SetOrderHighlight(curr, next) {
 
 const socket = io()
 
-socket.on(SocketCodes.bkgdUpdate, function(/*name*/) {
-    //if (currBackground === "")
-    //    currBackground = bkgd
-    //else if (bkgd != currBackground)
-        location.reload()
+socket.on(SocketCodes.bkgdUpdate, function() {
+    location.reload()
 })
 
 socket.on(SocketCodes.initUpdate, function() {
