@@ -16,6 +16,18 @@ document.getElementById("debugPlayers").addEventListener('click', function() {
     AddEntry(key, InitEntry('Self', 1, 2, false))
 })
 
+document.getElementById("refreshImages").addEventListener('click', function() {
+    InitOrder.Images.Reload(key, function(event) {
+        console.log(event.target.responseText)
+        if (event.target.status == 200)
+            location.reload()
+        else if (event.target.status == 400)
+            alert('Error while reloading images: ' + JSON.parse(event.target.responseText).error)
+        else
+            alert('Error ' + event.target.status + ' while trying to reload images files')
+    })
+})
+
 const socket = io()
 
 socket.on(SocketCodes.bkgdUpdate, function(/*name*/) {

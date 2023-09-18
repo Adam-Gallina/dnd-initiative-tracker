@@ -1,28 +1,42 @@
 const { io, codes } = require('./socket.js')
 
-try {
-    var charImages = require(process.env.IMG_FILE || '../images.json')
-} catch (error) {
-    console.log("Error loading images.json: " + error.message)
-    var charImages = {}
-}
-
-var currBackground = {
+const defaultBackground = {
     name: "Scroll",
     image: "./images/scroll_tile.jpg",
     color: "tan",
     darkColor: "rgb(204, 164, 112)"
 }
-if (charImages.backgrounds) {
-    for (i = 0; i < charImages.backgrounds.length; i++) {
-        if (charImages.backgrounds[i].default) {
-            currBackground = charImages.backgrounds[i]
-            break
-        }
+
+var charImages = {}
+var currBackground = defaultBackground
+function LoadImages() {
+    try {
+        charImages = require(process.env.IMG_FILE || '../images.json')
+    } catch (error) {
+        charImages = {}
+        return { ec: 1, msg: error.message }
     }
-} else {
-    console.log("[ERROR] No backgrounds found in images.json, using default")
+
+    var currBackground = defaultBackground
+    if (charImages.backgrounds) {
+        for (i = 0; i < charImages.backgrounds.length; i++) {
+            if (charImages.backgrounds[i].default) {
+                currBackground = charImages.backgrounds[i]
+                break
+            }
+        }
+    } else {
+        return { ec: 1, msg: "No backgrounds found in images.json, only loading default" }
+    }
+
+    return { ec: 0 }
 }
+
+err = LoadImages()
+if (err.ec == 1)
+    console.log(err.msg)
+
+
 
 function GetCharacter(charName) {
     return charImages.characters.find(e => e.name.toLowerCase() == charName.toLowerCase())
@@ -77,6 +91,18 @@ router.post('/background/:bkgd', requireAuthentication, function (req, res, next
             }
             res.status(200).send()
         }
+    }
+})
+
+router.post('/reloadImages', requireAuthentication, function(req, res, next) {
+    if (!req.authorized)
+        next()
+    else {
+        err = LoadImages()
+        if (err.ec == 1)
+            res.status(400).json({ error: err.msg })
+        else
+            res.status(200).send()
     }
 })
 
