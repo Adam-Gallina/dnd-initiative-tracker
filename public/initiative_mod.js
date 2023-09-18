@@ -97,7 +97,7 @@ document.getElementById('reset').addEventListener('click', function() {
 document.getElementById('submit').addEventListener('click', function(event) {
     var charNameVal = document.getElementById("charName").value
 
-    var count = document.getElementById("totalNpc")
+    //var count = document.getElementById("totalNpc")
     var isPlayer = document.getElementById("isPlayer")
 
     initVal = document.getElementById("initVal")
@@ -107,15 +107,15 @@ document.getElementById('submit').addEventListener('click', function(event) {
     var entry = ReadCharEntry(true, true, true, isPlayer.checked)
     
     if (entry) {
-        npcTotal = parseInt(count.value)
+        //npcTotal = parseInt(count.value)
         
-        for (var i = 0; i < npcTotal; i++) {
-            entry.name = charNameVal + (npcTotal > 1 ? ' ' + i : '')
+        //for (var i = 0; i < npcTotal; i++) {
+            entry.name = charNameVal// + (npcTotal > 1 ? ' ' + i : '')
             
             SubmitCharEntry(entry)
-        }
+        //}
 
-        count.value = '1'
+        //count.value = '1'
         isPlayer.checked = false
     }
 })
