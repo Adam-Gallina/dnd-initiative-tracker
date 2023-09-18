@@ -1,4 +1,5 @@
 const { io, codes } = require('./socket.js')
+const fs = require('fs')
 
 const defaultBackground = {
     name: "Scroll",
@@ -7,13 +8,14 @@ const defaultBackground = {
     darkColor: "rgb(204, 164, 112)"
 }
 
-var charImages = {}
+var charImages = {'backgrounds': [defaultBackground]}
 var currBackground = defaultBackground
-function LoadImages() {
+async function LoadImages() {
     try {
-        charImages = require(process.env.IMG_FILE || '../images.json')
+        data = fs.readFileSync(require.resolve(process.env.IMG_FILE || '../images.json'))
+        charImages = JSON.parse(data)
     } catch (error) {
-        charImages = {}
+        charImages = {'backgrounds': [defaultBackground]}
         return { ec: 1, msg: error.message }
     }
 
@@ -49,6 +51,7 @@ const { requireAuthentication } = require('../lib/auth')
 const router = Router()
 
 function GetImages(req, res, next) {
+    // Make a copy of the backgrounds object
     const bkgds = JSON.parse(JSON.stringify(charImages.backgrounds))
     for (i = 0; i < bkgds.length; i++)
         if (bkgds[i].name.toLowerCase() == currBackground.name.toLowerCase()) {
@@ -94,11 +97,12 @@ router.post('/background/:bkgd', requireAuthentication, function (req, res, next
     }
 })
 
-router.post('/reloadImages', requireAuthentication, function(req, res, next) {
+router.post('/reloadImages', requireAuthentication, async function(req, res, next) {
     if (!req.authorized)
         next()
     else {
         err = LoadImages()
+        console.log(charImages)
         if (err.ec == 1)
             res.status(400).json({ error: err.msg })
         else
