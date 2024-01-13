@@ -57,7 +57,7 @@ router.post('/:charName', requireAuthentication, function(req, res, next) {
             var char = req.params.charName.toLowerCase()
             
             if (!data.hasOwnProperty(char))
-                data[char] = structuredClone(dataTemplate)
+                data[char] = JSON.parse(JSON.stringify(dataTemplate))
 
             data[char].dexMod = req.body.dexMod
 
