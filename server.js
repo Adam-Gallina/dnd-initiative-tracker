@@ -25,6 +25,7 @@ app.use('/initiative', require('./api/initiative').router)
 app.use('/database', db.router)
 app.use('/images', images.router)
 app.use('/messages', require('./api/messages').router)
+app.use('/leaderboard', require('./api/leaderboard').router)
 
 app.get('/', images.GetImages, function(req, res, next) {
     res.status(200).render('home', req.handlebarsArgs)
