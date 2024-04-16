@@ -47,7 +47,9 @@ const { range } = require('express/lib/request')
 const { requireAuthentication } = require('../lib/auth')
 const router = Router()
 
-router.post('/:gamemode/score', requireAuthentication, function(req, res, next) {
+var cors = require('cors')
+
+router.post('/:gamemode/score', cors(), requireAuthentication, function(req, res, next) {
     if (!req.authorized)
         next()
     else {
@@ -60,7 +62,7 @@ router.post('/:gamemode/score', requireAuthentication, function(req, res, next) 
     }
 })
 
-router.get('/:gamemode/top', function(req, res, next) {
+router.get('/:gamemode/top', cors(), function(req, res, next) {
     LoadLeaderboard()
     if (!(req.params.gamemode in leaderboard))
         res.status(200).send([])

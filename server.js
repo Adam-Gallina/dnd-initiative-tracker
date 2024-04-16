@@ -21,9 +21,6 @@ if (process.env.CUSTOM_IMG)
 
 app.use(express.json())
 
-var cors = require('cors')
-app.use(cors)
-
 app.use('/initiative', require('./api/initiative').router)
 app.use('/database', db.router)
 app.use('/images', images.router)
