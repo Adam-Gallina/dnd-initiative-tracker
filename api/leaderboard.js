@@ -47,9 +47,12 @@ const { range } = require('express/lib/request')
 const { requireAuthentication } = require('../lib/auth')
 const router = Router()
 
-var cors = require('cors')
+router.post('/:gamemode/score', requireAuthentication, function(req, res, next) {
+    
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
 
-router.post('/:gamemode/score', cors(), requireAuthentication, function(req, res, next) {
     if (!req.authorized)
         next()
     else {
@@ -62,8 +65,12 @@ router.post('/:gamemode/score', cors(), requireAuthentication, function(req, res
     }
 })
 
-router.get('/:gamemode/top', cors(), function(req, res, next) {
+router.get('/:gamemode/top', function(req, res, next) {
     LoadLeaderboard()
+    
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
     if (!(req.params.gamemode in leaderboard))
         res.status(200).send([])
     else if (leaderboard[req.params.gamemode].length < req.body.count)
