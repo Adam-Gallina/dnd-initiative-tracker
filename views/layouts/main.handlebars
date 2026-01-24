@@ -26,6 +26,25 @@
                     {{/ if}}
                 }
             }
+
+            #arch {
+                position: absolute;
+                width: 110%;
+                left: -6%;
+                height: 150px;
+            }
+            #column-left {
+                position: absolute;
+                left: 0px;
+                top: 120px;
+                width: 18%;
+            }
+            #column-right {
+                position: absolute;
+                right: 0px;
+                top: 120px;
+                width: 18%;
+            }
         </style>
     </head>
 
@@ -36,6 +55,10 @@
             <input type="submit" id="submit-pw" value="Submit">
         </div>
         <div id="content" hidden>
+            <img id='arch' src='./images/archway_top.png'>
+            <img id='column-left' src='./images/pillarL.png'>
+            <img id='column-right' src='./images/pillarR.png'>
+        
             {{{ body }}}
         </div>
     </body>

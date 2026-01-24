@@ -3,7 +3,7 @@ require('dotenv').config()
 const db = require('./api/database')
 const images = require('./api/images')
 
-const port = process.env.PORT || 2282
+const port = process.env.PORT || 3235
 
 const express = require('express')
 const exphbs = require('express-handlebars')

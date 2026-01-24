@@ -2,22 +2,22 @@
 
 1. Run 'npm install' to set up packages
 2. Run 'npm start' to start server
-    * By default it will be reachable at *(your ip):2282*
+    * By default it will be reachable at *(your ip):3235*
 
 ___
 
 ## Pages
-* **Player view**: *(your ip):2282*
+* **Player view**: *(your ip):3235*
   * Create player character entry
   * View other players in initiative order
   * Quick links to custom player pages
-* **DM view**: *(your ip):2282/order*
+* **DM view**: *(your ip):3235/order*
   * View full initiative order
   * Modify entries in order
   * Add other entities to order that are hidden on player view
-* **Settings**: *(your ip):2282/settings*
+* **Settings**: *(your ip):3235/settings*
   * Change the current theme
-* **Custom player pages**: *(your ip):2282/(character name)*
+* **Custom player pages**: *(your ip):3235/(character name)*
   * Save/populate DEX modifiers on server
 
 ___

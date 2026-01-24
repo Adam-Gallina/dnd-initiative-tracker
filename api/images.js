@@ -19,7 +19,7 @@ async function LoadImages() {
         return { ec: 1, msg: error.message }
     }
 
-    var currBackground = defaultBackground
+    currBackground = defaultBackground
     if (charImages.backgrounds) {
         for (i = 0; i < charImages.backgrounds.length; i++) {
             if (charImages.backgrounds[i].default) {
