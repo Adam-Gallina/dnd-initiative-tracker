@@ -1,0 +1,87 @@
+<script src="/socket.io/socket.io.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,600,0,0" />
+
+<script src="initiative_xml.js"></script>
+<script src="auth.js" defer></script>
+<script src="minecarts.js" defer></script>
+
+<link rel="stylesheet" href="basic.css"></link>
+<link rel="stylesheet" href="anims.css"></link>
+
+<header class="bkgd-col">
+    <h1 id="main-title">Initiative Tracker</h1>
+
+    {{# if charImages }}
+    <div id="charLinks">
+        {{# each charImages }}
+            {{# if playing }}
+                {{> charLink name=name file=image }}
+            {{/ if }}
+        {{/ each}}
+    </div>
+    {{/ if }}
+
+    <div id="header-btns">
+        {{# if mapImages }}
+        <div id="map-dropdown" class="dropdown">
+            <span class="material-symbols-sharp border dark-col span-btn-big">map</span>
+                
+            <div class="dropdown-content border dark-col">
+                {{# each mapImages }}
+                    {{> mapLink name=name file=image }}
+                {{/ each }}
+            </div>
+        </div>
+        {{/ if }}
+
+        <span id="msgBtn" class="material-symbols-sharp border dark-col span-btn-big">sticky_note_2</span>
+    </div>
+</header>
+
+
+<div>
+    <button onclick="toggleA()">Snake</button>
+    <button onclick="toggleB()">Newt</button>
+    <button onclick="toggleC()">Owl</button>
+    
+    <br>
+    <br>
+
+    <table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>┌─</th>
+            <th>◯─</th>
+            <th id="B">┐</th>
+            <th>─◯</th>
+            <th>─</th>
+            <th id="AC">─┐</th>
+            <th>─</th>
+            <th>◯</th>
+        </tr>
+        <tr>
+            <th>◯─</th>
+            <th id="A">┘</th>
+            <th></th>
+            <th>◯</th>
+            <th>───</th>
+            <th id="BC">┐</th>
+            <th>─◯</th>
+            <th>─</th>
+            <th id="C">┘</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th>└─</th>
+            <th>◯─</th>
+            <th id="AB">┘</th>
+            <th>─◯</th>
+            <th>└</th>
+            <th>─◯</th>
+            <th></th>
+            <th>◯</th>
+        </tr>
+    </thead>
+    </table>
+</div>
