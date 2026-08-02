@@ -3,7 +3,8 @@ const codes = {
     initUpdate: 'initiative update',
     currInit: 'curr initiative',
     newMessage: 'dm message',
-    msgUpdate: 'message update'
+    msgUpdate: 'message update',
+    minecartUpdate: 'minecart update'
 }
 exports.codes = codes
 

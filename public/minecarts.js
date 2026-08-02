@@ -4,16 +4,14 @@ const indicators = {
     'C': ['┘', '┐'],
     'AB': ['┘', '─'],
     'BC': ['─', '┐'],
-    'AC': ['──', '─┐'],
+    'AC': ['─', '┐'],
 }
 
 function toggleA() {
     var req = OpenXmlRequest(
         {method: 'POST', url:'/minecarts/togglea'}, 
         function(event){
-            if (event.target.status == 200)
-                redrawMinecarts(JSON.parse(event.target.responseText))
-            else
+            if (event.target.status != 200)
                 alert('ERROR '+ event.target.status +': ' + event.target.response)
     })
     req.setRequestHeader('Content-Type', 'application/json')
@@ -24,9 +22,7 @@ function toggleB() {
     var req = OpenXmlRequest(
         {method: 'POST', url:'/minecarts/toggleb'}, 
         function(event){
-            if (event.target.status == 200)
-                redrawMinecarts(JSON.parse(event.target.responseText))
-            else
+            if (event.target.status != 200)
                 alert('ERROR '+ event.target.status +': ' + event.target.response)
     })
     req.setRequestHeader('Content-Type', 'application/json')
@@ -36,25 +32,35 @@ function toggleC() {
     var req = OpenXmlRequest(
         {method: 'POST', url:'/minecarts/togglec'}, 
         function(event){
-            if (event.target.status == 200)
-                redrawMinecarts(JSON.parse(event.target.responseText))
-            else
+            if (event.target.status != 200)
                 alert('ERROR '+ event.target.status +': ' + event.target.response)
     })
     req.setRequestHeader('Content-Type', 'application/json')
     req.send(JSON.stringify({key: key}))
 }
 
+const snakeLever = document.getElementById('toggleA')
+const newtLever = document.getElementById('toggleB')
+const owlLever = document.getElementById('toggleC')
+const A = document.getElementById('A')
+const B = document.getElementById('B')
+const C = document.getElementById('C')
+const AB = document.getElementById('AB')
+const BC = document.getElementById('BC')
+const AC = document.getElementById('AC')
 function redrawMinecarts(data) {
-    document.getElementById('A').innerHTML = indicators['A'][data['A'] ? 0 : 1]
-    document.getElementById('B').innerHTML = indicators['B'][data['B'] ? 0 : 1]
-    document.getElementById('C').innerHTML = indicators['C'][data['C'] ? 0 : 1]
-    document.getElementById('AB').innerHTML = indicators['AB'][data['AB'] ? 0 : 1]
-    document.getElementById('BC').innerHTML = indicators['BC'][data['BC'] ? 0 : 1]
-    document.getElementById('AC').innerHTML = indicators['AC'][data['AC'] ? 0 : 1]
+    snakeLever.hidden = !data['snake']
+    newtLever.hidden = !data['newt']
+    owlLever.hidden = !data['owl']
+    A.innerHTML = indicators['A'][data['A'] ? 0 : 1]
+    B.innerHTML = data['display'] ? indicators['B'][data['B'] ? 0 : 1] : ' '
+    C.innerHTML = data['display'] ? indicators['C'][data['C'] ? 0 : 1] : ' '
+    AB.innerHTML = data['display'] ? indicators['AB'][data['AB'] ? 0 : 1] : ' '
+    BC.innerHTML = data['display'] ? indicators['BC'][data['BC'] ? 0 : 1] : ' '
+    AC.innerHTML = data['display'] ? indicators['AC'][data['AC'] ? 0 : 1] : ' '
 }
 
-
+// Get current minecart state on page load
 var req = OpenXmlRequest(
     {method: 'GET', url:'/minecarts/minecartstate'}, 
     function(event){
@@ -64,3 +70,14 @@ var req = OpenXmlRequest(
             alert('ERROR '+ event.target.status +': ' + event.target.response)
 })
 req.send()
+
+
+const socket = io()
+
+socket.on(SocketCodes.bkgdUpdate, function() {
+    location.reload()
+})
+
+socket.on(SocketCodes.minecartUpdate, function(val) {
+    redrawMinecarts(val)
+})

@@ -28,6 +28,44 @@ document.getElementById("refreshImages").addEventListener('click', function() {
     })
 })
 
+const snakeLever = document.getElementById('snakeLever')
+const newtLever = document.getElementById('newtLever')
+const owlLever = document.getElementById('owlLever')
+const lightDisplay = document.getElementById('lightDisplay')
+document.getElementById('saveMinecart').addEventListener('click', function() {    
+    var req = OpenXmlRequest(
+        {method: 'POST', url:'/minecarts/controls'}, 
+        function(event){
+            if (event.target.status != 200)
+                alert("Failed to submit minecart state")
+    })
+    req.setRequestHeader('Content-Type', 'application/json')
+    req.send(JSON.stringify({
+        key: key,
+        "snake": snakeLever.checked,
+        "newt": newtLever.checked,
+        "owl": owlLever.checked,
+        "display": lightDisplay.checked
+    }))
+})
+
+// Load current minecart state
+var req = OpenXmlRequest(
+    {method: 'GET', url:'/minecarts/minecartstate'}, 
+    function(event){
+        if (event.target.status == 200) {
+            var vals = JSON.parse(event.target.responseText)
+            snakeLever.checked = vals.snake
+            newtLever.checked = vals.newt
+            owlLever.checked = vals.owl
+            lightDisplay.checked = vals.display
+        } else {
+            alert("Could not load existing minecart state")
+        }
+})
+req.setRequestHeader('Content-Type', 'application/json')
+req.send()
+
 const socket = io()
 
 socket.on(SocketCodes.bkgdUpdate, function(/*name*/) {

@@ -1,7 +1,14 @@
+const { io, codes } = require('./socket')
+
 // Html requests
 const { Router } = require('express')
 const { requireAuthentication } = require('../lib/auth')
 const router = Router()
+
+var snakeUnlocked = false
+var newtUnlocked = false
+var owlUnlocked = false
+var displayUnlocked = false
 
 var A = true
 var B = false
@@ -26,6 +33,7 @@ router.post('/togglea', requireAuthentication, function(req, res) {
     AB = !AB
     AC = !AC
 
+    io.emit(codes.minecartUpdate, getMinecartState())
     res.status(200).json(getMinecartState())
 })
 
@@ -34,6 +42,7 @@ router.post('/toggleb', requireAuthentication, function(req, res) {
     AB = !AB
     BC = !BC
     
+    io.emit(codes.minecartUpdate, getMinecartState())
     res.status(200).json(getMinecartState())
 })
 
@@ -42,6 +51,17 @@ router.post('/togglec', requireAuthentication, function(req, res) {
     BC = !BC
     AC = !AC
     
+    io.emit(codes.minecartUpdate, getMinecartState())
+    res.status(200).json(getMinecartState())
+})
+
+router.post('/controls', requireAuthentication, function(req, res) {
+    snakeUnlocked = req.body.snake
+    newtUnlocked = req.body.newt
+    owlUnlocked = req.body.owl
+    displayUnlocked = req.body.display
+
+    io.emit(codes.minecartUpdate, getMinecartState())
     res.status(200).json(getMinecartState())
 })
 
@@ -52,7 +72,11 @@ function getMinecartState() {
         'C': C,
         'AB': AB,
         'BC': BC,
-        'AC': AC
+        'AC': AC,
+        'snake': snakeUnlocked,
+        'newt': newtUnlocked,
+        'owl': owlUnlocked,
+        'display': displayUnlocked,
     }
 }
 
