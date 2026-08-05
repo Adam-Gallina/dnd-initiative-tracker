@@ -6,6 +6,7 @@
 <script src="minecarts.js" defer></script>
 
 <link rel="stylesheet" href="basic.css"></link>
+<link rel="stylesheet" href="minecarts.css"></link>
 
 <header class="bkgd-col">
     <h1 id="main-title">Initiative Tracker</h1>
@@ -38,20 +39,17 @@
 </header>
 
 
-<div>
-    <button onclick="toggleA()" id="toggleA">Snake</button>
-    <button onclick="toggleB()" id="toggleB">Newt</button>
-    <button onclick="toggleC()" id="toggleC">Owl</button>
-    
-    <br>
-    <br>
+<div id="minecartdisplay" class="border">
+    <button onclick="toggleA()" id="toggleA" class="minecartbtn">Snake</button>
+    <button onclick="toggleB()" id="toggleB" class="minecartbtn">Newt</button>
+    <button onclick="toggleC()" id="toggleC" class="minecartbtn">Owl</button>
 
-    <table>
+    <table id="displaypanel" class="border">
     <thead>
         <tr>
             <th></th>
-            <th>┌─</th>
-            <th>◯─</th>
+            <th>┌</th>
+            <th>─◯─</th>
             <th id="B">┐</th>
             <th>─◯</th>
             <th>─</th>
@@ -74,8 +72,8 @@
         </tr>
         <tr>
             <th></th>
-            <th>└─</th>
-            <th>◯─</th>
+            <th>└</th>
+            <th>─◯─</th>
             <th id="AB">┘</th>
             <th>─◯</th>
             <th>└</th>

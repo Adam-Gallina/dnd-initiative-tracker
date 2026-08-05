@@ -49,9 +49,12 @@ const AB = document.getElementById('AB')
 const BC = document.getElementById('BC')
 const AC = document.getElementById('AC')
 function redrawMinecarts(data) {
-    snakeLever.hidden = !data['snake']
-    newtLever.hidden = !data['newt']
-    owlLever.hidden = !data['owl']
+    snakeLever.innerHTML = data['snake'] ? 'Snake' : ''
+    snakeLever.disabled = !data['snake']
+    newtLever.innerHTML = data['newt'] ? 'Newt' : ''
+    newtLever.disabled = !data['newt']
+    owlLever.innerHTML = data['owl'] ? 'Owl' : ''
+    owlLever.disabled = !data['owl']
     A.innerHTML = indicators['A'][data['A'] ? 0 : 1]
     B.innerHTML = data['display'] ? indicators['B'][data['B'] ? 0 : 1] : ' '
     C.innerHTML = data['display'] ? indicators['C'][data['C'] ? 0 : 1] : ' '
